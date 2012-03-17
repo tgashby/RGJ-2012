@@ -54,6 +54,8 @@ namespace RGJgame
 
             currentState = gameState;
 
+            KeyHandler.Update();
+
             base.Initialize();
         }
 
@@ -87,6 +89,8 @@ namespace RGJgame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            KeyHandler.Update();
+
             // Allows the game to exit
             if ((Input.BACK(1) || Input.BACK(2) || Input.BACK(3) || Input.BACK(4)))
                 this.Exit();

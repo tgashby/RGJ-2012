@@ -18,7 +18,7 @@ namespace RGJgame
     {
         private SpriteFont logFont;
         private Texture2D background;
-        private char[] hackString;
+        private String hackString;
 
         public LogState(Game game)
             : base(game)
@@ -29,14 +29,14 @@ namespace RGJgame
             logFont = Game.Content.Load<SpriteFont>(@"logtext");
             background = Game.Content.Load<Texture2D>(@"backgrounds/bg");
 
-            hackString = new char[50];
+            hackString = new String("Log State".ToCharArray());
         }
 
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(background, new Vector2(0, 0), null, Color.White, 0f, Vector2.Zero, 4, SpriteEffects.None, 0f);
-            spriteBatch.DrawString(logFont, "Log State", new Vector2(100, 100), Color.Orange, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+            spriteBatch.DrawString(logFont, hackString, new Vector2(100, 100), Color.Orange, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
         }
 
         public override void Update(GameTime gameTime)
