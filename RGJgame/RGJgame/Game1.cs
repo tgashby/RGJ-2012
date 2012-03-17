@@ -109,10 +109,10 @@ namespace RGJgame
 
                 // all the rest...
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
-                    currentState = gameState;
+                    currentState = logState;
 
                 if (Keyboard.GetState().IsKeyDown(Keys.Enter))
-                    currentState = logState;
+                    currentState = gameState;
 
                 currentState.Update(gameTime);
             }
@@ -138,9 +138,8 @@ namespace RGJgame
             else
             {
                 // all the rest
-                //spriteBatch.Draw(bg, new Vector2(0, 0), null, Color.White, 0f, Vector2.Zero, 4, SpriteEffects.None, 0f);
-                //spriteBatch.DrawString(font, "Awesome!", new Vector2(200, 100), new Color(0.1f, 0.5f, 0.8f), 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
-                currentState.Draw(spriteBatch);
+                gameState.Draw(spriteBatch);
+                logState.Draw(spriteBatch);
             }
 
             spriteBatch.End();
