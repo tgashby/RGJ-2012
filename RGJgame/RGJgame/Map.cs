@@ -35,6 +35,11 @@ namespace RGJgame
             m_tileMap.GetData(m_pixels);
         }
 
+        public Vector2 getPlayerSpawn()
+        {
+            return m_playerSpawn;
+        }
+
         public void Update(float gameTime)
         {
             foreach (Tile t in m_tiles)
@@ -51,8 +56,8 @@ namespace RGJgame
                 if (t != null)
                 {
                     Vector2 tempPos = t.getPosition();
-                    if (tempPos.X > playerPos.X - 400 && tempPos.X < playerPos.X + 400
-                        && tempPos.Y > playerPos.Y - 400 && tempPos.Y < playerPos.Y + 400)
+                    if (tempPos.X > playerPos.X - 1000 && tempPos.X < playerPos.X + 1000
+                        && tempPos.Y > playerPos.Y - 1000 && tempPos.Y < playerPos.Y + 1000)
                     {
                         t.Draw(batch, playerPos);
                     }
@@ -76,11 +81,11 @@ namespace RGJgame
                     else if (curColor.Equals(Color.Cyan))
                     {
                         m_tiles[x, y] = null;
-                        m_playerSpawn = new Vector2(x * tileWidth, y * tileWidth);
+                        m_playerSpawn = new Vector2(x * tileWidth * 3, y * tileWidth * 3);
                     }
                     else if (m_textures.ContainsKey(curColor))
                     {
-                        m_tiles[x, y] = new Tile(new Vector2(x * tileWidth, y * tileWidth),
+                        m_tiles[x, y] = new Tile(new Vector2(x * tileWidth * 3, y * tileWidth * 3),
                             m_textures[curColor]);
                     }
                     else
