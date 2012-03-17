@@ -94,10 +94,16 @@ namespace RGJgame
 
         public void parseInput()
         {
+            // Strip initial spaces
+            while (hackString.StartsWith(" "))
+            {
+                hackString = hackString.Remove(0, 1);
+            }
+
             // Parse the hacker string here.... Call toMod stuff, abilities, etc
 
             // TEMP
-            if (hackString.Equals(new String("TAG".ToCharArray())))
+            if (hackString.CompareTo(new String("TAG".ToCharArray())) == 0)
             {
                 toMod.Exit();
             }
