@@ -24,8 +24,12 @@ namespace RGJgame
         State currentState;
         GameState gameState;
         LogState logState;
+        Map gameMap;
+        Dictionary<Color, Texture2D[]> textureDictionary;
+        Bus bus;
 
         Texture2D bg;
+        Texture2D[] levels = new Texture2D[10];
         SpriteFont font;
 
         public Game1()
@@ -70,6 +74,7 @@ namespace RGJgame
 
             font = Content.Load<SpriteFont>(@"logtext");
             bg = Content.Load<Texture2D>(@"backgrounds/bg");
+
             // TODO: use this.Content to load your game content here
         }
 

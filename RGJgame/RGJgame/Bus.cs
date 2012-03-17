@@ -15,9 +15,10 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace RGJgame
 {
-    class Bus
+    public class Bus
     {
-        //public ArrayList<
+        public Texture2D[] m_textures;
+
         public Bus()
         {
         }
