@@ -43,6 +43,7 @@ namespace RGJgame
 
             spriteBatch.Draw(background, new Vector2(800, 0), null, logActual, 0f, Vector2.Zero, 1, SpriteEffects.None, 0.1f);
             spriteBatch.DrawString(logFont, "Log State", new Vector2(820, 100), Color.Orange, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+	}
 
         public override void Update(GameTime gameTime)
         {

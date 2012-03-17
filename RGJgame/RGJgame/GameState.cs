@@ -23,7 +23,7 @@ namespace RGJgame
         public GameState(Game game)
             : base(game)
         {
-            player = new Player();
+            player = new Player(new Vector2(0,0));
         }
 
         protected override void LoadContent()
