@@ -21,6 +21,9 @@ namespace RGJgame
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         MenuSystem menus;
+        State currentState;
+        GameState gameState;
+        LogState logState;
 
         Texture2D bg;
         SpriteFont font;
@@ -45,6 +48,11 @@ namespace RGJgame
             menus = new MenuSystem(this);
 
             menus.turnOn(MenuSystem.MAIN);
+
+            gameState = new GameState(this);
+            logState = new LogState(this);
+
+            currentState = gameState;
 
             base.Initialize();
         }
@@ -95,9 +103,14 @@ namespace RGJgame
                 if ((Input.START(1) || Input.START(2) || Input.START(3) || Input.START(4)))
                     menus.turnOn(MenuSystem.PAUSE);
 
-
                 // all the rest...
+                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                    currentState = gameState;
 
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                    currentState = logState;
+
+                currentState.Update(gameTime);
             }
 
             base.Update(gameTime);
@@ -121,8 +134,9 @@ namespace RGJgame
             else
             {
                 // all the rest
-                spriteBatch.Draw(bg, new Vector2(0, 0), null, Color.White, 0f, Vector2.Zero, 4, SpriteEffects.None, 0f);
-                spriteBatch.DrawString(font, "Awesome!", new Vector2(200, 100), new Color(0.1f, 0.5f, 0.8f), 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+                //spriteBatch.Draw(bg, new Vector2(0, 0), null, Color.White, 0f, Vector2.Zero, 4, SpriteEffects.None, 0f);
+                //spriteBatch.DrawString(font, "Awesome!", new Vector2(200, 100), new Color(0.1f, 0.5f, 0.8f), 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+                currentState.Draw(spriteBatch);
             }
 
             spriteBatch.End();
