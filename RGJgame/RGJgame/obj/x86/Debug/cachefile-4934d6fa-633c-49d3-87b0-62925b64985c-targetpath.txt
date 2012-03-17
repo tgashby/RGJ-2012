@@ -15,3 +15,4 @@ Content\images\tile3.xnb
 Content\Selected.xnb
 Content\Titles.xnb
 Content\Unselected.xnb
+Content\logtext.xnb
