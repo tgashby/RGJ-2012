@@ -19,29 +19,33 @@ namespace RGJgame
         private SpriteFont gameFont;
         private Texture2D background;
         public static Player player;
+        public const int PARALAX = 10;
 
         public GameState(Game game)
             : base(game)
         {
-            player = new Player(new Vector2(0,0));
         }
 
         protected override void LoadContent()
         {
             gameFont = Game.Content.Load<SpriteFont>(@"logtext");
             background = Game.Content.Load<Texture2D>(@"backgrounds/bg");
+
+            player = new Player(new Vector2(300, 300));
+            player.LoadContent(Game);
         }
 
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(background, new Vector2(0, 0), null, Color.White, 0f, Vector2.Zero, 4, SpriteEffects.None, 0f);
-            spriteBatch.DrawString(gameFont, "Game State", new Vector2(20, 100), Color.Orange, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+            spriteBatch.Draw(background, -player.position / PARALAX, null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 0f);
+
+            player.draw(spriteBatch);
         }
 
         public override void Update(GameTime gameTime)
         {
-
+            player.update(gameTime.ElapsedGameTime.Milliseconds);
         }
     }
 }
