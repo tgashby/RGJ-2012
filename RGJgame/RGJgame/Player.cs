@@ -23,7 +23,7 @@ namespace RGJgame
 
         public float health;
         public float detection;
-        private bool jump = false, hack = false;
+        private bool jump = false, hack = false, shielding = false;
         private Texture2D standing, running1, running2, jumping, hacking, jumphacking, shield;
         private int runtimer;
 
@@ -50,45 +50,50 @@ namespace RGJgame
 
         public void update(float dtime)
         {
-            if (KeyHandler.keyDown(Keys.W))
+            shielding = KeyHandler.keyDown(Keys.S);
+
+            if (!shielding)
             {
-                if (!jump)
+                if (KeyHandler.keyDown(Keys.W))
                 {
-                    jump = true;
-                    velocity.Y = JUMP;
+                    if (!jump)
+                    {
+                        jump = true;
+                        velocity.Y = JUMP;
+                    }
                 }
-            }
-            if (KeyHandler.keyDown(Keys.A))
-            {
-                velocity.X += -MOVEMENTSPEED;
-                if (velocity.X < -MOVEMENTSPEED)
-                    velocity.X = -MOVEMENTSPEED;
-                runtimer++;
-            }
-            if (KeyHandler.keyDown(Keys.D))
-            {
-                velocity.X += MOVEMENTSPEED;
-                if (velocity.X > MOVEMENTSPEED)
-                    velocity.X = MOVEMENTSPEED;
-                runtimer++;
-            }
-            if (!KeyHandler.keyDown(Keys.D) && !KeyHandler.keyDown(Keys.A))
-            {
-                velocity.X = 0;
-                runtimer = 0;
-            }
+                if (KeyHandler.keyDown(Keys.A))
+                {
+                    velocity.X += -MOVEMENTSPEED;
+                    if (velocity.X < -MOVEMENTSPEED)
+                        velocity.X = -MOVEMENTSPEED;
+                    runtimer++;
+                }
+                if (KeyHandler.keyDown(Keys.D))
+                {
+                    velocity.X += MOVEMENTSPEED;
+                    if (velocity.X > MOVEMENTSPEED)
+                        velocity.X = MOVEMENTSPEED;
+                    runtimer++;
+                }
 
-            if (jump)
-                velocity.Y += GRAVITY;
+                if (!KeyHandler.keyDown(Keys.D) && !KeyHandler.keyDown(Keys.A))
+                {
+                    velocity.X = 0;
+                    runtimer = 0;
+                }
 
-            if (position.Y > 500)
-            {
-                position.Y = 500;
-                jump = false;
+                if (jump)
+                    velocity.Y += GRAVITY;
+
+                if (position.Y > 500)
+                {
+                    position.Y = 500;
+                    jump = false;
+                }
+
+                position += velocity * dtime;
             }
-
-            position += velocity * dtime;
-            
             
             /*detection -= 0.01f;
             if (detection < 0) detection = 1;*/
@@ -104,23 +109,33 @@ namespace RGJgame
                 else
                     toDraw = jumping;
             }
+            else if (hack)
+            {
+                toDraw = hacking;
+            }
+            else if (shielding)
+            {
+                toDraw = shield;
+            }
             else
             {
-                if (hack)
-                    toDraw = hacking;
+                if (velocity.X == 0)
+                    toDraw = standing;
+                else if (runtimer % RUNCYCLE < RUNCYCLE / 2)
+                    toDraw = running1;
                 else
-                {
-                    if (velocity.X == 0)
-                        toDraw = standing;
-                    else if (runtimer % RUNCYCLE < RUNCYCLE / 2)
-                        toDraw = running1;
-                    else
-                        toDraw = running2;
-                }
-            }
-            
+                    toDraw = running2;
 
-            spriteBatch.Draw(toDraw, PLAYERDRAWPOS, null, Color.White, 0f, new Vector2(20, 20), 1f, SpriteEffects.None, 0.8f);
+                
+            }
+
+            SpriteEffects playerDir = new SpriteEffects();
+
+            if (velocity.X < 0)
+                playerDir = SpriteEffects.FlipHorizontally;
+                
+                
+            spriteBatch.Draw(toDraw, PLAYERDRAWPOS, null, Color.White, 0f, new Vector2(20, 20), 1f, playerDir, 0.8f);
         }
 
     }
@@ -129,7 +144,7 @@ namespace RGJgame
     {
         private PlayerPower() {}
 
-        // Add powers and their string values down here
+        // Add powers and their string values down here, then go to LogState and add them in parseInput
         public const string GRAVITY_OFF = "GRAVITY OFF";
         public const string SUPER_JUMP = "SUPER JUMP";
     }
