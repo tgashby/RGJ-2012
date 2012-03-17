@@ -39,7 +39,6 @@ namespace RGJgame
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(background, -player.position / PARALAX, null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 0f);
-            spriteBatch.DrawString(gameFont, "Game State", new Vector2(20, 100), Color.Orange, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
 
             player.draw(spriteBatch);
         }

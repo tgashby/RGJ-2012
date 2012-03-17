@@ -88,6 +88,10 @@ namespace RGJgame
             }
 
             position += velocity * dtime;
+            
+            
+            /*detection -= 0.01f;
+            if (detection < 0) detection = 1;*/
         }
 
         public void draw(SpriteBatch spriteBatch)
