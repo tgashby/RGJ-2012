@@ -20,11 +20,15 @@ namespace RGJgame
         private Texture2D background;
         private String hackString, promptString, activePowers;
 
+        public static LogState instance;
+
         private Dictionary<Keys, bool> keystates;
 
         public LogState(Game game)
             : base(game)
-        { }
+        {
+            LogState.instance = this;
+        }
 
         protected override void LoadContent()
         {
@@ -67,6 +71,11 @@ namespace RGJgame
             spriteBatch.DrawString(logFont, promptString.Insert(promptString.Length, hackString), new Vector2(820, 100), Color.Orange, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
 	    }
 
+        public void catIntoLog(String str)
+        {
+            promptString += str;
+        }
+
         public override void Update(GameTime gameTime)
         {
             foreach (Keys key in Enum.GetValues(typeof(Keys)))
@@ -91,6 +100,12 @@ namespace RGJgame
                     else if (!keystates[key] && (int)key == 191)
                     {
                         hackString = hackString.Insert(hackString.Length, new String("/".ToCharArray()));
+                    }
+                    // '.' Char
+                    else if (!keystates[key] && (int)key == 190)
+                    {
+                        
+                        hackString = hackString.Insert(hackString.Length, new String(".".ToCharArray()));
                     }
                     // Backspace
                     else if (!keystates[key] && (int)key == 8)
@@ -122,28 +137,139 @@ namespace RGJgame
                 case PlayerPower.GRAVITY_OFF:
                     GameState.player.GRAVITY = 0.0f;
                     activePowers += (hackString + "\n");
+                    GameState.player.usePower(PlayerPower.GRAVITY_OFF);
+                    GameState.player.disablePower(PlayerPower.GRAVITY_NORMAL);
+                    GameState.player.disablePower(PlayerPower.LOW_GRAV);
+                    GameState.player.disablePower(PlayerPower.MASSIVE_GRAV);
+                    break;
+
+                case PlayerPower.GRAVITY_NORMAL:
+                    GameState.player.GRAVITY = 0.08f;
+                    activePowers += (hackString + "\n");
+                    GameState.player.disablePower(PlayerPower.GRAVITY_OFF);
+                    GameState.player.usePower(PlayerPower.GRAVITY_NORMAL);
+                    GameState.player.disablePower(PlayerPower.LOW_GRAV);
+                    GameState.player.disablePower(PlayerPower.MASSIVE_GRAV);
+                    break;
+
+                case PlayerPower.LOW_GRAV:
+                    GameState.player.GRAVITY = 0.05f;
+                    activePowers += (hackString + "\n");
+                    GameState.player.disablePower(PlayerPower.GRAVITY_OFF);
+                    GameState.player.disablePower(PlayerPower.GRAVITY_NORMAL);
+                    GameState.player.usePower(PlayerPower.LOW_GRAV);
+                    GameState.player.disablePower(PlayerPower.MASSIVE_GRAV);
+                    break;
+
+                case PlayerPower.MASSIVE_GRAV:
+                    GameState.player.GRAVITY = 0.15f;
+                    activePowers += (hackString + "\n");
+                    GameState.player.disablePower(PlayerPower.GRAVITY_OFF);
+                    GameState.player.disablePower(PlayerPower.GRAVITY_NORMAL);
+                    GameState.player.disablePower(PlayerPower.LOW_GRAV);
+                    GameState.player.usePower(PlayerPower.MASSIVE_GRAV);
+                    break;
+
+                case PlayerPower.REV_GRAVITY:
+                    /*GameState.player.GRAVITY = -0.08f;
+                    GameState.player.JUMP = 3.0f;*/
+                    activePowers += (hackString + "\n");
+                    GameState.player.usePower(PlayerPower.REV_GRAVITY);
                     break;
 
                 case PlayerPower.SUPER_JUMP:
                     activePowers += (hackString + "\n");
-                    GameState.player.JUMP = -3.0f;
+                    GameState.player.usePower(PlayerPower.SUPER_JUMP);
+                    GameState.player.disablePower(PlayerPower.NORMAL_JUMP);
+                    GameState.player.disablePower(PlayerPower.WEAK_JUMP);
                     break;
 
-                case PlayerPower.LOW_GRAV:
-
+                case PlayerPower.NORMAL_JUMP:
+                    activePowers += (hackString + "\n");
+                    GameState.player.disablePower(PlayerPower.SUPER_JUMP);
+                    GameState.player.usePower(PlayerPower.NORMAL_JUMP);
+                    GameState.player.disablePower(PlayerPower.WEAK_JUMP);
                     break;
 
-                case PlayerPower.MASSIVE_GRAV:
-
+                case PlayerPower.WEAK_JUMP:
+                    activePowers += (hackString + "\n");
+                    GameState.player.disablePower(PlayerPower.SUPER_JUMP);
+                    GameState.player.disablePower(PlayerPower.NORMAL_JUMP);
+                    GameState.player.usePower(PlayerPower.WEAK_JUMP);
                     break;
 
-                case PlayerPower.REV_GRAVITY:
-
+                case PlayerPower.OVERCLOCK4:
+                    activePowers += (hackString + "\n");
+                    Game1.CLOCKSPEED = 4;
+                    GameState.player.usePower(PlayerPower.OVERCLOCK4);
+                    GameState.player.disablePower(PlayerPower.OVERCLOCK2);
+                    GameState.player.disablePower(PlayerPower.CLOCK1);
+                    GameState.player.disablePower(PlayerPower.UNDERCLOCK2);
+                    GameState.player.disablePower(PlayerPower.UNDERCLOCK4);
                     break;
 
-                case PlayerPower.SUPERSPEED:
-
+                case PlayerPower.OVERCLOCK2:
+                    activePowers += (hackString + "\n");
+                    Game1.CLOCKSPEED = 2;
+                    GameState.player.disablePower(PlayerPower.OVERCLOCK4);
+                    GameState.player.usePower(PlayerPower.OVERCLOCK2);
+                    GameState.player.disablePower(PlayerPower.CLOCK1);
+                    GameState.player.disablePower(PlayerPower.UNDERCLOCK2);
+                    GameState.player.disablePower(PlayerPower.UNDERCLOCK4);
                     break;
+
+                case PlayerPower.CLOCK1:
+                    activePowers += (hackString + "\n");
+                    Game1.CLOCKSPEED = 1.0f;
+                    GameState.player.disablePower(PlayerPower.OVERCLOCK4);
+                    GameState.player.disablePower(PlayerPower.OVERCLOCK2);
+                    GameState.player.usePower(PlayerPower.CLOCK1);
+                    GameState.player.disablePower(PlayerPower.UNDERCLOCK2);
+                    GameState.player.disablePower(PlayerPower.UNDERCLOCK4);
+                    break;
+
+                case PlayerPower.UNDERCLOCK4:
+                    activePowers += (hackString + "\n");
+                    GameState.player.disablePower(PlayerPower.OVERCLOCK4);
+                    GameState.player.disablePower(PlayerPower.OVERCLOCK2);
+                    GameState.player.disablePower(PlayerPower.CLOCK1);
+                    GameState.player.disablePower(PlayerPower.UNDERCLOCK2);
+                    GameState.player.usePower(PlayerPower.UNDERCLOCK4);
+                    Game1.CLOCKSPEED = 0.25f;
+                    break;
+
+                case PlayerPower.UNDERCLOCK2:
+                    activePowers += (hackString + "\n");
+                    Game1.CLOCKSPEED = 0.5f;
+                    GameState.player.disablePower(PlayerPower.OVERCLOCK4);
+                    GameState.player.disablePower(PlayerPower.OVERCLOCK2);
+                    GameState.player.disablePower(PlayerPower.CLOCK1);
+                    GameState.player.usePower(PlayerPower.UNDERCLOCK2);
+                    GameState.player.disablePower(PlayerPower.UNDERCLOCK4);
+                    break;
+
+                case PlayerPower.MOVEMENT_FAST:
+                    activePowers += (hackString + "\n");
+                    GameState.player.MOVEMENTSPEED = 0.56f;
+                    GameState.player.disablePower(PlayerPower.MOVEMENT_SLOW);
+                    GameState.player.disablePower(PlayerPower.MOVEMENT_NORMAL);
+                    GameState.player.usePower(PlayerPower.MOVEMENT_FAST);
+                    break;
+                case PlayerPower.MOVEMENT_NORMAL:
+                    activePowers += (hackString + "\n");
+                    GameState.player.MOVEMENTSPEED = 0.28f;
+                    GameState.player.disablePower(PlayerPower.MOVEMENT_SLOW);
+                    GameState.player.usePower(PlayerPower.MOVEMENT_NORMAL);
+                    GameState.player.disablePower(PlayerPower.MOVEMENT_FAST);
+                    break;
+                case PlayerPower.MOVEMENT_SLOW:
+                    activePowers += (hackString + "\n");
+                    GameState.player.MOVEMENTSPEED = 0.14f;
+                    GameState.player.usePower(PlayerPower.MOVEMENT_SLOW);
+                    GameState.player.disablePower(PlayerPower.MOVEMENT_NORMAL);
+                    GameState.player.disablePower(PlayerPower.MOVEMENT_FAST);
+                    break;
+
 
                 case PlayerPower.BULLET:
 
@@ -202,7 +328,7 @@ namespace RGJgame
                     break;
 
                 default:
-                    hackString = new String("Unknown Command!".ToCharArray());
+                    hackString = new String("System Runtime Exception: Unknown Command\n".ToCharArray());
                     break;
             }
         }

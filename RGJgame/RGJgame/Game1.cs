@@ -18,6 +18,8 @@ namespace RGJgame
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
+        public static float CLOCKSPEED = 1;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         MenuSystem menus;

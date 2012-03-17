@@ -61,8 +61,10 @@ namespace RGJgame
 
         public override void Update(GameTime gameTime)
         {
-            player.update(gameTime.ElapsedGameTime.Milliseconds);
-            gameMap.Update(gameTime.ElapsedGameTime.Milliseconds);
+            float gametime = gameTime.ElapsedGameTime.Milliseconds * Game1.CLOCKSPEED;
+
+            player.update(gametime);
+            gameMap.Update(gametime);
         }
     }
 }
