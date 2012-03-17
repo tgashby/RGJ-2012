@@ -107,15 +107,19 @@ namespace RGJgame
             }
 
             // Parse the hacker string here.... Call toMod stuff, abilities, etc
+            switch (hackString)
+            {
+                case PlayerPower.GRAVITY_OFF:
+                    GameState.player.GRAVITY = 0.0f;
+                    break;
 
-            // TEMP
-            if (hackString.CompareTo(new String("TAG".ToCharArray())) == 0)
-            {
-                toMod.Exit();
-            }
-            else
-            {
-                hackString = new String("Unknown Command!".ToCharArray());
+                case PlayerPower.SUPER_JUMP:
+                    GameState.player.JUMP = -3.0f;
+                    break;
+
+                default:
+                    hackString = new String("Unknown Command!".ToCharArray());
+                    break;
             }
         }
 

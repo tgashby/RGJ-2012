@@ -17,7 +17,7 @@ namespace RGJgame
 {
     class Player
     {
-        public const float JUMP = -1.1f, MOVEMENTSPEED = 0.28f, GRAVITY = 0.08f;
+        public float JUMP = -1.1f, MOVEMENTSPEED = 0.28f, GRAVITY = 0.08f;
         public static Vector2 PLAYERDRAWPOS = new Vector2(300, 300);
         public const int RUNCYCLE = 20;
 
@@ -123,5 +123,14 @@ namespace RGJgame
             spriteBatch.Draw(toDraw, PLAYERDRAWPOS, null, Color.White, 0f, new Vector2(20, 20), 1f, SpriteEffects.None, 0.8f);
         }
 
+    }
+
+    public sealed class PlayerPower
+    {
+        private PlayerPower() {}
+
+        // Add powers and their string values down here
+        public const string GRAVITY_OFF = "GRAVITY OFF";
+        public const string SUPER_JUMP = "SUPER JUMP";
     }
 }
