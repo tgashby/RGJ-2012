@@ -20,11 +20,14 @@ namespace RGJgame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        MenuSystem menus;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            setScreenSize(1200, 600);
         }
 
         /// <summary>
@@ -36,6 +39,9 @@ namespace RGJgame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            menus = new MenuSystem(this);
+
+            menus.turnOn(MenuSystem.MAIN);
 
             base.Initialize();
         }
@@ -69,10 +75,25 @@ namespace RGJgame
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            if ((Input.BACK(1) || Input.BACK(2) || Input.BACK(3) || Input.BACK(4)))
+                this.Exit();
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
             // TODO: Add your update logic here
+            if (menus.menusBusy)
+            {
+                menus.Update(gameTime.ElapsedGameTime.Milliseconds);
+            }
+            else
+            {
+                if ((Input.START(1) || Input.START(2) || Input.START(3) || Input.START(4)))
+                    menus.turnOn(MenuSystem.PAUSE);
+
+
+                // all the rest...
+
+            }
 
             base.Update(gameTime);
         }
@@ -83,11 +104,62 @@ namespace RGJgame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
+
+            spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.FrontToBack, SaveStateMode.None);
 
             // TODO: Add your drawing code here
+            if (menus.menusBusy)
+            {
+                menus.Draw(spriteBatch);
+            }
+            else
+            {
+
+                // all the rest
+
+            }
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
+
+
+
+
+
+
+
+
+        public void NewGame()
+        {
+            // do all your game init stuffs here (like making new player or tilemaps)
+        }
+
+
+
+
+        // Stuff menus need
+        #region
+        public void EndGame()
+        {
+            this.Exit();
+        }
+
+        public void toggleFullScreen()
+        {
+            this.graphics.ToggleFullScreen();
+        }
+
+        public void setScreenSize(int w, int h)
+        {
+            this.graphics.PreferredBackBufferWidth = w;
+            this.graphics.PreferredBackBufferHeight = h;
+            this.graphics.ApplyChanges();
+        }
+
+        #endregion
+
     }
 }
