@@ -16,3 +16,4 @@ Content\Selected.xnb
 Content\Titles.xnb
 Content\Unselected.xnb
 Content\logtext.xnb
+Content\backgrounds\log.xnb

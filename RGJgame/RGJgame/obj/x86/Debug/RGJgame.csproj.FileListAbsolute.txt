@@ -22,3 +22,4 @@ C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\t
 C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\tile3.xnb
 C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\backgrounds\bg.xnb
 C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\logtext.xnb
+C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\backgrounds\log.xnb

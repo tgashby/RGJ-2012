@@ -163,6 +163,15 @@
       <Output>C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\logtext.xnb</Output>
       <Time>2012-03-16T21:58:39.2826109-07:00</Time>
     </Item>
+    <Item>
+      <Source>backgrounds\log.png</Source>
+      <Name>backgrounds\log</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\backgrounds\log.xnb</Output>
+      <Time>2012-03-16T23:51:55.7372523-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

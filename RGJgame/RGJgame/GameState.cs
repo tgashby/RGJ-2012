@@ -18,10 +18,13 @@ namespace RGJgame
     {
         private SpriteFont gameFont;
         private Texture2D background;
+        public static Player player;
 
         public GameState(Game game)
             : base(game)
-        {}
+        {
+            player = new Player();
+        }
 
         protected override void LoadContent()
         {
@@ -33,7 +36,7 @@ namespace RGJgame
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(background, new Vector2(0, 0), null, Color.White, 0f, Vector2.Zero, 4, SpriteEffects.None, 0f);
-            spriteBatch.DrawString(gameFont, "Game State", new Vector2(100, 100), Color.Orange, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+            spriteBatch.DrawString(gameFont, "Game State", new Vector2(20, 100), Color.Orange, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
         }
 
         public override void Update(GameTime gameTime)

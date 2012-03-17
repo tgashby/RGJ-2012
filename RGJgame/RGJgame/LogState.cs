@@ -27,7 +27,7 @@ namespace RGJgame
         protected override void LoadContent()
         {
             logFont = Game.Content.Load<SpriteFont>(@"logtext");
-            background = Game.Content.Load<Texture2D>(@"backgrounds/bg");
+            background = Game.Content.Load<Texture2D>(@"backgrounds/log");
 
             hackString = new char[50];
         }
@@ -35,8 +35,15 @@ namespace RGJgame
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(background, new Vector2(0, 0), null, Color.White, 0f, Vector2.Zero, 4, SpriteEffects.None, 0f);
-            spriteBatch.DrawString(logFont, "Log State", new Vector2(100, 100), Color.Orange, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+            Vector3 logColor1 = new Vector3(0.1f, 0.7f, 0.1f);
+            Vector3 logColor2 = new Vector3(1.0f, 0.1f, 0.0f);
+
+            Vector3 lcolor;
+            lcolor = GameState.player.detection * logColor1 + (1 - GameState.player.detection) * logColor2;
+            Color logActual = new Color(lcolor);
+
+            spriteBatch.Draw(background, new Vector2(800, 0), null, logActual, 0f, Vector2.Zero, 1, SpriteEffects.None, 0.1f);
+            spriteBatch.DrawString(logFont, "Log State", new Vector2(820, 100), Color.Orange, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
         }
 
         public override void Update(GameTime gameTime)
