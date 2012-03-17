@@ -32,8 +32,15 @@ namespace RGJgame
             background = Game.Content.Load<Texture2D>(@"backgrounds/log");
 
             hackString = new String("".ToCharArray());
-            promptString = new String("".ToCharArray());
             activePowers = new String("".ToCharArray());
+
+            promptString = new String(
+                 ("List of Available Commands:\n" +
+                 "GRAVITY OFF, " +
+                // Add power names and a comma, or a \n at the end of powers list
+                 "SUPER JUMP\n" +
+                 "Currently Active Powers:\n" +
+                 activePowers + "Enter Power:\n").ToCharArray());
 
             keystates = new Dictionary<Keys, bool>();
 
