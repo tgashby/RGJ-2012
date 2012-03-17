@@ -1,5 +1,6 @@
 # Ignore ALL the things
+*
 
-
-# But not source files.
+# But not source files or images.
 !*.cs
+!*.png

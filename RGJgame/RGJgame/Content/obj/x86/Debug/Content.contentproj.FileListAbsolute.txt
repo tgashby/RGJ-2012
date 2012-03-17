@@ -1,2 +1,0 @@
-C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\Content\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Users\Nick\School\RGJ-2012\RGJgame\RGJgame\Content\obj\x86\Debug\ResolveAssemblyReference.cache
