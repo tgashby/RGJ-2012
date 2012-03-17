@@ -23,3 +23,6 @@ C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\t
 C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\backgrounds\bg.xnb
 C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\logtext.xnb
 C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\backgrounds\log.xnb
+C:\Users\Nick\School\RGJ-2012\RGJgame\RGJgame\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Nick\School\RGJ-2012\RGJgame\RGJgame\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Nick\School\RGJ-2012\RGJgame\RGJgame\obj\x86\Debug\RGJgame.exe
