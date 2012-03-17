@@ -63,8 +63,6 @@ namespace RGJgame
             {
                 if (KeyHandler.keyDown(key))
                 {
-                    Console.WriteLine((int)key);
-
                     char[] tmp = new char[1];
                     tmp[0] = (char)(int)key;
 
@@ -92,6 +90,22 @@ namespace RGJgame
                     keystates[key] = false;
                 }
             }
+        }
+
+        public void parseInput()
+        {
+            // Parse the hacker string here.... Call toMod stuff, abilities, etc
+
+            // TEMP
+            if (hackString.Equals(new String("TAG".ToCharArray())))
+            {
+                toMod.Exit();
+            }
+        }
+
+        public void clearInput()
+        {
+            hackString = new String("".ToCharArray());
         }
     }
 }
