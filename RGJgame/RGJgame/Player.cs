@@ -50,7 +50,10 @@ namespace RGJgame
 
         public void update(float dtime)
         {
-            shielding = KeyHandler.keyDown(Keys.S);
+            if (!jump)
+                shielding = KeyHandler.keyDown(Keys.S);
+            else
+                shielding = false;
 
             if (!shielding)
             {
