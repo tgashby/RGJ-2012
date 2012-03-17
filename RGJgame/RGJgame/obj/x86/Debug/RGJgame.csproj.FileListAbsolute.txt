@@ -23,3 +23,7 @@ C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\t
 C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\backgrounds\bg.xnb
 C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\logtext.xnb
 C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\backgrounds\log.xnb
+C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\flyer3.xnb
+C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\flyer4.xnb
+C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\flyer2.xnb
+C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\flyer1.xnb
