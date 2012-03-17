@@ -63,6 +63,8 @@ namespace RGJgame
             {
                 if (KeyHandler.keyDown(key))
                 {
+                    Console.WriteLine((int)key);
+
                     char[] tmp = new char[1];
                     tmp[0] = (char)(int)key;
 
@@ -81,6 +83,12 @@ namespace RGJgame
                     else if (!keystates[key] && (int)key == 191)
                     {
                         hackString = hackString.Insert(hackString.Length, new String("/".ToCharArray()));
+                    }
+                    // Backspace
+                    else if (!keystates[key] && (int)key == 8)
+                    {
+                        if (hackString.Length > 0)
+                            hackString = hackString.Remove(hackString.Length - 1, 1);
                     }
 
                     keystates[key] = true;

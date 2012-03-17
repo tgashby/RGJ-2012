@@ -1,6 +1,8 @@
 # Ignore ALL the things
-*
-
-# But not source files or images.
-!*.cs
-!*.png
+*.sln
+*.suo
+*.contentproj*
+*obj/
+*.csproj*
+*Properties/
+*bin/

@@ -113,16 +113,16 @@ namespace RGJgame
                     menus.turnOn(MenuSystem.PAUSE);
 
                 // all the rest...
-                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                if (currentState == gameState && Keyboard.GetState().IsKeyDown(Keys.Space))
                 {
                     currentState = logState;
+                    logState.clearInput();
                 }
 
-                if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                if (currentState == logState && Keyboard.GetState().IsKeyDown(Keys.Enter))
                 {
                     currentState = gameState;
                     logState.parseInput();
-                    logState.clearInput();
                 }
 
                 currentState.Update(gameTime);
