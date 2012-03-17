@@ -149,8 +149,8 @@ namespace RGJgame
             else
             {
                 // all the rest
-                gameState.Draw(spriteBatch);
                 logState.Draw(spriteBatch);
+                gameState.Draw(spriteBatch);
             }
 
             spriteBatch.End();

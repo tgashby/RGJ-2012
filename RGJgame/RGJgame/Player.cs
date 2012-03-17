@@ -125,8 +125,6 @@ namespace RGJgame
                     toDraw = running1;
                 else
                     toDraw = running2;
-
-                
             }
 
             SpriteEffects playerDir = new SpriteEffects();

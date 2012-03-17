@@ -18,7 +18,7 @@ namespace RGJgame
     {
         private SpriteFont logFont;
         private Texture2D background;
-        private String hackString;
+        private String hackString, promptString, activePowers;
 
         private Dictionary<Keys, bool> keystates;
 
@@ -31,7 +31,10 @@ namespace RGJgame
             logFont = Game.Content.Load<SpriteFont>(@"logtext");
             background = Game.Content.Load<Texture2D>(@"backgrounds/log");
 
-            hackString = new String("Log State".ToCharArray());
+            hackString = new String("".ToCharArray());
+            promptString = new String("".ToCharArray());
+            activePowers = new String("".ToCharArray());
+
             keystates = new Dictionary<Keys, bool>();
 
             foreach (Keys key in Enum.GetValues(typeof(Keys)))
@@ -53,8 +56,8 @@ namespace RGJgame
             lcolor = GameState.player.detection * logColor1 + (1 - GameState.player.detection) * logColor2;
             Color logActual = new Color(lcolor);
 
-            spriteBatch.Draw(background, new Vector2(800, 0), null, logActual, 0f, Vector2.Zero, 1, SpriteEffects.None, 0.1f);
-            spriteBatch.DrawString(logFont, hackString, new Vector2(820, 100), Color.Orange, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+            spriteBatch.Draw(background, new Vector2(800, 0), null, logActual, 0f, Vector2.Zero, 1, SpriteEffects.None, 0.9f);
+            spriteBatch.DrawString(logFont, promptString.Insert(promptString.Length, hackString), new Vector2(820, 100), Color.Orange, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
 	    }
 
         public override void Update(GameTime gameTime)
@@ -111,9 +114,11 @@ namespace RGJgame
             {
                 case PlayerPower.GRAVITY_OFF:
                     GameState.player.GRAVITY = 0.0f;
+                    activePowers += (hackString + "\n");
                     break;
 
                 case PlayerPower.SUPER_JUMP:
+                    activePowers += (hackString + "\n");
                     GameState.player.JUMP = -3.0f;
                     break;
 
@@ -125,7 +130,16 @@ namespace RGJgame
 
         public void clearInput()
         {
-            hackString = new String("".ToCharArray());
+            promptString = new String(
+                ("List of Available Commands:\n" +
+                "GRAVITY OFF, " +
+                // Add power names and a comma, or a \n at the end of powers list
+                "SUPER JUMP\n" +
+                "Currently Active Powers:\n" +
+                activePowers + "Enter Power:\n").ToCharArray());
+
+            if (hackString.Length > 0)
+                hackString = hackString.Remove(0);
         }
     }
 }
