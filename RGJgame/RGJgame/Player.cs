@@ -50,7 +50,7 @@ namespace RGJgame
 
         public void update(float dtime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
+            if (KeyHandler.keyDown(Keys.W))
             {
                 if (!jump)
                 {
@@ -58,21 +58,21 @@ namespace RGJgame
                     velocity.Y = JUMP;
                 }
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            if (KeyHandler.keyDown(Keys.A))
             {
                 velocity.X += -MOVEMENTSPEED;
                 if (velocity.X < -MOVEMENTSPEED)
                     velocity.X = -MOVEMENTSPEED;
                 runtimer++;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            if (KeyHandler.keyDown(Keys.D))
             {
                 velocity.X += MOVEMENTSPEED;
                 if (velocity.X > MOVEMENTSPEED)
                     velocity.X = MOVEMENTSPEED;
                 runtimer++;
             }
-            if (!Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A))
+            if (!KeyHandler.keyDown(Keys.D) && !KeyHandler.keyDown(Keys.A))
             {
                 velocity.X = 0;
                 runtimer = 0;
