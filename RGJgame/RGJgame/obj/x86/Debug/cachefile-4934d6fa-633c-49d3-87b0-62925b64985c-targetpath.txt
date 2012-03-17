@@ -17,3 +17,8 @@ Content\Selected.xnb
 Content\Titles.xnb
 Content\Unselected.xnb
 Content\logtext.xnb
+Content\backgrounds\log.xnb
+Content\images\flyer1.xnb
+Content\images\flyer2.xnb
+Content\images\flyer3.xnb
+Content\images\flyer4.xnb

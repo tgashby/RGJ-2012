@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Nick\School\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\backgrounds\bg.xnb</Output>
-      <Time>2012-03-17T00:53:23.3508884-07:00</Time>
+      <Output>C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\backgrounds\bg.xnb</Output>
+      <Time>2012-03-17T01:16:06.4961392-07:00</Time>
     </Item>
     <Item>
       <Source>images\guy_hacking_jumping.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Nick\School\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\guy_hacking_jumping.xnb</Output>
-      <Time>2012-03-17T00:53:23.3528886-07:00</Time>
+      <Output>C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\guy_hacking_jumping.xnb</Output>
+      <Time>2012-03-17T01:06:52.2184364-07:00</Time>
     </Item>
     <Item>
       <Source>images\guy_hacking_standing.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Nick\School\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\guy_hacking_standing.xnb</Output>
-      <Time>2012-03-17T00:53:23.3538886-07:00</Time>
+      <Output>C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\guy_hacking_standing.xnb</Output>
+      <Time>2012-03-17T01:07:05.3681885-07:00</Time>
     </Item>
     <Item>
       <Source>images\guy_jumping.png</Source>
@@ -34,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Nick\School\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\guy_jumping.xnb</Output>
-      <Time>2012-03-17T00:53:23.3548887-07:00</Time>
+      <Output>C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\guy_jumping.xnb</Output>
+      <Time>2012-03-17T01:09:15.7906482-07:00</Time>
     </Item>
     <Item>
       <Source>images\guy_shield.png</Source>
@@ -43,8 +43,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Nick\School\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\guy_shield.xnb</Output>
-      <Time>2012-03-17T00:53:23.3558887-07:00</Time>
+      <Output>C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\guy_shield.xnb</Output>
+      <Time>2012-03-17T01:07:31.5576864-07:00</Time>
     </Item>
     <Item>
       <Source>images\guy_standing.png</Source>
@@ -52,8 +52,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Nick\School\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\guy_standing.xnb</Output>
-      <Time>2012-03-17T00:53:23.3558887-07:00</Time>
+      <Output>C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\guy_standing.xnb</Output>
+      <Time>2012-03-17T01:07:41.6262623-07:00</Time>
     </Item>
     <Item>
       <Source>images\guy_walking1.png</Source>
@@ -61,8 +61,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Nick\School\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\guy_walking1.xnb</Output>
-      <Time>2012-03-17T00:53:23.3568888-07:00</Time>
+      <Output>C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\guy_walking1.xnb</Output>
+      <Time>2012-03-17T01:09:37.9919181-07:00</Time>
     </Item>
     <Item>
       <Source>images\guy_walking2.png</Source>
@@ -70,8 +70,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Nick\School\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\guy_walking2.xnb</Output>
-      <Time>2012-03-17T00:53:23.3568888-07:00</Time>
+      <Output>C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\guy_walking2.xnb</Output>
+      <Time>2012-03-17T01:08:20.0954626-07:00</Time>
     </Item>
     <Item>
       <Source>images\spike1.png</Source>
@@ -79,8 +79,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Nick\School\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\spike1.xnb</Output>
-      <Time>2012-03-17T00:53:23.3578888-07:00</Time>
+      <Output>C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\spike1.xnb</Output>
+      <Time>2012-03-17T01:44:24.7922762-07:00</Time>
     </Item>
     <Item>
       <Source>images\spike2.png</Source>
@@ -88,8 +88,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Nick\School\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\spike2.xnb</Output>
-      <Time>2012-03-17T00:53:23.3578888-07:00</Time>
+      <Output>C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\spike2.xnb</Output>
+      <Time>2012-03-17T01:45:10.7299037-07:00</Time>
     </Item>
     <Item>
       <Source>images\spike3.png</Source>
@@ -97,8 +97,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Nick\School\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\spike3.xnb</Output>
-      <Time>2012-03-17T00:53:23.3588889-07:00</Time>
+      <Output>C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\spike3.xnb</Output>
+      <Time>2012-03-17T01:45:42.9867487-07:00</Time>
     </Item>
     <Item>
       <Source>images\tile1.png</Source>
@@ -106,8 +106,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Nick\School\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\tile1.xnb</Output>
-      <Time>2012-03-17T00:53:23.3588889-07:00</Time>
+      <Output>C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\tile1.xnb</Output>
+      <Time>2012-03-17T01:26:19.027174-07:00</Time>
     </Item>
     <Item>
       <Source>images\tile2.png</Source>
@@ -115,8 +115,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Nick\School\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\tile2.xnb</Output>
-      <Time>2012-03-17T00:53:23.359889-07:00</Time>
+      <Output>C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\tile2.xnb</Output>
+      <Time>2012-03-17T01:26:27.3356492-07:00</Time>
     </Item>
     <Item>
       <Source>images\tile3.png</Source>
@@ -124,17 +124,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Nick\School\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\tile3.xnb</Output>
-      <Time>2012-03-17T00:53:23.360889-07:00</Time>
-    </Item>
-    <Item>
-      <Source>backgrounds\log.png</Source>
-      <Name>backgrounds\log</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Nick\School\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\backgrounds\log.xnb</Output>
-      <Time>2012-03-17T00:53:23.3518885-07:00</Time>
+      <Output>C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\tile3.xnb</Output>
+      <Time>2012-03-17T01:26:35.1530963-07:00</Time>
     </Item>
     <Item>
       <Source>Selected.spritefont</Source>
@@ -171,6 +162,42 @@
       <Options>None</Options>
       <Output>C:\Users\Nick\School\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\logtext.xnb</Output>
       <Time>2012-03-17T00:53:23.360889-07:00</Time>
+    </Item>
+    <Item>
+      <Source>images\flyer1.png</Source>
+      <Name>images\flyer1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\flyer1.xnb</Output>
+      <Time>2012-03-17T03:04:01.1544685-07:00</Time>
+    </Item>
+    <Item>
+      <Source>images\flyer2.png</Source>
+      <Name>images\flyer2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\flyer2.xnb</Output>
+      <Time>2012-03-17T03:04:01.1444679-07:00</Time>
+    </Item>
+    <Item>
+      <Source>images\flyer3.png</Source>
+      <Name>images\flyer3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\flyer3.xnb</Output>
+      <Time>2012-03-17T03:04:01.1484682-07:00</Time>
+    </Item>
+    <Item>
+      <Source>images\flyer4.png</Source>
+      <Name>images\flyer4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\images\flyer4.xnb</Output>
+      <Time>2012-03-17T03:04:01.1514683-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

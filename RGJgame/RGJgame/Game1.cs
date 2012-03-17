@@ -109,10 +109,16 @@ namespace RGJgame
 
                 // all the rest...
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                {
                     currentState = logState;
+                }
 
                 if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                {
                     currentState = gameState;
+                    logState.parseInput();
+                    logState.clearInput();
+                }
 
                 currentState.Update(gameTime);
             }

@@ -86,6 +86,7 @@
   <ItemGroup>
     <Compile Include="GameState.cs" />
     <Compile Include="Input.cs" />
+    <Compile Include="KeyHandler.cs" />
     <Compile Include="LogState.cs" />
     <Compile Include="MenuSystem.cs" />
     <Compile Include="Player.cs" />
