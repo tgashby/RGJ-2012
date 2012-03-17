@@ -1,2 +1,5 @@
-*.class
-*/obj/*
+# Ignore ALL the things
+*
+
+# But not source files.
+!*.cs
