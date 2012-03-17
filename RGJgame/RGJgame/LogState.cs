@@ -63,8 +63,6 @@ namespace RGJgame
             {
                 if (KeyHandler.keyDown(key))
                 {
-                    Console.WriteLine((int)key);
-
                     char[] tmp = new char[1];
                     tmp[0] = (char)(int)key;
 
@@ -114,6 +112,10 @@ namespace RGJgame
             if (hackString.CompareTo(new String("TAG".ToCharArray())) == 0)
             {
                 toMod.Exit();
+            }
+            else
+            {
+                hackString = new String("Unknown Command!".ToCharArray());
             }
         }
 
