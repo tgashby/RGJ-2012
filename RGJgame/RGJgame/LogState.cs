@@ -129,6 +129,78 @@ namespace RGJgame
                     GameState.player.JUMP = -3.0f;
                     break;
 
+                case PlayerPower.LOW_GRAV:
+
+                    break;
+
+                case PlayerPower.MASSIVE_GRAV:
+
+                    break;
+
+                case PlayerPower.REV_GRAVITY:
+
+                    break;
+
+                case PlayerPower.SUPERSPEED:
+
+                    break;
+
+                case PlayerPower.BULLET:
+
+                    break;
+
+                case PlayerPower.BULLET_SPREAD:
+
+                    break;
+
+                case PlayerPower.AUTO_FIRE:
+
+                    break;
+
+                case PlayerPower.STRONG_BULLETS:
+
+                    break;
+
+                case PlayerPower.FREEZE_ENEMIES:
+
+                    break;
+
+                case PlayerPower.BURN_ENEMIES:
+
+                    break;
+
+                case PlayerPower.THROW_ENEMY:
+
+                    break;
+
+                case PlayerPower.NUKE:
+
+                    break;
+
+                case PlayerPower.TELEPORT:
+
+                    break;
+
+                case PlayerPower.LAZER:
+
+                    break;
+
+                case PlayerPower.DECREASE_ENEMY_SPEED:
+
+                    break;
+
+                case PlayerPower.GET_ENEMY_ID:
+
+                    break;
+
+                case PlayerPower.KILL_ID:
+
+                    break;
+
+                case PlayerPower.ROOT_PRIV:
+
+                    break;
+
                 default:
                     hackString = new String("Unknown Command!".ToCharArray());
                     break;

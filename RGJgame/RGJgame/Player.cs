@@ -148,5 +148,23 @@ namespace RGJgame
         // Add powers and their string values down here, then go to LogState and add them in parseInput
         public const string GRAVITY_OFF = "GRAVITY OFF";
         public const string SUPER_JUMP = "SUPER JUMP";
+        public const string LOW_GRAV = "LOW GRAVITY";
+        public const string MASSIVE_GRAV = "MASSIVE GRAVITY";
+        public const string REV_GRAVITY = "REVERSE GRAVITY";
+        public const string SUPERSPEED = "OVERCLOCK";
+        public const string BULLET = "FIRE BULLET";
+        public const string BULLET_SPREAD = "FIRE SPREAD";
+        public const string AUTO_FIRE = "AUTO FIRE";
+        public const string STRONG_BULLETS = "STRONG BULLETS";
+        public const string FREEZE_ENEMIES = "FREEZE";
+        public const string BURN_ENEMIES = "FLAMES";
+        public const string THROW_ENEMY = "THROW NEAREST";
+        public const string NUKE = "WE ARE DOOMED";
+        public const string TELEPORT = "TELEPORT"; // Special Case
+        public const string LAZER = "LAZAR";
+        public const string DECREASE_ENEMY_SPEED = "SLOW EM DOWN";
+        public const string GET_ENEMY_ID = "PID NEAREST";
+        public const string KILL_ID = "KILL"; // Special Case
+        public const string ROOT_PRIV = "LOLZROOT";
     }
 }
