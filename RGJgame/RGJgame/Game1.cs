@@ -22,6 +22,9 @@ namespace RGJgame
         SpriteBatch spriteBatch;
         MenuSystem menus;
 
+        Texture2D bg;
+        SpriteFont font;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -55,6 +58,8 @@ namespace RGJgame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            font = Content.Load<SpriteFont>(@"logtext");
+            bg = Content.Load<Texture2D>(@"backgrounds/bg");
             // TODO: use this.Content to load your game content here
         }
 
@@ -115,9 +120,9 @@ namespace RGJgame
             }
             else
             {
-
                 // all the rest
-
+                spriteBatch.Draw(bg, new Vector2(0, 0), null, Color.White, 0f, Vector2.Zero, 4, SpriteEffects.None, 0f);
+                spriteBatch.DrawString(font, "Awesome!", new Vector2(200, 100), new Color(0.1f, 0.5f, 0.8f), 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
             }
 
             spriteBatch.End();

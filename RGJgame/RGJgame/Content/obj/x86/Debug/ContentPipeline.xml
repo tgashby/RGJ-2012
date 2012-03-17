@@ -154,6 +154,15 @@
       <Output>C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\Unselected.xnb</Output>
       <Time>2012-03-16T21:10:53.8477174-07:00</Time>
     </Item>
+    <Item>
+      <Source>logtext.spritefont</Source>
+      <Name>logtext</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Tim\Desktop\RGJ\RGJ-2012\RGJgame\RGJgame\bin\x86\Debug\Content\logtext.xnb</Output>
+      <Time>2012-03-16T21:58:39.2826109-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
