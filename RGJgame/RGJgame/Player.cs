@@ -27,7 +27,7 @@ namespace RGJgame
         public float detection;
         private float hitTimer;
         public bool hack = false, jump = false, facingLeft = false;
-        private bool shielding = false;
+        public bool shielding = false;
         private bool justHit = false;
         private Texture2D standing, running1, running2, jumping, hacking, jumphacking, shield, shield1, shield2, shield3;
         private int runtimer, detectiontimer = DETECTIONCYCLE;

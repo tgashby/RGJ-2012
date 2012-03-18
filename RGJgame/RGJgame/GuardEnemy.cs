@@ -16,8 +16,9 @@ namespace RGJgame
 {
     class GuardEnemy : Entity
     {
-        public float MOVEMENTSPEED = 0.28f;
-        public static Vector2 GUARDDRAWPOS = new Vector2(300, 300);
+        public const float MOVEMENTSPEED = 0.28f, BULLETSPEED = 2f;
+        public const int SHOOTTIME = 500;
+
 
         private Texture2D guardbase, guardgun;
         private float moveTimer, shotTimer;
@@ -61,12 +62,11 @@ namespace RGJgame
             position += velocity * elapsedTime;
 
             shotTimer += elapsedTime;
-            if (shotTimer >= 1000.0f)
+            if (shotTimer >= SHOOTTIME)
             {
-                if (velocity.X < 0)
-                    Bullets.instance.addNewBullet((position - new Vector2(10, 20)), new Vector2(-1.0f, 0.0f), Bullets.P_SMALL, this);
-                else
-                    Bullets.instance.addNewBullet((position - new Vector2(-10, 20)), new Vector2(1.0f, 0.0f), Bullets.P_SMALL, this);
+                Vector2 toPlayer = -(position - GameState.player.position);
+                toPlayer.Normalize();
+                Bullets.instance.addNewBullet((position - new Vector2(0, 20)), toPlayer * BULLETSPEED, Bullets.P_SMALL, this);
 
                 shotTimer = 0.0f;
             }
@@ -77,20 +77,22 @@ namespace RGJgame
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (velocity.X < 0)
+            Vector2 toPlayer = position - GameState.player.position;
+            float rot;
+
+            if (toPlayer.Y < 0)
             {
-                spriteBatch.Draw(guardbase, position - GameState.player.position + Player.PLAYERDRAWPOS, null, Color.White, 0f,
-                    new Vector2(guardbase.Width / 2, guardbase.Height / 2), 1f, SpriteEffects.FlipHorizontally, 0.8f);
-                spriteBatch.Draw(guardgun, (position - new Vector2(10, 20)) - GameState.player.position + Player.PLAYERDRAWPOS, null, Color.White, -(float)Math.PI / 2.0f,
-                    new Vector2(guardgun.Width / 2, guardgun.Height / 2), 1f, SpriteEffects.FlipHorizontally, 0.9f);
+                rot = (float)Math.Atan(toPlayer.X / toPlayer.Y) + (float)MathHelper.Pi;
             }
             else
             {
-                spriteBatch.Draw(guardbase, position - GameState.player.position + Player.PLAYERDRAWPOS, null, Color.White, 0f, 
-                    new Vector2(guardbase.Width / 2, guardbase.Height / 2), 1f, SpriteEffects.None, 0.8f);
-                spriteBatch.Draw(guardgun, (position - new Vector2(-10, 20)) - GameState.player.position + Player.PLAYERDRAWPOS, null, Color.White, (float)Math.PI / 2.0f,
-                    new Vector2(guardgun.Width / 2, guardgun.Height / 2), 1f, SpriteEffects.None, 0.9f);
+                rot = (float)Math.Atan(toPlayer.X / toPlayer.Y + 0.001);
             }
+
+            spriteBatch.Draw(guardbase, position - GameState.player.position + Player.PLAYERDRAWPOS, null, Color.White, 0f,
+                new Vector2(guardbase.Width / 2, guardbase.Height / 2), 1f, SpriteEffects.None, 0.8f);
+            spriteBatch.Draw(guardgun, (position - new Vector2(0, 20)) - GameState.player.position + Player.PLAYERDRAWPOS, null, Color.White, -rot,
+                new Vector2(guardgun.Width / 2, guardgun.Height / 2), 1f, SpriteEffects.None, 0.7f);
         }
 
         public override void doCollision(Player player)
