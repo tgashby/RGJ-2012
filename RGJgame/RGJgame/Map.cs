@@ -23,7 +23,7 @@ namespace RGJgame
         private Tile[,] m_tiles;
         private Vector2 m_playerSpawn;
         private Dictionary<Color, Texture2D[]> m_textures;
-        private const int tileWidth = 20;
+        private const int tileWidth = 60;
 
         public Map(Game game, Texture2D tileMap, Dictionary<Color, Texture2D[]> tileTextures)
         {
@@ -38,6 +38,45 @@ namespace RGJgame
         public Vector2 getPlayerSpawn()
         {
             return m_playerSpawn;
+        }
+
+        public void checkPlayerCollision(Player p)
+        {
+            int xmin = (int)(p.position.X - p.imageDimension().X / 2) / tileWidth;
+            int xmax = (int)(p.position.X + p.imageDimension().X / 2) / tileWidth;
+            int ymin = (int)(p.position.Y - p.imageDimension().Y / 2) / tileWidth;
+            int ymax = (int)(p.position.Y + p.imageDimension().Y / 2) / tileWidth;
+
+            int y = (int)(p.position.Y) / tileWidth;
+
+            if (m_tiles[xmin, y] != null)
+            {
+                p.position.X = xmax * tileWidth + p.imageDimension().X / 2;
+            }
+            if (m_tiles[xmax, y] != null)
+            {
+                p.position.X = xmax * tileWidth - p.imageDimension().X / 2;
+            }
+
+            int x = (int)(p.position.X) / tileWidth;
+
+            if (m_tiles[x, ymin] != null)
+            {
+                p.position.Y = ymax * tileWidth + p.imageDimension().Y / 2;
+                p.velocity.Y = 0;
+            }
+
+            if (m_tiles[x, ymax] != null)
+            {
+                p.position.Y = ymax * tileWidth - p.imageDimension().Y / 2;
+                p.jump = false;
+            }
+            else
+            {
+                p.jump = true;
+            }
+
+            
         }
 
         public void Update(float gameTime)
@@ -56,8 +95,8 @@ namespace RGJgame
                 if (t != null)
                 {
                     Vector2 tempPos = t.getPosition();
-                    if (tempPos.X > playerPos.X - 1000 && tempPos.X < playerPos.X + 1000
-                        && tempPos.Y > playerPos.Y - 1000 && tempPos.Y < playerPos.Y + 1000)
+                    if (tempPos.X > playerPos.X - 500 && tempPos.X < playerPos.X + 500
+                        && tempPos.Y > playerPos.Y - 500 && tempPos.Y < playerPos.Y + 500)
                     {
                         t.Draw(batch, playerPos);
                     }
@@ -81,11 +120,11 @@ namespace RGJgame
                     else if (curColor.Equals(Color.Cyan))
                     {
                         m_tiles[x, y] = null;
-                        m_playerSpawn = new Vector2(x * tileWidth * 3, y * tileWidth * 3);
+                        m_playerSpawn = new Vector2(x * tileWidth, y * tileWidth);
                     }
                     else if (m_textures.ContainsKey(curColor))
                     {
-                        m_tiles[x, y] = new Tile(new Vector2(x * tileWidth * 3, y * tileWidth * 3),
+                        m_tiles[x, y] = new Tile(new Vector2(x * tileWidth, y * tileWidth),
                             m_textures[curColor]);
                     }
                     else

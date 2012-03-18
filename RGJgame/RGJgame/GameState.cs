@@ -84,6 +84,8 @@ namespace RGJgame
             player.update(gametime);
             gameMap.Update(gametime);
 
+            gameMap.checkPlayerCollision(player);
+
             foreach (Entity ent in enemies)
             {
                 ent.Update(gameTime);

@@ -15,17 +15,18 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace RGJgame
 {
-    class Player
+    public class Player
     {
         public float JUMP = -1.1f, MOVEMENTSPEED = 0.28f, GRAVITY = 0.08f;
         public static Vector2 PLAYERDRAWPOS = new Vector2(300, 300);
         public const int RUNCYCLE = 20, DETECTIONCYCLE = 50;
         public const float RECOVERY = 0.007f;
+        public const float VBOUND = 5f;
 
         public float health;
         public float detection;
-        public bool hack = false;
-        private bool jump = false, shielding = false;
+        public bool hack = false, jump = false;
+        private bool shielding = false;
         private Texture2D standing, running1, running2, jumping, hacking, jumphacking, shield;
         private int runtimer, detectiontimer = DETECTIONCYCLE;
 
@@ -59,12 +60,6 @@ namespace RGJgame
         {
             if (jump)
                 velocity.Y += GRAVITY;
-
-            if (position.Y > 500)
-            {
-                position.Y = 500;
-                jump = false;
-            }
 
             if (!jump)
                 shielding = KeyHandler.keyDown(Keys.S);
@@ -104,6 +99,16 @@ namespace RGJgame
                     velocity.X = 0;
                     runtimer = 0;
                 }
+
+                if (Math.Abs(velocity.X) > VBOUND)
+                {
+                    velocity.X = VBOUND * Math.Sign(velocity.X);
+                }
+                if (Math.Abs(velocity.Y) > VBOUND)
+                {
+                    velocity.Y = VBOUND * Math.Sign(velocity.Y);
+                }
+
 
                 position += velocity * dtime;
             }
@@ -179,6 +184,11 @@ namespace RGJgame
             LogState.instance.catIntoLog("Resetting...\n");
         }
 
+        public Vector2 imageDimension()
+        {
+            return new Vector2(running1.Width, running1.Height);
+        }
+
         public void draw(SpriteBatch spriteBatch)
         {
             Texture2D toDraw;
@@ -212,10 +222,11 @@ namespace RGJgame
             if (velocity.X < 0)
                 playerDir = SpriteEffects.FlipHorizontally;
                 
-            spriteBatch.Draw(toDraw, PLAYERDRAWPOS, null, Color.White, 0f, new Vector2(20, 20), 1f, playerDir, 0.9f);
+            spriteBatch.Draw(toDraw, PLAYERDRAWPOS, null, Color.White, 0f, new Vector2(toDraw.Width/2, toDraw.Height/2), 1f, playerDir, 0.9f);
         }
-
     }
+
+    
 
     public sealed class PlayerPower
     {

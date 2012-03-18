@@ -40,6 +40,11 @@ namespace RGJgame
             m_position = spawn;
         }
 
+        public int getType()
+        {
+            return m_type;
+        }
+
         public void Update(float gameTime)
         {
             Random rand = new Random();
