@@ -211,7 +211,7 @@ namespace RGJgame
             if (velocity.X < 0)
                 playerDir = SpriteEffects.FlipHorizontally;
                 
-            spriteBatch.Draw(toDraw, PLAYERDRAWPOS, null, Color.White, 0f, new Vector2(20, 20), 1f, playerDir, 0.8f);
+            spriteBatch.Draw(toDraw, PLAYERDRAWPOS, null, Color.White, 0f, new Vector2(20, 20), 1f, playerDir, 0.9f);
         }
 
     }
