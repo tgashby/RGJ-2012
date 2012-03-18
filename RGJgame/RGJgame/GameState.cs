@@ -24,6 +24,7 @@ namespace RGJgame
         public Dictionary<Color, Texture2D[]> tileTextures;
         public Bus bus;
         public Texture2D level;
+        Entity[] enemies;
 
         public GameState(Game game)
             : base(game)
@@ -48,15 +49,32 @@ namespace RGJgame
 
             player = new Player(gameMap.getPlayerSpawn());
             player.LoadContent(Game);
+
+            enemies = new Entity[4];
+
+            enemies[0] = new FlyingEnemy(gameMap.getPlayerSpawn() + new Vector2(100, 30));
+            enemies[1] = new FlyingEnemy(gameMap.getPlayerSpawn() + new Vector2(50, 0));
+            enemies[2] = new GuardEnemy(gameMap.getPlayerSpawn() + new Vector2(100, 0));
+            enemies[3] = new SpawnerEnemy(gameMap.getPlayerSpawn() + new Vector2(-10, 0));
+
+            foreach (Entity ent in enemies)
+            {
+                ent.LoadContent(Game);
+            }
         }
 
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(background, -player.position / PARALAX, null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 0f);
+            spriteBatch.Draw(background, - player.position / PARALAX, null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 0f);
 
             player.draw(spriteBatch);
             gameMap.Draw(spriteBatch, player.position);
+
+            foreach (Entity ent in enemies)
+            {
+                ent.Draw(spriteBatch);
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -65,6 +83,11 @@ namespace RGJgame
 
             player.update(gametime);
             gameMap.Update(gametime);
+
+            foreach (Entity ent in enemies)
+            {
+                ent.Update(gameTime);
+            }
         }
     }
 }
