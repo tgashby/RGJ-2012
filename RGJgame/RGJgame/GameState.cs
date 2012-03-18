@@ -74,7 +74,7 @@ namespace RGJgame
             entities.Add(new Color(85, 100, 100), new InfoPad(Vector2.One, PlayerPower.FREEZE_ENEMIES));            // 85
             entities.Add(new Color(90, 100, 100), new InfoPad(Vector2.One, PlayerPower.BURN_ENEMIES));              // 90
             entities.Add(new Color(95, 100, 100), new InfoPad(Vector2.One, PlayerPower.THROW_ENEMY));               // 95
-            entities.Add(new Color(100, 100, 100), new InfoPad(Vector2.One, PlayerPower.NUKE));                     // 100
+            entities.Add(new Color(100, 100, 100), new InfoPad(Vector2.One, PlayerPower.SUPERLAZER));                     // 100
             entities.Add(new Color(105, 100, 100), new InfoPad(Vector2.One, PlayerPower.TELEPORT));                 // 105
             entities.Add(new Color(110, 100, 100), new InfoPad(Vector2.One, PlayerPower.LAZER));                    // 110
             entities.Add(new Color(115, 100, 100), new InfoPad(Vector2.One, PlayerPower.DECREASE_ENEMY_SPEED));     // 115
