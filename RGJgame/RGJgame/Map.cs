@@ -47,17 +47,6 @@ namespace RGJgame
             int ymin = (int)(p.position.Y - p.imageDimension().Y / 2) / tileWidth;
             int ymax = (int)(p.position.Y + p.imageDimension().Y / 2) / tileWidth;
 
-            int y = (int)(p.position.Y) / tileWidth;
-
-            if (m_tiles[xmin, y] != null)
-            {
-                p.position.X = xmax * tileWidth + p.imageDimension().X / 2;
-            }
-            if (m_tiles[xmax, y] != null)
-            {
-                p.position.X = xmax * tileWidth - p.imageDimension().X / 2;
-            }
-
             int x = (int)(p.position.X) / tileWidth;
 
             if (m_tiles[x, ymin] != null)
@@ -76,6 +65,16 @@ namespace RGJgame
                 p.jump = true;
             }
 
+            int y = (int)(p.position.Y) / tileWidth;
+
+            if (m_tiles[xmin, y] != null)
+            {
+                p.position.X = (xmax) * tileWidth + p.imageDimension().X / 2;
+            }
+            if (m_tiles[xmax, y] != null)
+            {
+                p.position.X = xmax * tileWidth - p.imageDimension().X / 2;
+            }
             
         }
 

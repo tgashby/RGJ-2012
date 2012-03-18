@@ -285,7 +285,8 @@ namespace RGJgame
         public const string CLOCK1 = "OVERCLOCK 1.0";
         public const string UNDERCLOCK2 = "OVERCLOCK 0.5";
         public const string UNDERCLOCK4 = "OVERCLOCK 0.25";
-        public const string BULLET = "FIRE BULLET";
+        public const string BULLET1 = "SHOOT BULLET";
+        public const string BULLET2 = "SHOOT";
         public const string BULLET_SPREAD = "FIRE SPREAD";
         public const string AUTO_FIRE = "AUTO FIRE";
         public const string STRONG_BULLETS = "STRONG BULLETS";
