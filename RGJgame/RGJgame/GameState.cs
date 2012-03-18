@@ -80,8 +80,6 @@ namespace RGJgame
             {
                 ent.Draw(spriteBatch);
             }
-
-
         }
 
         public override void Update(GameTime gameTime)
