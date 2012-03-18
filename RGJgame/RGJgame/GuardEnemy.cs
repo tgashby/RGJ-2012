@@ -34,6 +34,8 @@ namespace RGJgame
         {
             guardbase = game.Content.Load<Texture2D>(@"images/guardbase");
             guardgun = game.Content.Load<Texture2D>(@"images/guardgun");
+
+            texture = guardbase;
         }
 
         public override void Update(GameTime gameTime)
@@ -75,7 +77,7 @@ namespace RGJgame
 
         public override void doCollision(Player player)
         {
-            throw new NotImplementedException();
+
         }
     }
 }

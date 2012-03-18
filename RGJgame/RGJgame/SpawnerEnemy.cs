@@ -35,6 +35,8 @@ namespace RGJgame
             spawner1 = game.Content.Load<Texture2D>(@"images/spawner1");
             spawner2 = game.Content.Load<Texture2D>(@"images/spawner2");
             spawner3 = game.Content.Load<Texture2D>(@"images/spawner3");
+
+            texture = spawner1;
         }
 
         public override void Update(GameTime gameTime)
@@ -70,7 +72,7 @@ namespace RGJgame
 
         public override void doCollision(Player player)
         {
-            throw new NotImplementedException();
+
         }
     }
 }

@@ -50,12 +50,12 @@ namespace RGJgame
             player = new Player(gameMap.getPlayerSpawn());
             player.LoadContent(Game);
 
-            enemies = new Entity[4];
+            enemies = new Entity[2];
 
-            enemies[0] = new FlyingEnemy(gameMap.getPlayerSpawn() + new Vector2(100, 30));
-            enemies[1] = new FlyingEnemy(gameMap.getPlayerSpawn() + new Vector2(50, 0));
-            enemies[2] = new GuardEnemy(gameMap.getPlayerSpawn() + new Vector2(100, 0));
-            enemies[3] = new SpawnerEnemy(gameMap.getPlayerSpawn() + new Vector2(-10, 0));
+            //enemies[0] = new FlyingEnemy(gameMap.getPlayerSpawn() + new Vector2(100, 30));
+            //enemies[1] = new FlyingEnemy(gameMap.getPlayerSpawn() + new Vector2(50, 0));
+            enemies[0] = new GuardEnemy(gameMap.getPlayerSpawn() + new Vector2(100, 0));
+            enemies[1] = new SpawnerEnemy(gameMap.getPlayerSpawn() + new Vector2(-10, 0));
 
             foreach (Entity ent in enemies)
             {

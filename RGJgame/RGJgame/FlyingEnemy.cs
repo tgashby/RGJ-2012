@@ -40,6 +40,8 @@ namespace RGJgame
             flyer2 = game.Content.Load<Texture2D>(@"images/flyer2");
             flyer3 = game.Content.Load<Texture2D>(@"images/flyer3");
             flyer4 = game.Content.Load<Texture2D>(@"images/flyer4");
+
+            texture = flyer1;
         }
 
         public override void Update(GameTime gameTime)
@@ -83,7 +85,7 @@ namespace RGJgame
 
         public override void doCollision(Player player)
         {
-            throw new NotImplementedException();
+
         }
     }
 }
