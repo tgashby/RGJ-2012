@@ -151,6 +151,12 @@ namespace RGJgame
             else
             {
                 // all the rest
+                if (currentState == logState)
+                    GameState.player.hack = true;
+                else
+                    GameState.player.hack = false;
+
+
                 logState.Draw(spriteBatch);
                 gameState.Draw(spriteBatch);
             }

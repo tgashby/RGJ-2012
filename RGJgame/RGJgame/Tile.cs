@@ -54,7 +54,7 @@ namespace RGJgame
         public void Draw(SpriteBatch batch, Vector2 pos)
         {
             batch.Draw(m_currentTexture, m_position - pos + new Vector2(300, 300), null, Color.White,
-                0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0.3f);
+                0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0.5f);
         }
 
     }
