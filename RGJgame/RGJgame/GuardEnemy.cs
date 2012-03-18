@@ -19,14 +19,13 @@ namespace RGJgame
         public float MOVEMENTSPEED = 0.28f, GRAVITY = 0.08f;
         public static Vector2 GUARDDRAWPOS = new Vector2(300, 300);
 
-        public float health;
         private Texture2D guardbase, guardgun;
         private float moveTimer;
 
         public GuardEnemy(Vector2 pos)
             : base(pos)
         {
-            health = 15.0f;
+            health = 1;
             moveTimer = 0;
         }
 
@@ -65,13 +64,17 @@ namespace RGJgame
         {
             if (velocity.X < 0)
             {
-                spriteBatch.Draw(guardbase, position - GameState.player.position, null, Color.White, 0f, new Vector2(40, 40), 1f, SpriteEffects.FlipHorizontally, 0.9f);
-                spriteBatch.Draw(guardgun, (position - new Vector2(-25, 20)) - GameState.player.position, null, Color.White, -(float)Math.PI/2.0f, new Vector2(40, 40), 1f, SpriteEffects.FlipHorizontally, 0.9f);
+                spriteBatch.Draw(guardbase, position - GameState.player.position + Player.PLAYERDRAWPOS, null, Color.White, 0f,
+                    new Vector2(guardbase.Width / 2, guardbase.Height / 2), 1f, SpriteEffects.FlipHorizontally, 0.9f);
+                spriteBatch.Draw(guardgun, position - GameState.player.position + Player.PLAYERDRAWPOS, null, Color.White, 0f,
+                    new Vector2(guardgun.Width / 2, guardgun.Height / 2), 1f, SpriteEffects.FlipHorizontally, 0.9f);
             }
             else
             {
-                spriteBatch.Draw(guardbase, position - GameState.player.position, null, Color.White, 0f, new Vector2(40, 40), 1f, SpriteEffects.None, 0.9f);
-                spriteBatch.Draw(guardgun, (position - new Vector2(-25, 0)) - GameState.player.position, null, Color.White, (float)Math.PI / 2.0f, new Vector2(40, 40), 1f, SpriteEffects.None, 0.9f);
+                spriteBatch.Draw(guardbase, position - GameState.player.position + Player.PLAYERDRAWPOS, null, Color.White, 0f, 
+                    new Vector2(guardbase.Width / 2, guardbase.Height / 2), 1f, SpriteEffects.None, 0.9f);
+                spriteBatch.Draw(guardgun, position - GameState.player.position + Player.PLAYERDRAWPOS, null, Color.White, 0f,
+                    new Vector2(guardgun.Width / 2, guardgun.Height / 2), 1f, SpriteEffects.None, 0.9f);
             }
         }
 

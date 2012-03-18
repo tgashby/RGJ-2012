@@ -24,7 +24,7 @@ namespace RGJgame
         public Dictionary<Color, Texture2D[]> tileTextures;
         public Bus bus;
         public Texture2D level;
-        Entity[] enemies;
+        List<Entity> enemies;
         public Bullets bullets;
 
         public GameState(Game game)
@@ -51,12 +51,12 @@ namespace RGJgame
             player = new Player(gameMap.getPlayerSpawn());
             player.LoadContent(Game);
 
-            enemies = new Entity[2];
+            enemies = new List<Entity>();
 
             //enemies[0] = new FlyingEnemy(gameMap.getPlayerSpawn() + new Vector2(100, 30));
             //enemies[1] = new FlyingEnemy(gameMap.getPlayerSpawn() + new Vector2(50, 0));
-            enemies[0] = new GuardEnemy(gameMap.getPlayerSpawn() + new Vector2(100, 0));
-            enemies[1] = new SpawnerEnemy(gameMap.getPlayerSpawn() + new Vector2(-10, 0));
+            enemies.Add(new GuardEnemy(gameMap.getPlayerSpawn() + new Vector2(100, 0)));
+            enemies.Add(new SpawnerEnemy(gameMap.getPlayerSpawn() + new Vector2(-10, 0)));
 
             foreach (Entity ent in enemies)
             {
@@ -96,6 +96,18 @@ namespace RGJgame
             {
                 ent.Update(gameTime);
             }
+
+            bullets.checkEnemyCollisions(enemies);
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                if (enemies[i].health <= 0)
+                {
+                    enemies.RemoveAt(i);
+                    i--;
+                }
+            }
+
+            bullets.cullDeadBullets();
         }
     }
 }

@@ -20,14 +20,13 @@ namespace RGJgame
         public static Vector2 SPAWNERDRAWPOS = new Vector2(300, 300);
         public const int RUNCYCLE = 30;
 
-        public float health;
         private Texture2D spawner1, spawner2, spawner3;
         private int runtimer;
 
         public SpawnerEnemy(Vector2 pos)
             : base(pos)
         {
-            health = 20.0f;
+            health = 20;
         }
 
         public override void LoadContent(Game game)
@@ -67,7 +66,8 @@ namespace RGJgame
                 spawnerDir = SpriteEffects.FlipHorizontally;
 
 
-            spriteBatch.Draw(toDraw, position - GameState.player.position, null, Color.White, 0f, new Vector2(20, 20), 1f, spawnerDir, 0.9f);
+            spriteBatch.Draw(toDraw, position - GameState.player.position + Player.PLAYERDRAWPOS, null, Color.White, 0f, 
+                new Vector2(toDraw.Width / 2, toDraw.Height / 2), 1f, spawnerDir, 0.9f);
         }
 
         public override void doCollision(Player player)

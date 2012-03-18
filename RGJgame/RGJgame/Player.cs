@@ -247,6 +247,11 @@ namespace RGJgame
 
             SpriteEffects playerDir = new SpriteEffects();
 
+            if (velocity.X < 0)
+                facingLeft = true;
+            if (velocity.X > 0)
+                facingLeft = false;
+
             if (facingLeft)
             {
                 playerDir = SpriteEffects.FlipHorizontally;
