@@ -404,7 +404,14 @@ namespace RGJgame
 
         public bool isAvailable(String power)
         {
-            return available[power];
+            try
+            {
+                return available[power];
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public void setAvailable(String power)
