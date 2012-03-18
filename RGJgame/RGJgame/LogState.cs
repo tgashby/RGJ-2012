@@ -18,7 +18,7 @@ namespace RGJgame
     {
         private SpriteFont logFont;
         private Texture2D background;
-        private String hackString, promptString, activePowers;
+        private String hackString, promptString, activePowers, promptDefault;
 
         public static LogState instance;
 
@@ -38,19 +38,21 @@ namespace RGJgame
             hackString = new String("".ToCharArray());
             activePowers = new String("".ToCharArray());
 
-            promptString = new String(
-                 ("List of Available Commands:\n" +
+            promptDefault = new String(
+                ("List of Available Commands:\n" +
                  "GRAVITY [WEAK, STRONG, NORMAL]\n" +
-                 "GRAVITY [OFF, REV]\n" +
+                 "GRAVITY [OFF, FLIP]\n" +
                 // Add power names and a comma, or a \n at the end of powers list
                  "JUMP [WEAK, STRONG, NORMAL]\n" +
                  "MOVEMENT [FAST, SLOW, NORMAL]\n" +
-                 "SHOOT [ , BULLET, TRIPLE]\n"+
-                 "SHOOT [DIAGONAL, TRIPLE]\n"+
+                 "SHOOT [SPREAD, BULLET, TRIPLE]\n" +
+                 "SHOOT [DIAGONAL, TRIPLE]\n" +
                  "OVERCLOCK [4.0, 2.0, 1.0, 0.5, 0.25]\n" +
                  "RESET\n" +
-                 "Currently Active Powers:\n" +
-                 activePowers + "Enter Power:\n").ToCharArray());
+                 "Currently Active Powers:\n").ToCharArray());
+
+            promptString = new String(
+                 (promptDefault + activePowers + "Enter Power:\n").ToCharArray());
 
             keystates = new Dictionary<Keys, bool>();
 
@@ -161,21 +163,36 @@ namespace RGJgame
             {
                 String[] tokens = hackString.Split(new char[] { ' ' });
 
-                float xCoord = float.Parse(tokens[1]);
+                if (tokens.Length == 3)
+                {
+                    try
+                    {
+                        float xCoord = float.Parse(tokens[1]);
+                        float yCoord = float.Parse(tokens[2]);
 
-                float yCoord = float.Parse(tokens[2]);
-
-                GameState.player.position.X = xCoord;
-                GameState.player.position.Y = yCoord;
+                        GameState.player.position.X += xCoord;
+                        GameState.player.position.Y += yCoord;
+                    }
+                    catch (Exception e)
+                    { }
+                }
             }
             else if (hackString.IndexOf(PlayerPower.KILL_ID) != -1)
             {
                 String[] tokens = hackString.Split(new char[] { ' ' });
 
-                int pid = int.Parse(tokens[1]);
+                if (tokens.Length == 1)
+                {
+                    try
+                    {
+                        int pid = int.Parse(tokens[1]);
 
-                // TODO: KILL IT!
-                // Something like: enemies[pid].kill()
+                        // TODO: KILL IT!
+                        // Something like: enemies[pid].kill()
+                    }
+                    catch (Exception e) 
+                    { }
+                }
             }
             // Parse the hacker string here.... Call toMod stuff, abilities, etc
             else switch (hackString)
@@ -313,7 +330,7 @@ namespace RGJgame
                 case PlayerPower.BULLET1:
                     activePowers += (hackString + "\n");
                     Bullets.instance.addNewBullet(GameState.player.position,
-                        !GameState.player.facingRight ? new Vector2(-2f, 0f) : new Vector2(2f, 0f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.facingLeft ? new Vector2(-2f, 0f) : new Vector2(2f, 0f), Bullets.P_SMALL, GameState.player);
                     GameState.player.detection -= 0.1f;
                     break;
 
@@ -326,33 +343,33 @@ namespace RGJgame
                 case PlayerPower.BULLET_SPREAD:
                     activePowers += (hackString + "\n");
                     Bullets.instance.addNewBullet(GameState.player.position,
-                        !GameState.player.facingRight ? new Vector2(-0.8f, 0.4f) : new Vector2(0.8f, 0.4f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.facingLeft ? new Vector2(-0.8f, 0.4f) : new Vector2(0.8f, 0.4f), Bullets.P_SMALL, GameState.player);
                     Bullets.instance.addNewBullet(GameState.player.position,
-                        !GameState.player.facingRight ? new Vector2(-0.9f, 0.2f) : new Vector2(0.9f, 0.2f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.facingLeft ? new Vector2(-0.9f, 0.2f) : new Vector2(0.9f, 0.2f), Bullets.P_SMALL, GameState.player);
                     Bullets.instance.addNewBullet(GameState.player.position,
-                        !GameState.player.facingRight ? new Vector2(-1.0f, 0f) : new Vector2(1.0f, 0f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.facingLeft ? new Vector2(-1.0f, 0f) : new Vector2(1.0f, 0f), Bullets.P_SMALL, GameState.player);
                     Bullets.instance.addNewBullet(GameState.player.position,
-                        !GameState.player.facingRight ? new Vector2(-0.9f, -0.2f) : new Vector2(0.9f, -0.2f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.facingLeft ? new Vector2(-0.9f, -0.2f) : new Vector2(0.9f, -0.2f), Bullets.P_SMALL, GameState.player);
                     Bullets.instance.addNewBullet(GameState.player.position,
-                        !GameState.player.facingRight ? new Vector2(-0.8f, -0.4f) : new Vector2(0.8f, -0.4f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.facingLeft ? new Vector2(-0.8f, -0.4f) : new Vector2(0.8f, -0.4f), Bullets.P_SMALL, GameState.player);
                     GameState.player.detection -= 0.4f;
                     break;
                 case PlayerPower.BULLET_DIAGONAL:
                     activePowers += (hackString + "\n");
                     Bullets.instance.addNewBullet(GameState.player.position,
-                        !GameState.player.facingRight ? new Vector2(-0.8f, 0.5f) : new Vector2(0.8f, 0.5f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.facingLeft ? new Vector2(-0.8f, 0.5f) : new Vector2(0.8f, 0.5f), Bullets.P_SMALL, GameState.player);
                     Bullets.instance.addNewBullet(GameState.player.position,
-                        !GameState.player.facingRight ? new Vector2(-0.8f, -0.5f) : new Vector2(0.8f, -0.5f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.facingLeft ? new Vector2(-0.8f, -0.5f) : new Vector2(0.8f, -0.5f), Bullets.P_SMALL, GameState.player);
                     GameState.player.detection -= 0.2f;
                     break;
                 case PlayerPower.BULLET_TRIPLE:
                     activePowers += (hackString + "\n");
                     Bullets.instance.addNewBullet(GameState.player.position + new Vector2(0, -20),
-                        !GameState.player.facingRight ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
                     Bullets.instance.addNewBullet(GameState.player.position,
-                        !GameState.player.facingRight ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
                     Bullets.instance.addNewBullet(GameState.player.position + new Vector2(0, 20),
-                        !GameState.player.facingRight ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
                     GameState.player.detection -= 0.25f;
                     break;
 
@@ -406,7 +423,6 @@ namespace RGJgame
                         hackString = new String(("System Runtime Exception: \n   Unknown Command: " + hackString + "\n").ToCharArray());
                     else
                         hackString = new String(("System Runtime Exception: \n   Unknown Command: " + hackString.Substring(0, 10) + "...\n").ToCharArray());
-                    activePowers += hackString;
                     break;
             }
         }
@@ -414,6 +430,7 @@ namespace RGJgame
         public void clearInput()
         {
             promptString = new String(
+<<<<<<< HEAD
                  ("List of Available Commands:\n" +
                  "GRAVITY [WEAK, STRONG, NORMAL]\n" +
                  "GRAVITY [OFF, REV]\n" +
@@ -426,6 +443,9 @@ namespace RGJgame
                  "RESET\n" +
                  "Currently Active Powers:\n" +
                  activePowers + "Enter Power:\n").ToCharArray());
+=======
+                 (promptDefault + activePowers + "Enter Power:\n").ToCharArray());
+>>>>>>> 699622d0ac1f672740d3067a314a59c814c90786
 
             if (hackString.Length > 0)
                 hackString = hackString.Remove(0);
