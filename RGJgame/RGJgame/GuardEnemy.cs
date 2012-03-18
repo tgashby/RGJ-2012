@@ -27,6 +27,7 @@ namespace RGJgame
         {
             health = 9;
             moveTimer = 0;
+            velocity.Y = GRAVITY;
         }
 
         public override void LoadContent(Game game)
@@ -65,15 +66,15 @@ namespace RGJgame
             if (velocity.X < 0)
             {
                 spriteBatch.Draw(guardbase, position - GameState.player.position + Player.PLAYERDRAWPOS, null, Color.White, 0f,
-                    new Vector2(guardbase.Width / 2, guardbase.Height / 2), 1f, SpriteEffects.FlipHorizontally, 0.9f);
-                spriteBatch.Draw(guardgun, position - GameState.player.position + Player.PLAYERDRAWPOS, null, Color.White, 0f,
+                    new Vector2(guardbase.Width / 2, guardbase.Height / 2), 1f, SpriteEffects.FlipHorizontally, 0.8f);
+                spriteBatch.Draw(guardgun, (position - new Vector2(10, 20)) - GameState.player.position + Player.PLAYERDRAWPOS, null, Color.White, -(float)Math.PI / 2.0f,
                     new Vector2(guardgun.Width / 2, guardgun.Height / 2), 1f, SpriteEffects.FlipHorizontally, 0.9f);
             }
             else
             {
                 spriteBatch.Draw(guardbase, position - GameState.player.position + Player.PLAYERDRAWPOS, null, Color.White, 0f, 
-                    new Vector2(guardbase.Width / 2, guardbase.Height / 2), 1f, SpriteEffects.None, 0.9f);
-                spriteBatch.Draw(guardgun, position - GameState.player.position + Player.PLAYERDRAWPOS, null, Color.White, 0f,
+                    new Vector2(guardbase.Width / 2, guardbase.Height / 2), 1f, SpriteEffects.None, 0.8f);
+                spriteBatch.Draw(guardgun, (position - new Vector2(-10, 20)) - GameState.player.position + Player.PLAYERDRAWPOS, null, Color.White, (float)Math.PI / 2.0f,
                     new Vector2(guardgun.Width / 2, guardgun.Height / 2), 1f, SpriteEffects.None, 0.9f);
             }
         }
