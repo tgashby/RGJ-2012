@@ -16,7 +16,7 @@ namespace RGJgame
 {
     class GuardEnemy : Entity
     {
-        public float MOVEMENTSPEED = 0.28f, GRAVITY = 0.08f;
+        public float MOVEMENTSPEED = 0.28f;
         public static Vector2 GUARDDRAWPOS = new Vector2(300, 300);
 
         private Texture2D guardbase, guardgun;
@@ -28,7 +28,6 @@ namespace RGJgame
             health = 9;
             moveTimer = 0;
             shotTimer = 0;
-            velocity.Y = GRAVITY;
         }
 
         public override void LoadContent(Game game)
@@ -41,6 +40,9 @@ namespace RGJgame
 
         public override void Update(GameTime gameTime)
         {
+            if (velocity.Y != 0)
+                velocity.Y += GameState.player.GRAVITY;
+
             float elapsedTime = gameTime.ElapsedGameTime.Milliseconds * Game1.CLOCKSPEED;
 
             moveTimer += elapsedTime;
