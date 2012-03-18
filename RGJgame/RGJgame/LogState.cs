@@ -155,13 +155,30 @@ namespace RGJgame
         public void parseInput()
         {
             // Strip initial spaces
-            while (hackString.StartsWith(" "))
-            {
-                hackString = hackString.Remove(0, 1);
-            }
+            hackString = hackString.Trim();
 
+            if (hackString.IndexOf(PlayerPower.TELEPORT) != -1)
+            {
+                String[] tokens = hackString.Split(new char[] { ' ' });
+
+                float xCoord = float.Parse(tokens[1]);
+
+                float yCoord = float.Parse(tokens[2]);
+
+                GameState.player.position.X = xCoord;
+                GameState.player.position.Y = yCoord;
+            }
+            else if (hackString.IndexOf(PlayerPower.KILL_ID) != -1)
+            {
+                String[] tokens = hackString.Split(new char[] { ' ' });
+
+                int pid = int.Parse(tokens[1]);
+
+                // TODO: KILL IT!
+                // Something like: enemies[pid].kill()
+            }
             // Parse the hacker string here.... Call toMod stuff, abilities, etc
-            switch (hackString)
+            else switch (hackString)
             {
                 case PlayerPower.GRAVITY_OFF:
                     GameState.player.GRAVITY = 0.0f;
@@ -359,10 +376,6 @@ namespace RGJgame
 
                     break;
 
-                case PlayerPower.TELEPORT:
-
-                    break;
-
                 case PlayerPower.LAZER:
 
                     break;
@@ -390,9 +403,9 @@ namespace RGJgame
 
                 default:
                     if (hackString.Length < 14)
-                       hackString = new String(("System Runtime Exception: \n   Unknown Command: " + hackString + "\n").ToCharArray());
+                        hackString = new String(("System Runtime Exception: \n   Unknown Command: " + hackString + "\n").ToCharArray());
                     else
-                       hackString = new String(("System Runtime Exception: \n   Unknown Command: " + hackString.Substring(0, 10) + "...\n").ToCharArray());
+                        hackString = new String(("System Runtime Exception: \n   Unknown Command: " + hackString.Substring(0, 10) + "...\n").ToCharArray());
                     activePowers += hackString;
                     break;
             }
