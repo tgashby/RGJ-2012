@@ -456,6 +456,9 @@ namespace RGJgame
 
         public void clearInput()
         {
+            if (prevLogEntries.Length > 60)
+                prevLogEntries = new String("".ToCharArray());
+
             promptString = new String(
                  (promptDefault + "Previous Log Entries:\n" + prevLogEntries + "Enter Power:\n").ToCharArray());
 
