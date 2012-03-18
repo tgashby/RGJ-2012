@@ -17,17 +17,18 @@ namespace RGJgame
     class GuardEnemy : Entity
     {
         public const float MOVEMENTSPEED = 0.28f, BULLETSPEED = 2f;
-        public const int SHOOTTIME = 500;
+        public const int SHOOTTIME = 100, MINDISTANCE = 400, MAXDISTANCE = 900, NUMSHOTS = 12;
 
 
         private Texture2D guardbase, guardgun;
-        private float moveTimer, shotTimer;
+        private float shotTimer;
+        private int numshots;
 
         public GuardEnemy(Vector2 pos)
             : base(pos)
         {
             health = 9;
-            moveTimer = 0;
+            numshots = NUMSHOTS;
             shotTimer = 0;
         }
 
@@ -45,30 +46,42 @@ namespace RGJgame
                 velocity.Y += GameState.player.GRAVITY;
 
             float elapsedTime = gameTime.ElapsedGameTime.Milliseconds * Game1.CLOCKSPEED;
+            Vector2 toPlayer = -(position - GameState.player.position);
 
-            moveTimer += elapsedTime;
-
-            if (moveTimer < 1000)
+            if (toPlayer.Length() > MINDISTANCE && toPlayer.Length() < MAXDISTANCE)
             {
-                velocity.X = -MOVEMENTSPEED;
-            }
-            else if (moveTimer < 2000)
-            {
-                velocity.X = MOVEMENTSPEED;
+                if (toPlayer.X > 0)
+                {
+                    velocity.X = MOVEMENTSPEED;
+                }
+                else
+                {
+                    velocity.X = -MOVEMENTSPEED;
+                }
             }
             else
-                moveTimer = 0;
+            {
+                velocity.X = 0;
+            }
 
             position += velocity * elapsedTime;
-
-            shotTimer += elapsedTime;
-            if (shotTimer >= SHOOTTIME)
+            
+            if (toPlayer.Length() < MINDISTANCE)
             {
-                Vector2 toPlayer = -(position - GameState.player.position);
-                toPlayer.Normalize();
-                Bullets.instance.addNewBullet((position - new Vector2(0, 20)), toPlayer * BULLETSPEED, Bullets.P_SMALL, this);
+                shotTimer -= elapsedTime;
+                if (shotTimer <= 0)
+                {
+                    toPlayer.Normalize();
+                    Bullets.instance.addNewBullet((position - new Vector2(0, 20)), toPlayer * BULLETSPEED, Bullets.P_SMALL, this);
 
-                shotTimer = 0.0f;
+                    shotTimer = SHOOTTIME;
+                    numshots--;
+                }
+                if (numshots == 0)
+                {
+                    numshots = NUMSHOTS;
+                    shotTimer = SHOOTTIME * 20;
+                }
             }
 
             // Collision checking
