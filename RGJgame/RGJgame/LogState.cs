@@ -186,7 +186,6 @@ namespace RGJgame
                     GameState.player.disablePower(PlayerPower.LOW_GRAV);
                     GameState.player.disablePower(PlayerPower.MASSIVE_GRAV);
                     break;
-
                 case PlayerPower.GRAVITY_NORMAL:
                     GameState.player.GRAVITY = 0.08f;
                     activePowers += (hackString + "\n");
@@ -195,7 +194,6 @@ namespace RGJgame
                     GameState.player.disablePower(PlayerPower.LOW_GRAV);
                     GameState.player.disablePower(PlayerPower.MASSIVE_GRAV);
                     break;
-
                 case PlayerPower.LOW_GRAV:
                     GameState.player.GRAVITY = 0.05f;
                     activePowers += (hackString + "\n");
@@ -204,7 +202,6 @@ namespace RGJgame
                     GameState.player.usePower(PlayerPower.LOW_GRAV);
                     GameState.player.disablePower(PlayerPower.MASSIVE_GRAV);
                     break;
-
                 case PlayerPower.MASSIVE_GRAV:
                     GameState.player.GRAVITY = 0.15f;
                     activePowers += (hackString + "\n");
@@ -213,7 +210,6 @@ namespace RGJgame
                     GameState.player.disablePower(PlayerPower.LOW_GRAV);
                     GameState.player.usePower(PlayerPower.MASSIVE_GRAV);
                     break;
-
                 case PlayerPower.REV_GRAVITY:
                     /*GameState.player.GRAVITY = -0.08f;
                     GameState.player.JUMP = 3.0f;*/
@@ -228,7 +224,6 @@ namespace RGJgame
                     GameState.player.disablePower(PlayerPower.NORMAL_JUMP);
                     GameState.player.disablePower(PlayerPower.WEAK_JUMP);
                     break;
-
                 case PlayerPower.NORMAL_JUMP:
                     activePowers += (hackString + "\n");
                     GameState.player.JUMP = -1.1f;
@@ -236,7 +231,6 @@ namespace RGJgame
                     GameState.player.usePower(PlayerPower.NORMAL_JUMP);
                     GameState.player.disablePower(PlayerPower.WEAK_JUMP);
                     break;
-
                 case PlayerPower.WEAK_JUMP:
                     activePowers += (hackString + "\n");
                     GameState.player.JUMP = -0.6f;
@@ -254,7 +248,6 @@ namespace RGJgame
                     GameState.player.disablePower(PlayerPower.UNDERCLOCK2);
                     GameState.player.disablePower(PlayerPower.UNDERCLOCK4);
                     break;
-
                 case PlayerPower.OVERCLOCK2:
                     activePowers += (hackString + "\n");
                     Game1.CLOCKSPEED = 2;
@@ -264,7 +257,6 @@ namespace RGJgame
                     GameState.player.disablePower(PlayerPower.UNDERCLOCK2);
                     GameState.player.disablePower(PlayerPower.UNDERCLOCK4);
                     break;
-
                 case PlayerPower.CLOCK1:
                     activePowers += (hackString + "\n");
                     Game1.CLOCKSPEED = 1.0f;
@@ -274,7 +266,6 @@ namespace RGJgame
                     GameState.player.disablePower(PlayerPower.UNDERCLOCK2);
                     GameState.player.disablePower(PlayerPower.UNDERCLOCK4);
                     break;
-
                 case PlayerPower.UNDERCLOCK4:
                     activePowers += (hackString + "\n");
                     GameState.player.disablePower(PlayerPower.OVERCLOCK4);
@@ -284,7 +275,6 @@ namespace RGJgame
                     GameState.player.usePower(PlayerPower.UNDERCLOCK4);
                     Game1.CLOCKSPEED = 0.25f;
                     break;
-
                 case PlayerPower.UNDERCLOCK2:
                     activePowers += (hackString + "\n");
                     Game1.CLOCKSPEED = 0.5f;
@@ -318,8 +308,18 @@ namespace RGJgame
                     break;
 
 
-                case PlayerPower.BULLET:
+                case PlayerPower.BULLET1:
+                    activePowers += (hackString + "\n");
+                    Bullets.instance.addNewBullet(GameState.player.position,
+                        GameState.player.velocity.X < 0 ? new Vector2(-3f, 0f) : new Vector2(3f, 0f), Bullets.P_SMALL);
+                    GameState.player.detection -= 0.1f;
+                    break;
 
+                case PlayerPower.BULLET2:
+                    activePowers += (hackString + "\n");
+                    Bullets.instance.addNewBullet(GameState.player.position,
+                        GameState.player.velocity.X < 0 ? new Vector2(-2f, 0f) : new Vector2(2f, 0f), Bullets.P_SMALL);
+                    GameState.player.detection -= 0.1f;
                     break;
 
                 case PlayerPower.BULLET_SPREAD:

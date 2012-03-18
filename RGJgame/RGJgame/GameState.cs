@@ -25,6 +25,7 @@ namespace RGJgame
         public Bus bus;
         public Texture2D level;
         Entity[] enemies;
+        public Bullets bullets;
 
         public GameState(Game game)
             : base(game)
@@ -61,6 +62,9 @@ namespace RGJgame
             {
                 ent.LoadContent(Game);
             }
+
+            bullets = new Bullets();
+            bullets.LoadContent(Game);
         }
 
 
@@ -70,11 +74,14 @@ namespace RGJgame
 
             player.draw(spriteBatch);
             gameMap.Draw(spriteBatch, player.position);
+            bullets.draw(spriteBatch);
 
             foreach (Entity ent in enemies)
             {
                 ent.Draw(spriteBatch);
             }
+
+
         }
 
         public override void Update(GameTime gameTime)
@@ -83,6 +90,7 @@ namespace RGJgame
 
             player.update(gametime);
             gameMap.Update(gametime);
+            bullets.update(gametime);
 
             gameMap.checkPlayerCollision(player);
 
