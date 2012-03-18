@@ -22,8 +22,10 @@ namespace RGJgame
         public const int PARALAX = 10;
         public static Map gameMap;
         public Dictionary<Color, Texture2D[]> tileTextures;
+        public Dictionary<Color, Entity> entities;
         public Bus bus;
         public Texture2D level;
+        public Texture2D texture_infoPad;
         List<Entity> enemies;
         public Bullets bullets;
 
@@ -45,17 +47,29 @@ namespace RGJgame
                Game.Content.Load<Texture2D>(@"images/tile2"),
                Game.Content.Load<Texture2D>(@"images/tile3"),
             });
-            gameMap = new Map(Game, level, tileTextures);
-            gameMap.makeTileMap();
+            tileTextures.Add(Color.Red, new Texture2D[]{
+                Game.Content.Load<Texture2D>(@"images/spike1"),
+                Game.Content.Load<Texture2D>(@"images/spike2"),
+                Game.Content.Load<Texture2D>(@"images/spike3"),
+            });
+
+            entities = new Dictionary<Color, Entity>();
+            entities.Add(new Color(255, 0, 255), new InfoPad(Vector2.One, PlayerPower.GRAVITY_OFF));
+            entities.Add(new Color(255, 5, 255), new InfoPad(Vector2.One, PlayerPower.BULLET1));
+            
+            entities.Add(new Color(50, 255, 255), new GuardEnemy(Vector2.One));
+            entities.Add(new Color(60, 255, 255), new SpawnerEnemy(Vector2.One));
+            gameMap = new Map(Game, level, tileTextures, entities);
+            enemies = gameMap.makeTileMap();
 
             player = new Player(gameMap.getPlayerSpawn());
             player.LoadContent(Game);
 
-            enemies = new List<Entity>();
+          /*  enemies = new List<Entity>();
 
             enemies.Add(new GuardEnemy(gameMap.getPlayerSpawn() + new Vector2(600, 0)));
             enemies.Add(new SpawnerEnemy(gameMap.getPlayerSpawn() + new Vector2(-300, 0)));
-            enemies.Add(new InfoPad(gameMap.getPlayerSpawn() + new Vector2(150, 0), PlayerPower.GRAVITY_OFF));
+            enemies.Add(new InfoPad(gameMap.getPlayerSpawn() + new Vector2(150, 0), PlayerPower.GRAVITY_OFF));*/
 
             foreach (Entity ent in enemies)
             {

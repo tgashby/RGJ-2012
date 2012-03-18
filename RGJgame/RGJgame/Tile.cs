@@ -28,6 +28,7 @@ namespace RGJgame
             m_position = position;
             m_texture = texture;
             m_currentTexture = m_texture[0];
+            m_type = 0;
         }
 
         public Vector2 getPosition()
@@ -43,6 +44,11 @@ namespace RGJgame
         public int getType()
         {
             return m_type;
+        }
+
+        public void setType(int set)
+        {
+            m_type = set;
         }
 
         public void Update(float gameTime)
