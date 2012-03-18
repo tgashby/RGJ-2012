@@ -167,12 +167,20 @@ namespace RGJgame
                 {
                     try
                     {
-                        float xCoord = float.Parse(tokens[1]);
-                        float yCoord = float.Parse(tokens[2]);
+                        float xCoord = float.Parse(tokens[1]) * 3;
+                        float yCoord = float.Parse(tokens[2]) * 3;
 
-                        GameState.player.position.X += xCoord;
-                        GameState.player.position.Y += yCoord;
-
+                        //GameState.player.position.X += xCoord;
+                        //GameState.player.position.Y += yCoord;
+                        Vector2 movement = GameState.gameMap.teleportCheck(GameState.player, new Vector2(xCoord, yCoord));
+                        if (movement != null)
+                        {
+                            GameState.player.position = movement;
+                        }
+                        else
+                        {
+                            GameState.player.health = 0;
+                        }
                         activePowers += (hackString + "\n");
                     }
                     catch (Exception e)
@@ -425,6 +433,7 @@ namespace RGJgame
                         hackString = new String(("System Runtime Exception: \n   Unknown Command: " + hackString + "\n").ToCharArray());
                     else
                         hackString = new String(("System Runtime Exception: \n   Unknown Command: " + hackString.Substring(0, 10) + "...\n").ToCharArray());
+                    activePowers += hackString;
                     break;
             }
         }
