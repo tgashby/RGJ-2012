@@ -185,6 +185,7 @@ namespace RGJgame
             // do all your game init stuffs here (like making new player or tilemaps)
             gameState = new GameState(this);
             logState = new LogState(this);
+            Entities.instance().clearList();
 
             currentState = gameState;
 

@@ -65,5 +65,10 @@ namespace RGJgame
         {
             return entities;
         }
+
+        public void clearList()
+        {
+            entities = new List<Entity>();
+        }
     }
 }
