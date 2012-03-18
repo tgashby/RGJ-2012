@@ -72,7 +72,7 @@ namespace RGJgame
                 if (shotTimer <= 0)
                 {
                     toPlayer.Normalize();
-                    Bullets.instance.addNewBullet((position - new Vector2(0, 20)), toPlayer * BULLETSPEED, Bullets.P_SMALL, this);
+                    Bullets.instance.addNewBullet((position - new Vector2(0, 20)), toPlayer * BULLETSPEED, Bullets.P_SMALL, this, false);
 
                     shotTimer = SHOOTTIME;
                     numshots--;

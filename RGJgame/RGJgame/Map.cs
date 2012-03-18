@@ -94,7 +94,11 @@ namespace RGJgame
                     p.health = 0;
                 }
             }
-            
+        }
+
+        public bool checkBulletCollision(Vector2 pos)
+        {
+            return m_tiles[(int)pos.X / tileWidth, (int)pos.Y / tileWidth] != null;
         }
 
         public void checkEnemyCollision(Entity ent)

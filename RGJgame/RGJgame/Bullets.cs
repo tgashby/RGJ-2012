@@ -32,9 +32,9 @@ namespace RGJgame
             P_SMALL = game.Content.Load<Texture2D>(@"images/playersmallbullet");
         }
 
-        public void addNewBullet(Vector2 position, Vector2 velocity, Texture2D image, Object shotBy)
+        public void addNewBullet(Vector2 position, Vector2 velocity, Texture2D image, Object shotBy, bool passthrough)
         {
-            bullets.Add(new Bullet(position, velocity, image, shotBy));
+            bullets.Add(new Bullet(position, velocity, image, shotBy, passthrough));
         }
 
         public void removeAll(Object objWhoShotThem)
@@ -99,8 +99,14 @@ namespace RGJgame
             }
         }
 
-        public void cullDeadBullets()
+        public void cullDeadBullets(Map m)
         {
+            foreach (Bullet b in bullets)
+            {
+                if (m.checkBulletCollision(b.position) && !b.pass)
+                    b.alive = false;
+            }
+
             for (int i = 0; i < bullets.Count; i++)
             {
                 if (!bullets[i].alive)
@@ -142,13 +148,15 @@ namespace RGJgame
             public Texture2D image;
             public Object shotBy;
             public bool alive = true;
+            public bool pass = false;
 
-            public Bullet(Vector2 position, Vector2 velocity, Texture2D image, Object shotBy)
+            public Bullet(Vector2 position, Vector2 velocity, Texture2D image, Object shotBy, bool passthrough)
             {
                 this.position = position;
                 this.velocity = velocity;
                 this.image = image;
                 this.shotBy = shotBy;
+                this.pass = passthrough;
             }
         }
     }

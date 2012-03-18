@@ -351,46 +351,46 @@ namespace RGJgame
                     case PlayerPower.BULLET1:
                         prevLogEntries += (hackString + "\n");
                         Bullets.instance.addNewBullet(GameState.player.position,
-                            GameState.player.facingLeft ? new Vector2(-2f, 0f) : new Vector2(2f, 0f), Bullets.P_SMALL, GameState.player);
+                            GameState.player.facingLeft ? new Vector2(-2f, 0f) : new Vector2(2f, 0f), Bullets.P_SMALL, GameState.player, false);
                         GameState.player.detection -= 0.1f;
                         break;
 
                     case PlayerPower.BULLET2:
                         prevLogEntries += (hackString + "\n");
                         Bullets.instance.addNewBullet(GameState.player.position,
-                            GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
+                            GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player, false);
                         GameState.player.detection -= 0.1f;
                         break;
                     case PlayerPower.BULLET_SPREAD:
                         prevLogEntries += (hackString + "\n");
                         Bullets.instance.addNewBullet(GameState.player.position,
-                            GameState.player.facingLeft ? new Vector2(-0.8f, 0.4f) : new Vector2(0.8f, 0.4f), Bullets.P_SMALL, GameState.player);
+                            GameState.player.facingLeft ? new Vector2(-0.8f, 0.4f) : new Vector2(0.8f, 0.4f), Bullets.P_SMALL, GameState.player, false);
                         Bullets.instance.addNewBullet(GameState.player.position,
-                            GameState.player.facingLeft ? new Vector2(-0.9f, 0.2f) : new Vector2(0.9f, 0.2f), Bullets.P_SMALL, GameState.player);
+                            GameState.player.facingLeft ? new Vector2(-0.9f, 0.2f) : new Vector2(0.9f, 0.2f), Bullets.P_SMALL, GameState.player, false);
                         Bullets.instance.addNewBullet(GameState.player.position,
-                            GameState.player.facingLeft ? new Vector2(-1.0f, 0f) : new Vector2(1.0f, 0f), Bullets.P_SMALL, GameState.player);
+                            GameState.player.facingLeft ? new Vector2(-1.0f, 0f) : new Vector2(1.0f, 0f), Bullets.P_SMALL, GameState.player, false);
                         Bullets.instance.addNewBullet(GameState.player.position,
-                            GameState.player.facingLeft ? new Vector2(-0.9f, -0.2f) : new Vector2(0.9f, -0.2f), Bullets.P_SMALL, GameState.player);
+                            GameState.player.facingLeft ? new Vector2(-0.9f, -0.2f) : new Vector2(0.9f, -0.2f), Bullets.P_SMALL, GameState.player, false);
                         Bullets.instance.addNewBullet(GameState.player.position,
-                            GameState.player.facingLeft ? new Vector2(-0.8f, -0.4f) : new Vector2(0.8f, -0.4f), Bullets.P_SMALL, GameState.player);
+                            GameState.player.facingLeft ? new Vector2(-0.8f, -0.4f) : new Vector2(0.8f, -0.4f), Bullets.P_SMALL, GameState.player, false);
                         GameState.player.detection -= 0.4f;
                         break;
                     case PlayerPower.BULLET_DIAGONAL:
                         prevLogEntries += (hackString + "\n");
                         Bullets.instance.addNewBullet(GameState.player.position,
-                            GameState.player.facingLeft ? new Vector2(-0.8f, 0.5f) : new Vector2(0.8f, 0.5f), Bullets.P_SMALL, GameState.player);
+                            GameState.player.facingLeft ? new Vector2(-0.8f, 0.5f) : new Vector2(0.8f, 0.5f), Bullets.P_SMALL, GameState.player, false);
                         Bullets.instance.addNewBullet(GameState.player.position,
-                            GameState.player.facingLeft ? new Vector2(-0.8f, -0.5f) : new Vector2(0.8f, -0.5f), Bullets.P_SMALL, GameState.player);
+                            GameState.player.facingLeft ? new Vector2(-0.8f, -0.5f) : new Vector2(0.8f, -0.5f), Bullets.P_SMALL, GameState.player, false);
                         GameState.player.detection -= 0.2f;
                         break;
                     case PlayerPower.BULLET_TRIPLE:
                         prevLogEntries += (hackString + "\n");
                         Bullets.instance.addNewBullet(GameState.player.position + new Vector2(0, -20),
-                            GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
+                            GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player, false);
                         Bullets.instance.addNewBullet(GameState.player.position,
-                            GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
+                            GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player, false);
                         Bullets.instance.addNewBullet(GameState.player.position + new Vector2(0, 20),
-                            GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
+                            GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player, false);
                         GameState.player.detection -= 0.25f;
                         break;
 
