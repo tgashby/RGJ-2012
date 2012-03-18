@@ -20,7 +20,7 @@ namespace RGJgame
         private Texture2D background;
         public static Player player;
         public const int PARALAX = 10;
-        public Map gameMap;
+        public static Map gameMap;
         public Dictionary<Color, Texture2D[]> tileTextures;
         public Bus bus;
         public Texture2D level;
@@ -53,10 +53,8 @@ namespace RGJgame
 
             enemies = new List<Entity>();
 
-            //enemies[0] = new FlyingEnemy(gameMap.getPlayerSpawn() + new Vector2(100, 30));
-            //enemies[1] = new FlyingEnemy(gameMap.getPlayerSpawn() + new Vector2(50, 0));
-            enemies.Add(new GuardEnemy(gameMap.getPlayerSpawn() + new Vector2(500, 0)));
-            enemies.Add(new SpawnerEnemy(gameMap.getPlayerSpawn() + new Vector2(-200, 0)));
+            enemies.Add(new GuardEnemy(gameMap.getPlayerSpawn() + new Vector2(600, 0)));
+            enemies.Add(new SpawnerEnemy(gameMap.getPlayerSpawn() + new Vector2(-300, 0)));
 
             foreach (Entity ent in enemies)
             {
