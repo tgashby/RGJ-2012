@@ -60,6 +60,7 @@ namespace RGJgame
 
             powers = new PlayerPower();
             powers.initiate();
+            powers.initializeAvail();
         }
 
         public void update(float dtime)
@@ -206,8 +207,11 @@ namespace RGJgame
 
         public void hardReset()
         {
+            Dictionary<String, Boolean> tmpAvailable = new Dictionary<String, Boolean>(powers.available);
+
             powers = new PlayerPower();
             powers.initiate();
+            powers.available = new Dictionary<String, Boolean>(tmpAvailable);
             LogState.instance.catIntoLog("Resetting...\n");
             Bullets.instance.removeAll(this);
         }
@@ -292,7 +296,7 @@ namespace RGJgame
 
                 if (!powers.isAvailable(newPower))
                 {
-                    powers.setAvailable(newPower);
+                    powers.makeAvailable(newPower);
                     LogState.instance.catIntoLog("Discovered: " + newPower + "\n");
                 }
             }
@@ -310,7 +314,7 @@ namespace RGJgame
         public PlayerPower() {}
 
         Dictionary<String, Boolean> active = new Dictionary<String, Boolean>();
-        Dictionary<String, Boolean> available = new Dictionary<String, Boolean>();
+        public Dictionary<String, Boolean> available = new Dictionary<String, Boolean>();
 
         public void initiate()
         {
@@ -351,7 +355,10 @@ namespace RGJgame
             active.Add(KILL_ID, false);
             active.Add(ROOT_PRIV, false);
             active.Add(RESET, true);
+        }
 
+        public void initializeAvail()
+        {
             available.Add(GRAVITY_OFF, false);
             available.Add(GRAVITY_NORMAL, true);
             available.Add(MASSIVE_GRAV, false);
@@ -385,7 +392,6 @@ namespace RGJgame
             available.Add(KILL_ID, false);
             available.Add(ROOT_PRIV, false);
             available.Add(RESET, true);
-            available.Add("", false);
         }
 
         public bool check(String power)
@@ -414,7 +420,7 @@ namespace RGJgame
             }
         }
 
-        public void setAvailable(String power)
+        public void makeAvailable(String power)
         {
             available[power] = true;
         }
