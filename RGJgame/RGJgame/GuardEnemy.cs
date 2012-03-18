@@ -66,12 +66,12 @@ namespace RGJgame
             if (velocity.X < 0)
             {
                 spriteBatch.Draw(guardbase, position - GameState.player.position, null, Color.White, 0f, new Vector2(40, 40), 1f, SpriteEffects.FlipHorizontally, 0.9f);
-                spriteBatch.Draw(guardgun, position - GameState.player.position, null, Color.White, 0f, new Vector2(40, 40), 1f, SpriteEffects.FlipHorizontally, 0.9f);
+                spriteBatch.Draw(guardgun, (position - new Vector2(-25, 20)) - GameState.player.position, null, Color.White, -(float)Math.PI/2.0f, new Vector2(40, 40), 1f, SpriteEffects.FlipHorizontally, 0.9f);
             }
             else
             {
                 spriteBatch.Draw(guardbase, position - GameState.player.position, null, Color.White, 0f, new Vector2(40, 40), 1f, SpriteEffects.None, 0.9f);
-                spriteBatch.Draw(guardgun, position - GameState.player.position, null, Color.White, 0f, new Vector2(40, 40), 1f, SpriteEffects.None, 0.9f);
+                spriteBatch.Draw(guardgun, (position - new Vector2(-25, 0)) - GameState.player.position, null, Color.White, (float)Math.PI / 2.0f, new Vector2(40, 40), 1f, SpriteEffects.None, 0.9f);
             }
         }
 
