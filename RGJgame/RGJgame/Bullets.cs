@@ -80,6 +80,27 @@ namespace RGJgame
             }
         }
 
+        public void checkPlayerCollisions(Player e)
+        {
+            foreach (Bullet b in bullets)
+            {
+                if ((b.shotBy is Entity))
+                {
+                    if (b.position.X > e.position.X - e.imageDimension().X / 2 &&
+                        b.position.X < e.position.X + e.imageDimension().X / 2 &&
+                        b.position.Y > e.position.Y - e.imageDimension().Y / 2 &&
+                        b.position.Y < e.position.Y + e.imageDimension().Y / 2)
+                    {
+                        if (b.image == Bullets.P_SMALL)
+                        {
+                            e.health -= 1;
+                            b.alive = false;
+                        }
+                    }
+                }
+            }
+        }
+
         public void cullDeadBullets()
         {
             for (int i = 0; i < bullets.Count; i++)

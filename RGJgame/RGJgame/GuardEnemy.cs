@@ -20,13 +20,14 @@ namespace RGJgame
         public static Vector2 GUARDDRAWPOS = new Vector2(300, 300);
 
         private Texture2D guardbase, guardgun;
-        private float moveTimer;
+        private float moveTimer, shotTimer;
 
         public GuardEnemy(Vector2 pos)
             : base(pos)
         {
             health = 9;
             moveTimer = 0;
+            shotTimer = 0;
             velocity.Y = GRAVITY;
         }
 
@@ -56,6 +57,17 @@ namespace RGJgame
                 moveTimer = 0;
 
             position += velocity * elapsedTime;
+
+            shotTimer += elapsedTime;
+            if (shotTimer >= 1000.0f)
+            {
+                if (velocity.X < 0)
+                    Bullets.instance.addNewBullet((position - new Vector2(10, 20)), new Vector2(-1.0f, 0.0f), Bullets.P_SMALL, this);
+                else
+                    Bullets.instance.addNewBullet((position - new Vector2(-10, 20)), new Vector2(1.0f, 0.0f), Bullets.P_SMALL, this);
+
+                shotTimer = 0.0f;
+            }
 
             // Collision checking
             Collisions.check(this, GameState.player);

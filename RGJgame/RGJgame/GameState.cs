@@ -59,6 +59,7 @@ namespace RGJgame
             
             entities.Add(new Color(50, 255, 255), new GuardEnemy(Vector2.One));
             entities.Add(new Color(60, 255, 255), new SpawnerEnemy(Vector2.One));
+            entities.Add(new Color(70, 255, 255), new FlyingEnemy(Vector2.One));
             gameMap = new Map(Game, level, tileTextures, entities);
             enemies = gameMap.makeTileMap();
 
@@ -112,6 +113,7 @@ namespace RGJgame
             }
 
             bullets.checkEnemyCollisions(enemies);
+            bullets.checkPlayerCollisions(player);
             for (int i = 0; i < enemies.Count; i++)
             {
                 if (enemies[i].health <= 0)

@@ -23,16 +23,13 @@ namespace RGJgame
         private Tile[,] m_tiles;
         private Vector2 m_playerSpawn;
         private Dictionary<Color, Texture2D[]> m_textures;
-        private Dictionary<Color, Entity> m_entities;
         private const int tileWidth = 60;
 
-        public Map(Game game, Texture2D tileMap, Dictionary<Color, Texture2D[]> tileTextures,
-            Dictionary<Color, Entity> entities)
+        public Map(Game game, Texture2D tileMap, Dictionary<Color, Texture2D[]> tileTextures)
         {
             m_game = game;
             m_tileMap = tileMap;
             m_textures = tileTextures;
-            m_entities = entities;
             m_tiles = new Tile[tileMap.Width, tileMap.Height];
             m_pixels = new Color[tileMap.Width * tileMap.Height];
             m_tileMap.GetData(m_pixels);
@@ -56,20 +53,12 @@ namespace RGJgame
             {
                 p.position.Y = ymax * tileWidth + p.imageDimension().Y / 2;
                 p.velocity.Y = 0;
-                if (m_tiles[x, ymin].getType() == 1)
-                {
-                    p.health = 0;
-                }
             }
 
             if (m_tiles[x, ymax] != null)
             {
                 p.position.Y = ymax * tileWidth - p.imageDimension().Y / 2;
                 p.jump = false;
-                if (m_tiles[x, ymax].getType() == 1)
-                {
-                    p.health = 0;
-                }
             }
             else
             {
@@ -81,18 +70,10 @@ namespace RGJgame
             if (m_tiles[xmin, y] != null)
             {
                 p.position.X = (xmax) * tileWidth + p.imageDimension().X / 2;
-                if (m_tiles[xmin, y].getType() == 1)
-                {
-                    p.health = 0;
-                }
             }
             if (m_tiles[xmax, y] != null)
             {
                 p.position.X = xmax * tileWidth - p.imageDimension().X / 2;
-                if (m_tiles[xmax, y].getType() == 1)
-                {
-                    p.health = 0;
-                }
             }
             
         }
@@ -238,10 +219,9 @@ namespace RGJgame
             }
         }
 
-        public List<Entity> makeTileMap()
+        public Bus makeTileMap()
         {
             Bus bus = new Bus();
-            List<Entity> list = new List<Entity>();
             Color curColor;
             for (int y = 0; y < m_tileMap.Height; y++)
             {
@@ -257,19 +237,6 @@ namespace RGJgame
                         m_tiles[x, y] = null;
                         m_playerSpawn = new Vector2(x * tileWidth, y * tileWidth);
                     }
-                    else if (curColor.Equals(Color.Red))
-                    {
-                        m_tiles[x, y] = new Tile(new Vector2(x * tileWidth, y * tileWidth),
-                            m_textures[curColor]);
-                        m_tiles[x, y].setType(1);
-                    }
-                    else if (m_entities.ContainsKey(curColor))
-                    {
-                        m_tiles[x, y] = null;
-                        Entity temp = m_entities[curColor];
-                        temp.position = new Vector2(x * tileWidth, y * tileWidth);
-                        list.Add(temp);
-                    }
                     else if (m_textures.ContainsKey(curColor))
                     {
                         m_tiles[x, y] = new Tile(new Vector2(x * tileWidth, y * tileWidth),
@@ -281,7 +248,7 @@ namespace RGJgame
                     }
                 }
             }
-            return list;
+            return bus;
         }
 
     }

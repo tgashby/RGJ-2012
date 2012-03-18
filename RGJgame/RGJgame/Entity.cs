@@ -26,6 +26,16 @@ namespace RGJgame
             acceleration = new Vector2(0.0f, 0.0f);
         }
 
+        public Entity(Entity rhs)
+        {
+            position = rhs.position;
+            velocity = rhs.velocity;
+            acceleration = rhs.acceleration;
+
+            texture = rhs.texture;
+            health = rhs.health;
+        }
+
         public abstract void LoadContent(Game game);
         public abstract void Update(GameTime gameTime);
         public abstract void Draw(SpriteBatch spriteBatch);
