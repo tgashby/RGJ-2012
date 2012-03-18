@@ -159,21 +159,36 @@ namespace RGJgame
             {
                 String[] tokens = hackString.Split(new char[] { ' ' });
 
-                float xCoord = float.Parse(tokens[1]);
+                if (tokens.Length == 3)
+                {
+                    try
+                    {
+                        float xCoord = float.Parse(tokens[1]);
+                        float yCoord = float.Parse(tokens[2]);
 
-                float yCoord = float.Parse(tokens[2]);
-
-                GameState.player.position.X = xCoord;
-                GameState.player.position.Y = yCoord;
+                        GameState.player.position.X = xCoord;
+                        GameState.player.position.Y = yCoord;
+                    }
+                    catch (Exception e)
+                    { }
+                }
             }
             else if (hackString.IndexOf(PlayerPower.KILL_ID) != -1)
             {
                 String[] tokens = hackString.Split(new char[] { ' ' });
 
-                int pid = int.Parse(tokens[1]);
+                if (tokens.Length == 1)
+                {
+                    try
+                    {
+                        int pid = int.Parse(tokens[1]);
 
-                // TODO: KILL IT!
-                // Something like: enemies[pid].kill()
+                        // TODO: KILL IT!
+                        // Something like: enemies[pid].kill()
+                    }
+                    catch (Exception e) 
+                    { }
+                }
             }
             // Parse the hacker string here.... Call toMod stuff, abilities, etc
             else switch (hackString)
