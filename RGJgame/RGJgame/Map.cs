@@ -78,6 +78,38 @@ namespace RGJgame
             
         }
 
+        public void checkEnemyCollision(Entity ent)
+        {
+            int xmin = (int)(ent.position.X - ent.texture.Width / 2) / tileWidth;
+            int xmax = (int)(ent.position.X + ent.texture.Width / 2) / tileWidth;
+            int ymin = (int)(ent.position.Y - ent.texture.Height / 2) / tileWidth;
+            int ymax = (int)(ent.position.Y + ent.texture.Height / 2) / tileWidth;
+
+            int x = (int)(ent.position.X) / tileWidth;
+
+            if (m_tiles[x, ymin] != null)
+            {
+                ent.position.Y = ymax * tileWidth + ent.texture.Height / 2;
+                ent.velocity.Y = 0;
+            }
+
+            if (m_tiles[x, ymax] != null)
+            {
+                ent.position.Y = ymax * tileWidth - ent.texture.Height / 2;
+            }
+
+            int y = (int)(ent.position.Y) / tileWidth;
+
+            if (m_tiles[xmin, y] != null)
+            {
+                ent.position.X = (xmax) * tileWidth + ent.texture.Width / 2;
+            }
+            if (m_tiles[xmax, y] != null)
+            {
+                ent.position.X = xmax * tileWidth - ent.texture.Width / 2;
+            }
+        }
+
         public void Update(float gameTime)
         {
             foreach (Tile t in m_tiles)

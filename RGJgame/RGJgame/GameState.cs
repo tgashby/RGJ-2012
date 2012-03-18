@@ -95,6 +95,7 @@ namespace RGJgame
             foreach (Entity ent in enemies)
             {
                 ent.Update(gameTime);
+                gameMap.checkEnemyCollision(ent);
             }
 
             bullets.checkEnemyCollisions(enemies);
