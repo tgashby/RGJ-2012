@@ -17,6 +17,7 @@ namespace RGJgame
     {
         public Vector2 position, velocity, acceleration;
         public Texture2D texture;
+        public int health;
 
         public Entity(Vector2 pos)
         {

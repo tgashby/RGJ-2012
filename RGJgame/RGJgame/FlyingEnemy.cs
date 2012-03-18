@@ -20,14 +20,13 @@ namespace RGJgame
         public static Vector2 FLYERDRAWPOS = new Vector2(300, 300);
         public const int RUNCYCLE = 40;
 
-        public float health;
         private Texture2D flyer1, flyer2, flyer3, flyer4;
         private int runtimer;
 
         public FlyingEnemy(Vector2 pos)
             : base(pos)
         {
-            health = 10.0f;
+            health = 6;
             runtimer = 0;
 
             velocity.X = MOVEMENTSPEED;
@@ -80,7 +79,8 @@ namespace RGJgame
                 flyerDir = SpriteEffects.FlipHorizontally;
 
 
-            spriteBatch.Draw(toDraw, position - GameState.player.position, null, Color.White, 0f, new Vector2(20, 20), 1f, flyerDir, 0.9f);
+            spriteBatch.Draw(toDraw, position - GameState.player.position + Player.PLAYERDRAWPOS, null, Color.White, 0f, 
+                new Vector2(toDraw.Width / 2, toDraw.Height / 2), 1f, flyerDir, 0.9f);
         }
 
         public override void doCollision(Player player)

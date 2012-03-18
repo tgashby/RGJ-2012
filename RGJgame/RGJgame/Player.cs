@@ -31,6 +31,7 @@ namespace RGJgame
         private bool justHit = false;
         private Texture2D standing, running1, running2, jumping, hacking, jumphacking, shield, shield1, shield2, shield3;
         private int runtimer, detectiontimer = DETECTIONCYCLE;
+        public bool facingRight = true;
 
         PlayerPower powers;
 
@@ -238,6 +239,11 @@ namespace RGJgame
             SpriteEffects playerDir = new SpriteEffects();
 
             if (velocity.X < 0)
+                facingRight = false;
+            if (velocity.X > 0)
+                facingRight = true;
+
+            if (!facingRight)
                 playerDir = SpriteEffects.FlipHorizontally;
                 
             spriteBatch.Draw(toDraw, PLAYERDRAWPOS, null, Color.White, 0f, new Vector2(toDraw.Width/2, toDraw.Height/2), 1f, playerDir, 0.9f);
