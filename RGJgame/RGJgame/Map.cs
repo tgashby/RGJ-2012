@@ -124,6 +124,10 @@ namespace RGJgame
             {
                 result.Y = ymax * tileWidth + p.imageDimension().Y / 2;
                 //p.velocity.Y = 0;
+            }
+
+            if (m_tiles[x, ymax] != null)
+            {
                 result.Y = ymax * tileWidth - p.imageDimension().Y / 2;
                 //p.jump = false;
             }
@@ -189,8 +193,8 @@ namespace RGJgame
             }
             return true;
         }
-
-        public void Update(float gameTime)
+        
+	public void Update(float gameTime)
         {
             foreach (Tile t in m_tiles)
             {
