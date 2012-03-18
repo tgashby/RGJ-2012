@@ -24,7 +24,8 @@ namespace RGJgame
 
         public float health;
         public float detection;
-        private bool jump = false, hack = false, shielding = false;
+        public bool hack = false;
+        private bool jump = false, shielding = false;
         private Texture2D standing, running1, running2, jumping, hacking, jumphacking, shield;
         private int runtimer, detectiontimer = DETECTIONCYCLE;
 
@@ -56,6 +57,15 @@ namespace RGJgame
 
         public void update(float dtime)
         {
+            if (jump)
+                velocity.Y += GRAVITY;
+
+            if (position.Y > 500)
+            {
+                position.Y = 500;
+                jump = false;
+            }
+
             if (!jump)
                 shielding = KeyHandler.keyDown(Keys.S);
             else
@@ -93,15 +103,6 @@ namespace RGJgame
                 {
                     velocity.X = 0;
                     runtimer = 0;
-                }
-
-                if (jump)
-                    velocity.Y += GRAVITY;
-
-                if (position.Y > 500)
-                {
-                    position.Y = 500;
-                    jump = false;
                 }
 
                 position += velocity * dtime;
@@ -155,7 +156,6 @@ namespace RGJgame
                     hardReset();
                     detection = 1.0f;
                     detectiontimer = DETECTIONCYCLE;
-                    LogState.instance.catIntoLog("Resetting...");
                 }
                 else
                 {
@@ -176,6 +176,7 @@ namespace RGJgame
         {
             powers = new PlayerPower();
             powers.initiate();
+            LogState.instance.catIntoLog("Resetting...\n");
         }
 
         public void draw(SpriteBatch spriteBatch)
@@ -287,5 +288,6 @@ namespace RGJgame
         public const string GET_ENEMY_ID = "PID NEAREST";
         public const string KILL_ID = "KILL"; // Special Case
         public const string ROOT_PRIV = "LOLZROOT";
+        public const string RESET = "RESET";
     }
 }

@@ -40,9 +40,13 @@ namespace RGJgame
 
             promptString = new String(
                  ("List of Available Commands:\n" +
-                 "GRAVITY OFF, " +
+                 "GRAVITY [WEAK, STRONG, NORMAL]\n" +
+                 "GRAVITY [OFF, REV]\n" +
                 // Add power names and a comma, or a \n at the end of powers list
-                 "SUPER JUMP\n" +
+                 "JUMP [WEAK, STRONG, NORMAL]\n" +
+                 "MOVEMENT [FAST, SLOW, NORMAL]\n" +
+                 "OVERCLOCK [4.0, 2.0, 1.0, 0.5, 0.25]\n" +
+                 "RESET\n" +
                  "Currently Active Powers:\n" +
                  activePowers + "Enter Power:\n").ToCharArray());
 
@@ -67,13 +71,36 @@ namespace RGJgame
             lcolor = GameState.player.detection * logColor1 + (1 - GameState.player.detection) * logColor2;
             Color logActual = new Color(lcolor);
 
+            promptString = cullString(promptString);   
+
             spriteBatch.Draw(background, new Vector2(800, 0), null, logActual, 0f, Vector2.Zero, 1, SpriteEffects.None, 0.9f);
-            spriteBatch.DrawString(logFont, promptString.Insert(promptString.Length, hackString), new Vector2(820, 100), Color.Orange, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+            spriteBatch.DrawString(logFont, promptString.Insert(promptString.Length, hackString), new Vector2(830, 50), Color.Orange, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
 	    }
+
+        public String cullString(String from)
+        {
+            int num = 0, index = from.Length - 1;
+            char[] str = from.ToCharArray();
+
+            while (index >= 0 && num < 20)
+            {
+                if (str[index] == '\n')
+                {
+                    num++;
+                }
+                index--;
+            }
+            if (index >= 0)
+            {
+                from = from.Substring(index + 2);
+            }
+            return from;
+        }
 
         public void catIntoLog(String str)
         {
             promptString += str;
+            activePowers += str;
         }
 
         public override void Update(GameTime gameTime)
@@ -179,6 +206,7 @@ namespace RGJgame
 
                 case PlayerPower.SUPER_JUMP:
                     activePowers += (hackString + "\n");
+                    GameState.player.JUMP = -2.2f;
                     GameState.player.usePower(PlayerPower.SUPER_JUMP);
                     GameState.player.disablePower(PlayerPower.NORMAL_JUMP);
                     GameState.player.disablePower(PlayerPower.WEAK_JUMP);
@@ -186,6 +214,7 @@ namespace RGJgame
 
                 case PlayerPower.NORMAL_JUMP:
                     activePowers += (hackString + "\n");
+                    GameState.player.JUMP = -1.1f;
                     GameState.player.disablePower(PlayerPower.SUPER_JUMP);
                     GameState.player.usePower(PlayerPower.NORMAL_JUMP);
                     GameState.player.disablePower(PlayerPower.WEAK_JUMP);
@@ -193,6 +222,7 @@ namespace RGJgame
 
                 case PlayerPower.WEAK_JUMP:
                     activePowers += (hackString + "\n");
+                    GameState.player.JUMP = -0.6f;
                     GameState.player.disablePower(PlayerPower.SUPER_JUMP);
                     GameState.player.disablePower(PlayerPower.NORMAL_JUMP);
                     GameState.player.usePower(PlayerPower.WEAK_JUMP);
@@ -327,8 +357,17 @@ namespace RGJgame
 
                     break;
 
+                case PlayerPower.RESET:
+                    activePowers += (hackString + "\n");
+                    GameState.player.hardReset();
+                    break;
+
                 default:
-                    hackString = new String("System Runtime Exception: Unknown Command\n".ToCharArray());
+                    if (hackString.Length < 14)
+                       hackString = new String(("System Runtime Exception: \n   Unknown Command: " + hackString + "\n").ToCharArray());
+                    else
+                       hackString = new String(("System Runtime Exception: \n   Unknown Command: " + hackString.Substring(0, 10) + "...\n").ToCharArray());
+                    activePowers += hackString;
                     break;
             }
         }
@@ -336,12 +375,16 @@ namespace RGJgame
         public void clearInput()
         {
             promptString = new String(
-                ("List of Available Commands:\n" +
-                "GRAVITY OFF, " +
+                 ("List of Available Commands:\n" +
+                 "GRAVITY [WEAK, STRONG, NORMAL]\n" +
+                 "GRAVITY [OFF, REV]\n" +
                 // Add power names and a comma, or a \n at the end of powers list
-                "SUPER JUMP\n" +
-                "Currently Active Powers:\n" +
-                activePowers + "Enter Power:\n").ToCharArray());
+                 "JUMP [WEAK, STRONG, NORMAL]\n" +
+                 "MOVEMENT [FAST, SLOW, NORMAL]\n" +
+                 "OVERCLOCK [4.0, 2.0, 1.0, 0.5, 0.25]\n" +
+                 "RESET\n" +
+                 "Currently Active Powers:\n" +
+                 activePowers + "Enter Power:\n").ToCharArray());
 
             if (hackString.Length > 0)
                 hackString = hackString.Remove(0);
