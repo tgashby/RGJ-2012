@@ -104,10 +104,6 @@ namespace RGJgame
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
-            if (GameState.player.isDead())
-            {
-                menus.turnOn(MenuSystem.GAMEOVER);
-            }
 
             // TODO: Add your update logic here
             if (menus.menusBusy)
@@ -116,7 +112,8 @@ namespace RGJgame
             }
             else
             {
-                if ((Input.START(1) || Input.START(2) || Input.START(3) || Input.START(4)))
+                if ((Input.START(1) || Input.START(2) || Input.START(3) || Input.START(4)) || 
+                    Keyboard.GetState().IsKeyDown(Keys.Tab))
                     menus.turnOn(MenuSystem.PAUSE);
 
                 // all the rest...
@@ -133,6 +130,11 @@ namespace RGJgame
                 }
 
                 currentState.Update(gameTime);
+
+                if (GameState.player.isDead())
+                {
+                    menus.turnOn(MenuSystem.GAMEOVER);
+                }
             }
 
             base.Update(gameTime);
@@ -181,6 +183,12 @@ namespace RGJgame
         public void NewGame()
         {
             // do all your game init stuffs here (like making new player or tilemaps)
+            gameState = new GameState(this);
+            logState = new LogState(this);
+
+            currentState = gameState;
+
+            KeyHandler.Update();
         }
 
 

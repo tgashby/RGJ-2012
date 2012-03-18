@@ -337,7 +337,7 @@ namespace RGJgame
                 case PlayerPower.BULLET2:
                     activePowers += (hackString + "\n");
                     Bullets.instance.addNewBullet(GameState.player.position,
-                        !GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
                     GameState.player.detection -= 0.1f;
                     break;
                 case PlayerPower.BULLET_SPREAD:
@@ -423,6 +423,7 @@ namespace RGJgame
                         hackString = new String(("System Runtime Exception: \n   Unknown Command: " + hackString + "\n").ToCharArray());
                     else
                         hackString = new String(("System Runtime Exception: \n   Unknown Command: " + hackString.Substring(0, 10) + "...\n").ToCharArray());
+                    activePowers += hackString;
                     break;
             }
         }
