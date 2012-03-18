@@ -16,7 +16,7 @@ namespace RGJgame
 {
     class FlyingEnemy : Entity
     {
-        public float MOVEMENTSPEED = 0.28f, GRAVITY = 0.08f;
+        public float MOVEMENTSPEED = 0.28f, GRAVITY = 0.08f, VELOCITY = 0.03f;
         public static Vector2 FLYERDRAWPOS = new Vector2(300, 300);
         public const int RUNCYCLE = 40;
 
@@ -50,10 +50,12 @@ namespace RGJgame
             if (runtimer > 500.0f)
                 runtimer = 0;
 
-            Vector2 dirToPlayer = GameState.player.position - position + Player.PLAYERDRAWPOS;
-            dirToPlayer.Normalize();
+            Vector2 toPlayer = GameState.player.position - position;
 
-            position += dirToPlayer * velocity * elapsedTime;
+            toPlayer.Normalize();
+            //toPlayer.Y -= GameState.player.GRAVITY + 0.08f;
+
+            position += toPlayer * VELOCITY * elapsedTime;
             runtimer++;
 
             Collisions.check(this, GameState.player);

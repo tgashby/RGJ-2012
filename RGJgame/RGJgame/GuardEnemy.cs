@@ -27,7 +27,7 @@ namespace RGJgame
         public GuardEnemy(Vector2 pos)
             : base(pos)
         {
-            health = 9;
+            health = 3;
             numshots = NUMSHOTS;
             shotTimer = 0;
         }

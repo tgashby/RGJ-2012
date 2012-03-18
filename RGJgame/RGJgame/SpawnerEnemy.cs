@@ -63,7 +63,7 @@ namespace RGJgame
                     toPlayer.Normalize();
                     Vector2 r = new Vector2((float)rand.NextDouble() - 0.5f, (float)rand.NextDouble() - 0.5f);
                     r /= 2;
-                    Bullets.instance.addNewBullet((position - new Vector2(0, 20)), toPlayer * BULLETSPEED + r, Bullets.PURPLE, this, true);
+                    Bullets.instance.addNewBullet((position + new Vector2(0, 60)), toPlayer * BULLETSPEED + r, Bullets.PURPLE, this, true);
 
                     shotTimer = SHOOTTIME;
                     numshots--;
@@ -90,7 +90,7 @@ namespace RGJgame
                 spawnerDir = SpriteEffects.FlipHorizontally;
 
 
-            spriteBatch.Draw(toDraw, position + new Vector2(0, -60) - GameState.player.position + Player.PLAYERDRAWPOS, null, Color.White, 0f, 
+            spriteBatch.Draw(toDraw, position - GameState.player.position + Player.PLAYERDRAWPOS, null, Color.White, 0f, 
                 new Vector2(toDraw.Width / 2, toDraw.Height / 2), 1f, spawnerDir, 0.8f);
         }
 
