@@ -35,6 +35,8 @@ namespace RGJgame
             spawner1 = game.Content.Load<Texture2D>(@"images/spawner1");
             spawner2 = game.Content.Load<Texture2D>(@"images/spawner2");
             spawner3 = game.Content.Load<Texture2D>(@"images/spawner3");
+
+            texture = spawner1;
         }
 
         public override void Update(GameTime gameTime)
@@ -45,6 +47,8 @@ namespace RGJgame
                 runtimer = 0;
 
             runtimer++;
+
+            Collisions.check(this, GameState.player);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -64,6 +68,11 @@ namespace RGJgame
 
 
             spriteBatch.Draw(toDraw, position - GameState.player.position, null, Color.White, 0f, new Vector2(20, 20), 1f, spawnerDir, 0.9f);
+        }
+
+        public override void doCollision(Player player)
+        {
+
         }
     }
 }

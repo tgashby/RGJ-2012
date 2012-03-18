@@ -40,6 +40,8 @@ namespace RGJgame
             flyer2 = game.Content.Load<Texture2D>(@"images/flyer2");
             flyer3 = game.Content.Load<Texture2D>(@"images/flyer3");
             flyer4 = game.Content.Load<Texture2D>(@"images/flyer4");
+
+            texture = flyer1;
         }
 
         public override void Update(GameTime gameTime)
@@ -54,6 +56,8 @@ namespace RGJgame
 
             position += dirToPlayer * velocity * elapsedTime;
             runtimer++;
+
+            Collisions.check(this, GameState.player);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -77,6 +81,11 @@ namespace RGJgame
 
 
             spriteBatch.Draw(toDraw, position - GameState.player.position, null, Color.White, 0f, new Vector2(20, 20), 1f, flyerDir, 0.9f);
+        }
+
+        public override void doCollision(Player player)
+        {
+
         }
     }
 }

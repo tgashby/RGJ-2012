@@ -104,6 +104,11 @@ namespace RGJgame
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
+            if (GameState.player.isDead())
+            {
+                menus.turnOn(MenuSystem.GAMEOVER);
+            }
+
             // TODO: Add your update logic here
             if (menus.menusBusy)
             {

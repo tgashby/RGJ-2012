@@ -25,8 +25,10 @@ namespace RGJgame
 
         public float health;
         public float detection;
+        private float hitTimer;
         public bool hack = false, jump = false;
         private bool shielding = false;
+        private bool justHit = false;
         private Texture2D standing, running1, running2, jumping, hacking, jumphacking, shield;
         private int runtimer, detectiontimer = DETECTIONCYCLE;
 
@@ -38,6 +40,7 @@ namespace RGJgame
         {
             health = 1.0f;
             detection = 1.0f;
+            hitTimer = 0.0f;
 
             position = pos;
         }
@@ -58,6 +61,17 @@ namespace RGJgame
 
         public void update(float dtime)
         {
+            if (justHit)
+            {
+                hitTimer += dtime;
+
+                if (hitTimer >= 1000.0f)
+                {
+                    justHit = false;
+                    hitTimer = 0;
+                }
+            }
+
             if (jump)
                 velocity.Y += GRAVITY;
 
@@ -224,8 +238,36 @@ namespace RGJgame
                 
             spriteBatch.Draw(toDraw, PLAYERDRAWPOS, null, Color.White, 0f, new Vector2(toDraw.Width/2, toDraw.Height/2), 1f, playerDir, 0.9f);
         }
-    }
 
+        public void doCollision(Entity ent)
+        {
+            if (ent.GetType() == typeof(FlyingEnemy))
+            {
+
+            }
+
+            if (ent.GetType() == typeof(SpawnerEnemy))
+            {
+
+            }
+
+            if (ent.GetType() == typeof(GuardEnemy))
+            {
+
+            }
+
+            if (!justHit)
+            {
+                health -= 1.0f;
+                justHit = true;
+            }
+        }
+
+        public bool isDead()
+        {
+            return health <= 0;
+        }
+    }
     
 
     public sealed class PlayerPower

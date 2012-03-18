@@ -34,6 +34,8 @@ namespace RGJgame
         {
             guardbase = game.Content.Load<Texture2D>(@"images/guardbase");
             guardgun = game.Content.Load<Texture2D>(@"images/guardgun");
+
+            texture = guardbase;
         }
 
         public override void Update(GameTime gameTime)
@@ -54,6 +56,9 @@ namespace RGJgame
                 moveTimer = 0;
 
             position += velocity * elapsedTime;
+
+            // Collision checking
+            Collisions.check(this, GameState.player);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -68,6 +73,11 @@ namespace RGJgame
                 spriteBatch.Draw(guardbase, position - GameState.player.position, null, Color.White, 0f, new Vector2(40, 40), 1f, SpriteEffects.None, 0.9f);
                 spriteBatch.Draw(guardgun, position - GameState.player.position, null, Color.White, 0f, new Vector2(40, 40), 1f, SpriteEffects.None, 0.9f);
             }
+        }
+
+        public override void doCollision(Player player)
+        {
+
         }
     }
 }
