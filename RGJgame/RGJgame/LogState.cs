@@ -167,278 +167,299 @@ namespace RGJgame
             {
                 String[] tokens = hackString.Split(new char[] { ' ' });
 
-                if (tokens.Length == 3)
+                if (GameState.player.powers.isAvailable(PlayerPower.TELEPORT))
                 {
-                    try
+                    if (tokens.Length == 3)
                     {
-                        float xCoord = float.Parse(tokens[1]) * 3;
-                        float yCoord = float.Parse(tokens[2]) * 3;
+                        try
+                        {
+                            float xCoord = float.Parse(tokens[1]) * 3;
+                            float yCoord = float.Parse(tokens[2]) * 3;
 
-                        //GameState.player.position.X += xCoord;
-                        //GameState.player.position.Y += yCoord;
-                        Vector2 movement = GameState.gameMap.teleportCheck(GameState.player, new Vector2(xCoord, yCoord));
-                        if (movement != null)
-                        {
-                            GameState.player.position = movement;
+                            //GameState.player.position.X += xCoord;
+                            //GameState.player.position.Y += yCoord;
+                            Vector2 movement = GameState.gameMap.teleportCheck(GameState.player, new Vector2(xCoord, yCoord));
+                            if (movement != null)
+                            {
+                                GameState.player.position = movement;
+                            }
+                            else
+                            {
+                                GameState.player.health = 0;
+                            }
+                            activePowers += (hackString + "\n");
                         }
-                        else
-                        {
-                            GameState.player.health = 0;
-                        }
-                        activePowers += (hackString + "\n");
+                        catch (Exception e)
+                        { }
                     }
-                    catch (Exception e)
-                    { }
+                }
+                else
+                {
+                    activePowers += (hackString + " not available yet\n");
                 }
             }
             else if (hackString.IndexOf(PlayerPower.KILL_ID) != -1)
             {
                 String[] tokens = hackString.Split(new char[] { ' ' });
 
-                if (tokens.Length == 1)
+                if (GameState.player.powers.isAvailable(PlayerPower.TELEPORT))
                 {
-                    try
+                    if (tokens.Length == 1)
                     {
-                        int pid = int.Parse(tokens[1]);
+                        try
+                        {
+                            int pid = int.Parse(tokens[1]);
 
-                        // TODO: KILL IT!
-                        // Something like: enemies[pid].kill()
+                            // TODO: KILL IT!
+                            // Something like: enemies[pid].kill()
+                        }
+                        catch (Exception e) 
+                        { }
                     }
-                    catch (Exception e) 
-                    { }
+                }
+                else
+                {
+                    activePowers += (hackString + " not available yet\n");
                 }
             }
             // Parse the hacker string here.... Call toMod stuff, abilities, etc
-            else switch (hackString)
+            else if (GameState.player.powers.isAvailable(hackString))
             {
-                case PlayerPower.GRAVITY_OFF:
-                    GameState.player.GRAVITY = 0.0f;
-                    activePowers += (hackString + "\n");
-                    GameState.player.usePower(PlayerPower.GRAVITY_OFF);
-                    GameState.player.disablePower(PlayerPower.GRAVITY_NORMAL);
-                    GameState.player.disablePower(PlayerPower.LOW_GRAV);
-                    GameState.player.disablePower(PlayerPower.MASSIVE_GRAV);
-                    break;
-                case PlayerPower.GRAVITY_NORMAL:
-                    GameState.player.GRAVITY = 0.08f;
-                    activePowers += (hackString + "\n");
-                    GameState.player.disablePower(PlayerPower.GRAVITY_OFF);
-                    GameState.player.usePower(PlayerPower.GRAVITY_NORMAL);
-                    GameState.player.disablePower(PlayerPower.LOW_GRAV);
-                    GameState.player.disablePower(PlayerPower.MASSIVE_GRAV);
-                    break;
-                case PlayerPower.LOW_GRAV:
-                    GameState.player.GRAVITY = 0.05f;
-                    activePowers += (hackString + "\n");
-                    GameState.player.disablePower(PlayerPower.GRAVITY_OFF);
-                    GameState.player.disablePower(PlayerPower.GRAVITY_NORMAL);
-                    GameState.player.usePower(PlayerPower.LOW_GRAV);
-                    GameState.player.disablePower(PlayerPower.MASSIVE_GRAV);
-                    break;
-                case PlayerPower.MASSIVE_GRAV:
-                    GameState.player.GRAVITY = 0.15f;
-                    activePowers += (hackString + "\n");
-                    GameState.player.disablePower(PlayerPower.GRAVITY_OFF);
-                    GameState.player.disablePower(PlayerPower.GRAVITY_NORMAL);
-                    GameState.player.disablePower(PlayerPower.LOW_GRAV);
-                    GameState.player.usePower(PlayerPower.MASSIVE_GRAV);
-                    break;
-                case PlayerPower.REV_GRAVITY:
-                    /*GameState.player.GRAVITY = -0.08f;
-                    GameState.player.JUMP = 3.0f;*/
-                    activePowers += (hackString + "\n");
-                    GameState.player.usePower(PlayerPower.REV_GRAVITY);
-                    break;
+                switch (hackString)
+                {
+                    case PlayerPower.GRAVITY_OFF:
+                        GameState.player.GRAVITY = 0.0f;
+                        activePowers += (hackString + "\n");
+                        GameState.player.usePower(PlayerPower.GRAVITY_OFF);
+                        GameState.player.disablePower(PlayerPower.GRAVITY_NORMAL);
+                        GameState.player.disablePower(PlayerPower.LOW_GRAV);
+                        GameState.player.disablePower(PlayerPower.MASSIVE_GRAV);
+                        break;
+                    case PlayerPower.GRAVITY_NORMAL:
+                        GameState.player.GRAVITY = 0.08f;
+                        activePowers += (hackString + "\n");
+                        GameState.player.disablePower(PlayerPower.GRAVITY_OFF);
+                        GameState.player.usePower(PlayerPower.GRAVITY_NORMAL);
+                        GameState.player.disablePower(PlayerPower.LOW_GRAV);
+                        GameState.player.disablePower(PlayerPower.MASSIVE_GRAV);
+                        break;
+                    case PlayerPower.LOW_GRAV:
+                        GameState.player.GRAVITY = 0.05f;
+                        activePowers += (hackString + "\n");
+                        GameState.player.disablePower(PlayerPower.GRAVITY_OFF);
+                        GameState.player.disablePower(PlayerPower.GRAVITY_NORMAL);
+                        GameState.player.usePower(PlayerPower.LOW_GRAV);
+                        GameState.player.disablePower(PlayerPower.MASSIVE_GRAV);
+                        break;
+                    case PlayerPower.MASSIVE_GRAV:
+                        GameState.player.GRAVITY = 0.15f;
+                        activePowers += (hackString + "\n");
+                        GameState.player.disablePower(PlayerPower.GRAVITY_OFF);
+                        GameState.player.disablePower(PlayerPower.GRAVITY_NORMAL);
+                        GameState.player.disablePower(PlayerPower.LOW_GRAV);
+                        GameState.player.usePower(PlayerPower.MASSIVE_GRAV);
+                        break;
+                    case PlayerPower.REV_GRAVITY:
+                        /*GameState.player.GRAVITY = -0.08f;
+                        GameState.player.JUMP = 3.0f;*/
+                        activePowers += (hackString + "\n");
+                        GameState.player.usePower(PlayerPower.REV_GRAVITY);
+                        break;
 
-                case PlayerPower.SUPER_JUMP:
-                    activePowers += (hackString + "\n");
-                    GameState.player.JUMP = -1.8f;
-                    GameState.player.usePower(PlayerPower.SUPER_JUMP);
-                    GameState.player.disablePower(PlayerPower.NORMAL_JUMP);
-                    GameState.player.disablePower(PlayerPower.WEAK_JUMP);
-                    break;
-                case PlayerPower.NORMAL_JUMP:
-                    activePowers += (hackString + "\n");
-                    GameState.player.JUMP = -1.1f;
-                    GameState.player.disablePower(PlayerPower.SUPER_JUMP);
-                    GameState.player.usePower(PlayerPower.NORMAL_JUMP);
-                    GameState.player.disablePower(PlayerPower.WEAK_JUMP);
-                    break;
-                case PlayerPower.WEAK_JUMP:
-                    activePowers += (hackString + "\n");
-                    GameState.player.JUMP = -0.6f;
-                    GameState.player.disablePower(PlayerPower.SUPER_JUMP);
-                    GameState.player.disablePower(PlayerPower.NORMAL_JUMP);
-                    GameState.player.usePower(PlayerPower.WEAK_JUMP);
-                    break;
+                    case PlayerPower.SUPER_JUMP:
+                        activePowers += (hackString + "\n");
+                        GameState.player.JUMP = -1.8f;
+                        GameState.player.usePower(PlayerPower.SUPER_JUMP);
+                        GameState.player.disablePower(PlayerPower.NORMAL_JUMP);
+                        GameState.player.disablePower(PlayerPower.WEAK_JUMP);
+                        break;
+                    case PlayerPower.NORMAL_JUMP:
+                        activePowers += (hackString + "\n");
+                        GameState.player.JUMP = -1.1f;
+                        GameState.player.disablePower(PlayerPower.SUPER_JUMP);
+                        GameState.player.usePower(PlayerPower.NORMAL_JUMP);
+                        GameState.player.disablePower(PlayerPower.WEAK_JUMP);
+                        break;
+                    case PlayerPower.WEAK_JUMP:
+                        activePowers += (hackString + "\n");
+                        GameState.player.JUMP = -0.6f;
+                        GameState.player.disablePower(PlayerPower.SUPER_JUMP);
+                        GameState.player.disablePower(PlayerPower.NORMAL_JUMP);
+                        GameState.player.usePower(PlayerPower.WEAK_JUMP);
+                        break;
 
-                case PlayerPower.OVERCLOCK4:
-                    activePowers += (hackString + "\n");
-                    Game1.CLOCKSPEED = 4;
-                    GameState.player.usePower(PlayerPower.OVERCLOCK4);
-                    GameState.player.disablePower(PlayerPower.OVERCLOCK2);
-                    GameState.player.disablePower(PlayerPower.CLOCK1);
-                    GameState.player.disablePower(PlayerPower.UNDERCLOCK2);
-                    GameState.player.disablePower(PlayerPower.UNDERCLOCK4);
-                    break;
-                case PlayerPower.OVERCLOCK2:
-                    activePowers += (hackString + "\n");
-                    Game1.CLOCKSPEED = 2;
-                    GameState.player.disablePower(PlayerPower.OVERCLOCK4);
-                    GameState.player.usePower(PlayerPower.OVERCLOCK2);
-                    GameState.player.disablePower(PlayerPower.CLOCK1);
-                    GameState.player.disablePower(PlayerPower.UNDERCLOCK2);
-                    GameState.player.disablePower(PlayerPower.UNDERCLOCK4);
-                    break;
-                case PlayerPower.CLOCK1:
-                    activePowers += (hackString + "\n");
-                    Game1.CLOCKSPEED = 1.0f;
-                    GameState.player.disablePower(PlayerPower.OVERCLOCK4);
-                    GameState.player.disablePower(PlayerPower.OVERCLOCK2);
-                    GameState.player.usePower(PlayerPower.CLOCK1);
-                    GameState.player.disablePower(PlayerPower.UNDERCLOCK2);
-                    GameState.player.disablePower(PlayerPower.UNDERCLOCK4);
-                    break;
-                case PlayerPower.UNDERCLOCK4:
-                    activePowers += (hackString + "\n");
-                    GameState.player.disablePower(PlayerPower.OVERCLOCK4);
-                    GameState.player.disablePower(PlayerPower.OVERCLOCK2);
-                    GameState.player.disablePower(PlayerPower.CLOCK1);
-                    GameState.player.disablePower(PlayerPower.UNDERCLOCK2);
-                    GameState.player.usePower(PlayerPower.UNDERCLOCK4);
-                    Game1.CLOCKSPEED = 0.25f;
-                    break;
-                case PlayerPower.UNDERCLOCK2:
-                    activePowers += (hackString + "\n");
-                    Game1.CLOCKSPEED = 0.5f;
-                    GameState.player.disablePower(PlayerPower.OVERCLOCK4);
-                    GameState.player.disablePower(PlayerPower.OVERCLOCK2);
-                    GameState.player.disablePower(PlayerPower.CLOCK1);
-                    GameState.player.usePower(PlayerPower.UNDERCLOCK2);
-                    GameState.player.disablePower(PlayerPower.UNDERCLOCK4);
-                    break;
+                    case PlayerPower.OVERCLOCK4:
+                        activePowers += (hackString + "\n");
+                        Game1.CLOCKSPEED = 4;
+                        GameState.player.usePower(PlayerPower.OVERCLOCK4);
+                        GameState.player.disablePower(PlayerPower.OVERCLOCK2);
+                        GameState.player.disablePower(PlayerPower.CLOCK1);
+                        GameState.player.disablePower(PlayerPower.UNDERCLOCK2);
+                        GameState.player.disablePower(PlayerPower.UNDERCLOCK4);
+                        break;
+                    case PlayerPower.OVERCLOCK2:
+                        activePowers += (hackString + "\n");
+                        Game1.CLOCKSPEED = 2;
+                        GameState.player.disablePower(PlayerPower.OVERCLOCK4);
+                        GameState.player.usePower(PlayerPower.OVERCLOCK2);
+                        GameState.player.disablePower(PlayerPower.CLOCK1);
+                        GameState.player.disablePower(PlayerPower.UNDERCLOCK2);
+                        GameState.player.disablePower(PlayerPower.UNDERCLOCK4);
+                        break;
+                    case PlayerPower.CLOCK1:
+                        activePowers += (hackString + "\n");
+                        Game1.CLOCKSPEED = 1.0f;
+                        GameState.player.disablePower(PlayerPower.OVERCLOCK4);
+                        GameState.player.disablePower(PlayerPower.OVERCLOCK2);
+                        GameState.player.usePower(PlayerPower.CLOCK1);
+                        GameState.player.disablePower(PlayerPower.UNDERCLOCK2);
+                        GameState.player.disablePower(PlayerPower.UNDERCLOCK4);
+                        break;
+                    case PlayerPower.UNDERCLOCK4:
+                        activePowers += (hackString + "\n");
+                        GameState.player.disablePower(PlayerPower.OVERCLOCK4);
+                        GameState.player.disablePower(PlayerPower.OVERCLOCK2);
+                        GameState.player.disablePower(PlayerPower.CLOCK1);
+                        GameState.player.disablePower(PlayerPower.UNDERCLOCK2);
+                        GameState.player.usePower(PlayerPower.UNDERCLOCK4);
+                        Game1.CLOCKSPEED = 0.25f;
+                        break;
+                    case PlayerPower.UNDERCLOCK2:
+                        activePowers += (hackString + "\n");
+                        Game1.CLOCKSPEED = 0.5f;
+                        GameState.player.disablePower(PlayerPower.OVERCLOCK4);
+                        GameState.player.disablePower(PlayerPower.OVERCLOCK2);
+                        GameState.player.disablePower(PlayerPower.CLOCK1);
+                        GameState.player.usePower(PlayerPower.UNDERCLOCK2);
+                        GameState.player.disablePower(PlayerPower.UNDERCLOCK4);
+                        break;
 
-                case PlayerPower.MOVEMENT_FAST:
-                    activePowers += (hackString + "\n");
-                    GameState.player.MOVEMENTSPEED = 0.56f;
-                    GameState.player.disablePower(PlayerPower.MOVEMENT_SLOW);
-                    GameState.player.disablePower(PlayerPower.MOVEMENT_NORMAL);
-                    GameState.player.usePower(PlayerPower.MOVEMENT_FAST);
-                    break;
-                case PlayerPower.MOVEMENT_NORMAL:
-                    activePowers += (hackString + "\n");
-                    GameState.player.MOVEMENTSPEED = 0.28f;
-                    GameState.player.disablePower(PlayerPower.MOVEMENT_SLOW);
-                    GameState.player.usePower(PlayerPower.MOVEMENT_NORMAL);
-                    GameState.player.disablePower(PlayerPower.MOVEMENT_FAST);
-                    break;
-                case PlayerPower.MOVEMENT_SLOW:
-                    activePowers += (hackString + "\n");
-                    GameState.player.MOVEMENTSPEED = 0.14f;
-                    GameState.player.usePower(PlayerPower.MOVEMENT_SLOW);
-                    GameState.player.disablePower(PlayerPower.MOVEMENT_NORMAL);
-                    GameState.player.disablePower(PlayerPower.MOVEMENT_FAST);
-                    break;
+                    case PlayerPower.MOVEMENT_FAST:
+                        activePowers += (hackString + "\n");
+                        GameState.player.MOVEMENTSPEED = 0.56f;
+                        GameState.player.disablePower(PlayerPower.MOVEMENT_SLOW);
+                        GameState.player.disablePower(PlayerPower.MOVEMENT_NORMAL);
+                        GameState.player.usePower(PlayerPower.MOVEMENT_FAST);
+                        break;
+                    case PlayerPower.MOVEMENT_NORMAL:
+                        activePowers += (hackString + "\n");
+                        GameState.player.MOVEMENTSPEED = 0.28f;
+                        GameState.player.disablePower(PlayerPower.MOVEMENT_SLOW);
+                        GameState.player.usePower(PlayerPower.MOVEMENT_NORMAL);
+                        GameState.player.disablePower(PlayerPower.MOVEMENT_FAST);
+                        break;
+                    case PlayerPower.MOVEMENT_SLOW:
+                        activePowers += (hackString + "\n");
+                        GameState.player.MOVEMENTSPEED = 0.14f;
+                        GameState.player.usePower(PlayerPower.MOVEMENT_SLOW);
+                        GameState.player.disablePower(PlayerPower.MOVEMENT_NORMAL);
+                        GameState.player.disablePower(PlayerPower.MOVEMENT_FAST);
+                        break;
 
 
-                case PlayerPower.BULLET1:
-                    activePowers += (hackString + "\n");
-                    Bullets.instance.addNewBullet(GameState.player.position,
-                        GameState.player.facingLeft ? new Vector2(-2f, 0f) : new Vector2(2f, 0f), Bullets.P_SMALL, GameState.player);
-                    GameState.player.detection -= 0.1f;
-                    break;
+                    case PlayerPower.BULLET1:
+                        activePowers += (hackString + "\n");
+                        Bullets.instance.addNewBullet(GameState.player.position,
+                            GameState.player.facingLeft ? new Vector2(-2f, 0f) : new Vector2(2f, 0f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.detection -= 0.1f;
+                        break;
 
-                case PlayerPower.BULLET2:
-                    activePowers += (hackString + "\n");
-                    Bullets.instance.addNewBullet(GameState.player.position,
-                        GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
-                    GameState.player.detection -= 0.1f;
-                    break;
-                case PlayerPower.BULLET_SPREAD:
-                    activePowers += (hackString + "\n");
-                    Bullets.instance.addNewBullet(GameState.player.position,
-                        GameState.player.facingLeft ? new Vector2(-0.8f, 0.4f) : new Vector2(0.8f, 0.4f), Bullets.P_SMALL, GameState.player);
-                    Bullets.instance.addNewBullet(GameState.player.position,
-                        GameState.player.facingLeft ? new Vector2(-0.9f, 0.2f) : new Vector2(0.9f, 0.2f), Bullets.P_SMALL, GameState.player);
-                    Bullets.instance.addNewBullet(GameState.player.position,
-                        GameState.player.facingLeft ? new Vector2(-1.0f, 0f) : new Vector2(1.0f, 0f), Bullets.P_SMALL, GameState.player);
-                    Bullets.instance.addNewBullet(GameState.player.position,
-                        GameState.player.facingLeft ? new Vector2(-0.9f, -0.2f) : new Vector2(0.9f, -0.2f), Bullets.P_SMALL, GameState.player);
-                    Bullets.instance.addNewBullet(GameState.player.position,
-                        GameState.player.facingLeft ? new Vector2(-0.8f, -0.4f) : new Vector2(0.8f, -0.4f), Bullets.P_SMALL, GameState.player);
-                    GameState.player.detection -= 0.4f;
-                    break;
-                case PlayerPower.BULLET_DIAGONAL:
-                    activePowers += (hackString + "\n");
-                    Bullets.instance.addNewBullet(GameState.player.position,
-                        GameState.player.facingLeft ? new Vector2(-0.8f, 0.5f) : new Vector2(0.8f, 0.5f), Bullets.P_SMALL, GameState.player);
-                    Bullets.instance.addNewBullet(GameState.player.position,
-                        GameState.player.facingLeft ? new Vector2(-0.8f, -0.5f) : new Vector2(0.8f, -0.5f), Bullets.P_SMALL, GameState.player);
-                    GameState.player.detection -= 0.2f;
-                    break;
-                case PlayerPower.BULLET_TRIPLE:
-                    activePowers += (hackString + "\n");
-                    Bullets.instance.addNewBullet(GameState.player.position + new Vector2(0, -20),
-                        GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
-                    Bullets.instance.addNewBullet(GameState.player.position,
-                        GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
-                    Bullets.instance.addNewBullet(GameState.player.position + new Vector2(0, 20),
-                        GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
-                    GameState.player.detection -= 0.25f;
-                    break;
+                    case PlayerPower.BULLET2:
+                        activePowers += (hackString + "\n");
+                        Bullets.instance.addNewBullet(GameState.player.position,
+                            GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.detection -= 0.1f;
+                        break;
+                    case PlayerPower.BULLET_SPREAD:
+                        activePowers += (hackString + "\n");
+                        Bullets.instance.addNewBullet(GameState.player.position,
+                            GameState.player.facingLeft ? new Vector2(-0.8f, 0.4f) : new Vector2(0.8f, 0.4f), Bullets.P_SMALL, GameState.player);
+                        Bullets.instance.addNewBullet(GameState.player.position,
+                            GameState.player.facingLeft ? new Vector2(-0.9f, 0.2f) : new Vector2(0.9f, 0.2f), Bullets.P_SMALL, GameState.player);
+                        Bullets.instance.addNewBullet(GameState.player.position,
+                            GameState.player.facingLeft ? new Vector2(-1.0f, 0f) : new Vector2(1.0f, 0f), Bullets.P_SMALL, GameState.player);
+                        Bullets.instance.addNewBullet(GameState.player.position,
+                            GameState.player.facingLeft ? new Vector2(-0.9f, -0.2f) : new Vector2(0.9f, -0.2f), Bullets.P_SMALL, GameState.player);
+                        Bullets.instance.addNewBullet(GameState.player.position,
+                            GameState.player.facingLeft ? new Vector2(-0.8f, -0.4f) : new Vector2(0.8f, -0.4f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.detection -= 0.4f;
+                        break;
+                    case PlayerPower.BULLET_DIAGONAL:
+                        activePowers += (hackString + "\n");
+                        Bullets.instance.addNewBullet(GameState.player.position,
+                            GameState.player.facingLeft ? new Vector2(-0.8f, 0.5f) : new Vector2(0.8f, 0.5f), Bullets.P_SMALL, GameState.player);
+                        Bullets.instance.addNewBullet(GameState.player.position,
+                            GameState.player.facingLeft ? new Vector2(-0.8f, -0.5f) : new Vector2(0.8f, -0.5f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.detection -= 0.2f;
+                        break;
+                    case PlayerPower.BULLET_TRIPLE:
+                        activePowers += (hackString + "\n");
+                        Bullets.instance.addNewBullet(GameState.player.position + new Vector2(0, -20),
+                            GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
+                        Bullets.instance.addNewBullet(GameState.player.position,
+                            GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
+                        Bullets.instance.addNewBullet(GameState.player.position + new Vector2(0, 20),
+                            GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.detection -= 0.25f;
+                        break;
 
-                case PlayerPower.STRONG_BULLETS:
+                    case PlayerPower.STRONG_BULLETS:
 
-                    break;
+                        break;
 
-                case PlayerPower.FREEZE_ENEMIES:
+                    case PlayerPower.FREEZE_ENEMIES:
 
-                    break;
+                        break;
 
-                case PlayerPower.BURN_ENEMIES:
+                    case PlayerPower.BURN_ENEMIES:
 
-                    break;
+                        break;
 
-                case PlayerPower.THROW_ENEMY:
+                    case PlayerPower.THROW_ENEMY:
 
-                    break;
+                        break;
 
-                case PlayerPower.NUKE:
+                    case PlayerPower.NUKE:
 
-                    break;
+                        break;
 
-                case PlayerPower.LAZER:
+                    case PlayerPower.LAZER:
 
-                    break;
+                        break;
 
-                case PlayerPower.DECREASE_ENEMY_SPEED:
+                    case PlayerPower.DECREASE_ENEMY_SPEED:
 
-                    break;
+                        break;
 
-                case PlayerPower.GET_ENEMY_ID:
+                    case PlayerPower.GET_ENEMY_ID:
 
-                    break;
+                        break;
 
-                case PlayerPower.KILL_ID:
+                    case PlayerPower.KILL_ID:
 
-                    break;
+                        break;
 
-                case PlayerPower.ROOT_PRIV:
+                    case PlayerPower.ROOT_PRIV:
 
-                    break;
+                        break;
 
-                case PlayerPower.RESET:
-                    activePowers += (hackString + "\n");
-                    GameState.player.hardReset();
-                    break;
+                    case PlayerPower.RESET:
+                        activePowers += (hackString + "\n");
+                        GameState.player.hardReset();
+                        break;
 
-                default:
-                    if (hackString.Length < 14)
-                        hackString = new String(("System Runtime Exception: \n   Unknown Command: " + hackString + "\n").ToCharArray());
-                    else
-                        hackString = new String(("System Runtime Exception: \n   Unknown Command: " + hackString.Substring(0, 10) + "...\n").ToCharArray());
-                    activePowers += hackString;
-                    break;
+                    default:
+                        if (hackString.Length < 14)
+                            hackString = new String(("System Runtime Exception: \n   Unknown Command: " + hackString + "\n").ToCharArray());
+                        else
+                            hackString = new String(("System Runtime Exception: \n   Unknown Command: " + hackString.Substring(0, 10) + "...\n").ToCharArray());
+                        activePowers += hackString;
+                        break;
+                }
+            }
+            else
+            {
+                activePowers += (hackString + " not available yet\n");
             }
         }
 

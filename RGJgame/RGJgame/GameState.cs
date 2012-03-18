@@ -55,6 +55,7 @@ namespace RGJgame
 
             enemies.Add(new GuardEnemy(gameMap.getPlayerSpawn() + new Vector2(600, 0)));
             enemies.Add(new SpawnerEnemy(gameMap.getPlayerSpawn() + new Vector2(-300, 0)));
+            enemies.Add(new InfoPad(gameMap.getPlayerSpawn() + new Vector2(150, 0), PlayerPower.GRAVITY_OFF));
 
             foreach (Entity ent in enemies)
             {

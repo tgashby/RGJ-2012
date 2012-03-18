@@ -32,7 +32,7 @@ namespace RGJgame
         private Texture2D standing, running1, running2, jumping, hacking, jumphacking, shield, shield1, shield2, shield3;
         private int runtimer, detectiontimer = DETECTIONCYCLE;
 
-        PlayerPower powers;
+        public PlayerPower powers;
 
         public Vector2 position, velocity;
 
@@ -275,25 +275,26 @@ namespace RGJgame
 
         public void doCollision(Entity ent)
         {
-            if (ent.GetType() == typeof(FlyingEnemy))
+            if (ent.GetType() == typeof(FlyingEnemy) || 
+                ent.GetType() == typeof(SpawnerEnemy) || 
+                ent.GetType() == typeof(GuardEnemy))
             {
-
+                if (!justHit)
+                {
+                    health -= 1.0f;
+                    justHit = true;
+                }
             }
 
-            if (ent.GetType() == typeof(SpawnerEnemy))
+            if (ent.GetType() == typeof(InfoPad))
             {
+                String newPower = ((InfoPad)ent).power;
 
-            }
-
-            if (ent.GetType() == typeof(GuardEnemy))
-            {
-
-            }
-
-            if (!justHit)
-            {
-                health -= 1.0f;
-                justHit = true;
+                if (!powers.isAvailable(newPower))
+                {
+                    powers.setAvailable(newPower);
+                    LogState.instance.catIntoLog("Discovered: " + newPower + "\n");
+                }
             }
         }
 
@@ -309,6 +310,7 @@ namespace RGJgame
         public PlayerPower() {}
 
         Dictionary<String, Boolean> active = new Dictionary<String, Boolean>();
+        Dictionary<String, Boolean> available = new Dictionary<String, Boolean>();
 
         public void initiate()
         {
@@ -332,16 +334,81 @@ namespace RGJgame
             Game1.CLOCKSPEED = 1;
             active.Add(UNDERCLOCK2, false);
             active.Add(UNDERCLOCK4, false);
+            active.Add(BULLET1, false);
+            active.Add(BULLET2, false);
+            active.Add(BULLET_SPREAD, false);
+            active.Add(BULLET_DIAGONAL, false);
+            active.Add(BULLET_TRIPLE, false);
+            active.Add(STRONG_BULLETS, false);
+            active.Add(FREEZE_ENEMIES, false);
+            active.Add(BURN_ENEMIES, false);
+            active.Add(THROW_ENEMY, false);
+            active.Add(NUKE, false);
+            active.Add(TELEPORT, false);
+            active.Add(LAZER, false);
+            active.Add(DECREASE_ENEMY_SPEED, false);
+            active.Add(GET_ENEMY_ID, false);
+            active.Add(KILL_ID, false);
+            active.Add(ROOT_PRIV, false);
+            active.Add(RESET, true);
+
+            available.Add(GRAVITY_OFF, false);
+            available.Add(GRAVITY_NORMAL, true);
+            available.Add(MASSIVE_GRAV, false);
+            available.Add(REV_GRAVITY, false);
+            available.Add(LOW_GRAV, false);
+            available.Add(SUPER_JUMP, false);
+            available.Add(NORMAL_JUMP, true);
+            available.Add(WEAK_JUMP, false);
+            available.Add(MOVEMENT_FAST, false);
+            available.Add(MOVEMENT_NORMAL, true);
+            available.Add(MOVEMENT_SLOW, false);
+            available.Add(OVERCLOCK4, false);
+            available.Add(OVERCLOCK2, false);
+            available.Add(CLOCK1, true);
+            available.Add(UNDERCLOCK2, false);
+            available.Add(UNDERCLOCK4, false);
+            available.Add(BULLET1, false);
+            available.Add(BULLET2, false);
+            available.Add(BULLET_SPREAD, false);
+            available.Add(BULLET_DIAGONAL, false);
+            available.Add(BULLET_TRIPLE, false);
+            available.Add(STRONG_BULLETS, false);
+            available.Add(FREEZE_ENEMIES, false);
+            available.Add(BURN_ENEMIES, false);
+            available.Add(THROW_ENEMY, false);
+            available.Add(NUKE, false);
+            available.Add(TELEPORT, false);
+            available.Add(LAZER, false);
+            available.Add(DECREASE_ENEMY_SPEED, false);
+            available.Add(GET_ENEMY_ID, false);
+            available.Add(KILL_ID, false);
+            available.Add(ROOT_PRIV, false);
+            available.Add(RESET, true);
         }
 
         public bool check(String power)
         {
-            return active[power];
+            return available[power] && active[power];
         }
 
         public void set(String power, bool b)
         {
-            active[power] = b;
+            // If setting it false, no need to check if it's available
+            if (!b)
+                active[power] = b;
+            else if (available[power])
+                active[power] = b;
+        }
+
+        public bool isAvailable(String power)
+        {
+            return available[power];
+        }
+
+        public void setAvailable(String power)
+        {
+            available[power] = true;
         }
 
         // Add powers and their string values down here, then go to LogState and add them in parseInput
