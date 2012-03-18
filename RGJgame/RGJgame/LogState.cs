@@ -134,9 +134,13 @@ namespace RGJgame
                     }
                     // '.' Char
                     else if (!keystates[key] && (int)key == 190)
-                    {
-                        
+                    {   
                         hackString = hackString.Insert(hackString.Length, new String(".".ToCharArray()));
+                    }
+                    // '-' char
+                    else if (!keystates[key] && (int)key == 189)
+                    {
+                        hackString = hackString.Insert(hackString.Length, new String("-".ToCharArray()));
                     }
                     // Backspace
                     else if (!keystates[key] && (int)key == 8)
