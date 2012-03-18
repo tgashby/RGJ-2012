@@ -168,8 +168,8 @@ namespace RGJgame
                         float xCoord = float.Parse(tokens[1]);
                         float yCoord = float.Parse(tokens[2]);
 
-                        GameState.player.position.X = xCoord;
-                        GameState.player.position.Y = yCoord;
+                        GameState.player.position.X += xCoord;
+                        GameState.player.position.Y += yCoord;
                     }
                     catch (Exception e)
                     { }
