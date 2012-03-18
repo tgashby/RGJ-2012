@@ -78,6 +78,89 @@ namespace RGJgame
             
         }
 
+        public Vector2 teleportCheck(Player p, Vector2 displaced)
+        {
+            Vector2 result = p.position + displaced;
+            int xmin = (int)(result.X - p.imageDimension().X / 2) / tileWidth;
+            int xmax = (int)(result.X + p.imageDimension().X / 2) / tileWidth;
+            int ymin = (int)(result.Y - p.imageDimension().Y / 2) / tileWidth;
+            int ymax = (int)(result.Y + p.imageDimension().Y / 2) / tileWidth;
+
+            int x = (int)(result.X) / tileWidth;
+
+            if (m_tiles[x, ymin] != null)
+            {
+                result.Y = ymax * tileWidth + p.imageDimension().Y / 2;
+                //p.velocity.Y = 0;
+            }
+
+            if (m_tiles[x, ymax] != null)
+            {
+                result.Y = ymax * tileWidth - p.imageDimension().Y / 2;
+                //p.jump = false;
+            }
+            else
+            {
+                //p.jump = true;
+            }
+
+            int y = (int)(result.Y) / tileWidth;
+
+            if (m_tiles[xmin, y] != null)
+            {
+                result.X = (xmax) * tileWidth + p.imageDimension().X / 2;
+            }
+            if (m_tiles[xmax, y] != null)
+            {
+                result.X = xmax * tileWidth - p.imageDimension().X / 2;
+            }
+            if (teleportCheck2(p, result))
+            {
+                return result;
+            }
+            else
+            {
+                p.health = 0;
+                return result;
+            }
+        }
+
+        public bool teleportCheck2(Player p, Vector2 result)
+        {
+            int xmin = (int)(result.X + 1 - p.imageDimension().X / 2) / tileWidth;
+            int xmax = (int)(result.X - 1 + p.imageDimension().X / 2) / tileWidth;
+            int ymin = (int)(result.Y + 1 - p.imageDimension().Y / 2) / tileWidth;
+            int ymax = (int)(result.Y - 1 + p.imageDimension().Y / 2) / tileWidth;
+
+            int x = (int)(result.X) / tileWidth;
+            int y = (int)(result.Y) / tileWidth;
+
+            if (m_tiles[x, ymin] != null)
+            {
+                return false;
+                //p.velocity.Y = 0;
+            }
+
+            if (m_tiles[x, ymax] != null)
+            {
+                return false;
+                //p.jump = false;
+            }
+            else
+            {
+                //p.jump = true;
+            }
+
+            if (m_tiles[xmin, y] != null)
+            {
+                return false;
+            }
+            if (m_tiles[xmax, y] != null)
+            {
+                return false;
+            }
+            return true;
+        }
         public void Update(float gameTime)
         {
             foreach (Tile t in m_tiles)

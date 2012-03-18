@@ -20,7 +20,7 @@ namespace RGJgame
         private Texture2D background;
         public static Player player;
         public const int PARALAX = 10;
-        public Map gameMap;
+        public static Map gameMap;
         public Dictionary<Color, Texture2D[]> tileTextures;
         public Bus bus;
         public Texture2D level;
