@@ -61,22 +61,6 @@ namespace RGJgame
             entities.Last<Entity>().LoadContent(game);
         }
 
-        public void update(GameTime gameTime)
-        {
-            foreach (Entity ent in entities)
-            {
-                ent.Update(gameTime);
-            }
-        }
-
-        public void draw(SpriteBatch spriteBatch)
-        {
-            foreach (Entity ent in entities)
-            {
-                ent.Draw(spriteBatch);    
-            }
-        }
-
         public List<Entity> list()
         {
             return entities;
