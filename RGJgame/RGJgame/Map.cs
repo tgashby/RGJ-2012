@@ -241,7 +241,6 @@ namespace RGJgame
         public List<Entity> makeTileMap()
         {
             Bus bus = new Bus();
-            List<Entity> list = new List<Entity>();
             Color curColor;
             for (int y = 0; y < m_tileMap.Height; y++)
             {
@@ -267,8 +266,7 @@ namespace RGJgame
                     {
                         m_tiles[x, y] = null;
                         Entity temp = m_entities[curColor];
-                        temp.position = new Vector2(x * tileWidth, y * tileWidth);
-                        list.Add(temp);
+                        Entities.instance().addEntity(temp, new Vector2(x * tileWidth, y * tileWidth), m_game);
                     }
                     else if (m_textures.ContainsKey(curColor))
                     {
@@ -281,7 +279,8 @@ namespace RGJgame
                     }
                 }
             }
-            return list;
+
+            return Entities.instance().list();
         }
 
     }

@@ -61,6 +61,7 @@ namespace RGJgame
             entities.Add(new Color(60, 255, 255), new SpawnerEnemy(Vector2.One));
             entities.Add(new Color(70, 255, 255), new FlyingEnemy(Vector2.One));
             gameMap = new Map(Game, level, tileTextures, entities);
+            
             enemies = gameMap.makeTileMap();
 
             player = new Player(gameMap.getPlayerSpawn());
@@ -71,11 +72,6 @@ namespace RGJgame
             enemies.Add(new GuardEnemy(gameMap.getPlayerSpawn() + new Vector2(600, 0)));
             enemies.Add(new SpawnerEnemy(gameMap.getPlayerSpawn() + new Vector2(-300, 0)));
             enemies.Add(new InfoPad(gameMap.getPlayerSpawn() + new Vector2(150, 0), PlayerPower.GRAVITY_OFF));*/
-
-            foreach (Entity ent in enemies)
-            {
-                ent.LoadContent(Game);
-            }
 
             bullets = new Bullets();
             bullets.LoadContent(Game);
