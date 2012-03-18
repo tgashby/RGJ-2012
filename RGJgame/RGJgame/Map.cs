@@ -115,7 +115,12 @@ namespace RGJgame
             if (m_tiles[x, ymax] != null || m_tiles[xmin, ymax] != null || m_tiles[xmax, ymax] != null)
             {
                 ent.position.Y = ymax * tileWidth - ent.texture.Height / 2;
-                ent.velocity.Y = GameState.player.GRAVITY;
+                ent.velocity.Y = 0;
+            }
+            else
+            {
+                if (ent.velocity.Y == 0)
+                   ent.velocity.Y = GameState.player.GRAVITY;
             }
 
             int y = (int)(ent.position.Y) / tileWidth;

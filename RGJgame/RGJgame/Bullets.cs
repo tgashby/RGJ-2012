@@ -91,11 +91,9 @@ namespace RGJgame
                         b.position.Y > e.position.Y - e.imageDimension().Y / 2 &&
                         b.position.Y < e.position.Y + e.imageDimension().Y / 2)
                     {
-                        if (b.image == Bullets.P_SMALL)
-                        {
+                        if (!e.shielding)
                             e.health -= 1;
-                            b.alive = false;
-                        }
+                        b.alive = false;
                     }
                 }
             }
