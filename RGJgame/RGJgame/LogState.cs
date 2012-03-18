@@ -337,7 +337,7 @@ namespace RGJgame
                 case PlayerPower.BULLET2:
                     activePowers += (hackString + "\n");
                     Bullets.instance.addNewBullet(GameState.player.position,
-                        !GameState.player.facingRight ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
+                        !GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
                     GameState.player.detection -= 0.1f;
                     break;
                 case PlayerPower.BULLET_SPREAD:
@@ -430,22 +430,7 @@ namespace RGJgame
         public void clearInput()
         {
             promptString = new String(
-<<<<<<< HEAD
-                 ("List of Available Commands:\n" +
-                 "GRAVITY [WEAK, STRONG, NORMAL]\n" +
-                 "GRAVITY [OFF, REV]\n" +
-                // Add power names and a comma, or a \n at the end of powers list
-                 "JUMP [WEAK, STRONG, NORMAL]\n" +
-                 "MOVEMENT [FAST, SLOW, NORMAL]\n" +
-                 "SHOOT [ , BULLET, TRIPLE]\n" +
-                 "SHOOT [DIAGONAL, TRIPLE]\n" +
-                 "OVERCLOCK [4.0, 2.0, 1.0, 0.5, 0.25]\n" +
-                 "RESET\n" +
-                 "Currently Active Powers:\n" +
-                 activePowers + "Enter Power:\n").ToCharArray());
-=======
                  (promptDefault + activePowers + "Enter Power:\n").ToCharArray());
->>>>>>> 699622d0ac1f672740d3067a314a59c814c90786
 
             if (hackString.Length > 0)
                 hackString = hackString.Remove(0);
