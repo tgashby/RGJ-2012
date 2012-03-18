@@ -29,6 +29,7 @@ namespace RGJgame
         private bool shielding = false;
         private Texture2D standing, running1, running2, jumping, hacking, jumphacking, shield;
         private int runtimer, detectiontimer = DETECTIONCYCLE;
+        public Texture2D texture;
 
         PlayerPower powers;
 
@@ -224,8 +225,12 @@ namespace RGJgame
                 
             spriteBatch.Draw(toDraw, PLAYERDRAWPOS, null, Color.White, 0f, new Vector2(toDraw.Width/2, toDraw.Height/2), 1f, playerDir, 0.9f);
         }
-    }
 
+        public void doCollision(Entity ent)
+        {
+
+        }
+    }
     
 
     public sealed class PlayerPower

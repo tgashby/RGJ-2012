@@ -16,6 +16,7 @@ namespace RGJgame
     public abstract class Entity
     {
         public Vector2 position, velocity, acceleration;
+        public Texture2D texture;
 
         public Entity(Vector2 pos)
         {
@@ -27,5 +28,6 @@ namespace RGJgame
         public abstract void LoadContent(Game game);
         public abstract void Update(GameTime gameTime);
         public abstract void Draw(SpriteBatch spriteBatch);
+        public abstract void doCollision(Player player);
     }
 }
