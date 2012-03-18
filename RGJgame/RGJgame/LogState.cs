@@ -18,7 +18,7 @@ namespace RGJgame
     {
         private SpriteFont logFont;
         private Texture2D background;
-        private String hackString, promptString, activePowers, promptDefault;
+        private String hackString, promptString, prevLogEntries, promptDefault;
 
         public static LogState instance;
 
@@ -36,23 +36,14 @@ namespace RGJgame
             background = Game.Content.Load<Texture2D>(@"backgrounds/log");
 
             hackString = new String("".ToCharArray());
-            activePowers = new String("".ToCharArray());
+            prevLogEntries = new String("".ToCharArray());
 
             promptDefault = new String(
                 ("List of Available Commands:\n" +
-                 "GRAVITY [WEAK, STRONG, NORMAL]\n" +
-                 "GRAVITY [OFF, FLIP]\n" +
-                // Add power names and a comma, or a \n at the end of powers list
-                 "JUMP [WEAK, STRONG, NORMAL]\n" +
-                 "MOVEMENT [FAST, SLOW, NORMAL]\n" +
-                 "SHOOT [SPREAD, BULLET, TRIPLE]\n" +
-                 "SHOOT [DIAGONAL, TRIPLE]\n" +
-                 "OVERCLOCK [4.0, 2.0, 1.0, 0.5, 0.25]\n" +
-                 "RESET\n" +
-                 "Currently Active Powers:\n").ToCharArray());
+                 "RESET\n").ToCharArray());
 
             promptString = new String(
-                 (promptDefault + activePowers + "Enter Power:\n").ToCharArray());
+                 (promptDefault + "Previous Log Entries:\n" + prevLogEntries + "Enter Power:\n").ToCharArray());
 
             keystates = new Dictionary<Keys, bool>();
 
@@ -104,7 +95,7 @@ namespace RGJgame
         public void catIntoLog(String str)
         {
             promptString += str;
-            activePowers += str;
+            prevLogEntries += str;
         }
 
         public override void Update(GameTime gameTime)
@@ -187,7 +178,7 @@ namespace RGJgame
                             {
                                 GameState.player.health = 0;
                             }
-                            activePowers += (hackString + "\n");
+                            prevLogEntries += (hackString + "\n");
                         }
                         catch (Exception e)
                         { }
@@ -195,7 +186,7 @@ namespace RGJgame
                 }
                 else
                 {
-                    activePowers += (hackString + " not available yet\n");
+                    prevLogEntries += (hackString + " not available yet\n");
                 }
             }
             else if (hackString.IndexOf(PlayerPower.KILL_ID) != -1)
@@ -219,7 +210,7 @@ namespace RGJgame
                 }
                 else
                 {
-                    activePowers += (hackString + " not available yet\n");
+                    prevLogEntries += (hackString + " not available yet\n");
                 }
             }
             // Parse the hacker string here.... Call toMod stuff, abilities, etc
@@ -229,7 +220,7 @@ namespace RGJgame
                 {
                     case PlayerPower.GRAVITY_OFF:
                         GameState.player.GRAVITY = 0.0f;
-                        activePowers += (hackString + "\n");
+                        prevLogEntries += (hackString + "\n");
                         GameState.player.usePower(PlayerPower.GRAVITY_OFF);
                         GameState.player.disablePower(PlayerPower.GRAVITY_NORMAL);
                         GameState.player.disablePower(PlayerPower.LOW_GRAV);
@@ -237,7 +228,7 @@ namespace RGJgame
                         break;
                     case PlayerPower.GRAVITY_NORMAL:
                         GameState.player.GRAVITY = 0.08f;
-                        activePowers += (hackString + "\n");
+                        prevLogEntries += (hackString + "\n");
                         GameState.player.disablePower(PlayerPower.GRAVITY_OFF);
                         GameState.player.usePower(PlayerPower.GRAVITY_NORMAL);
                         GameState.player.disablePower(PlayerPower.LOW_GRAV);
@@ -245,7 +236,7 @@ namespace RGJgame
                         break;
                     case PlayerPower.LOW_GRAV:
                         GameState.player.GRAVITY = 0.05f;
-                        activePowers += (hackString + "\n");
+                        prevLogEntries += (hackString + "\n");
                         GameState.player.disablePower(PlayerPower.GRAVITY_OFF);
                         GameState.player.disablePower(PlayerPower.GRAVITY_NORMAL);
                         GameState.player.usePower(PlayerPower.LOW_GRAV);
@@ -253,7 +244,7 @@ namespace RGJgame
                         break;
                     case PlayerPower.MASSIVE_GRAV:
                         GameState.player.GRAVITY = 0.15f;
-                        activePowers += (hackString + "\n");
+                        prevLogEntries += (hackString + "\n");
                         GameState.player.disablePower(PlayerPower.GRAVITY_OFF);
                         GameState.player.disablePower(PlayerPower.GRAVITY_NORMAL);
                         GameState.player.disablePower(PlayerPower.LOW_GRAV);
@@ -262,26 +253,26 @@ namespace RGJgame
                     case PlayerPower.REV_GRAVITY:
                         /*GameState.player.GRAVITY = -0.08f;
                         GameState.player.JUMP = 3.0f;*/
-                        activePowers += (hackString + "\n");
+                        prevLogEntries += (hackString + "\n");
                         GameState.player.usePower(PlayerPower.REV_GRAVITY);
                         break;
 
                     case PlayerPower.SUPER_JUMP:
-                        activePowers += (hackString + "\n");
+                        prevLogEntries += (hackString + "\n");
                         GameState.player.JUMP = -1.8f;
                         GameState.player.usePower(PlayerPower.SUPER_JUMP);
                         GameState.player.disablePower(PlayerPower.NORMAL_JUMP);
                         GameState.player.disablePower(PlayerPower.WEAK_JUMP);
                         break;
                     case PlayerPower.NORMAL_JUMP:
-                        activePowers += (hackString + "\n");
+                        prevLogEntries += (hackString + "\n");
                         GameState.player.JUMP = -1.1f;
                         GameState.player.disablePower(PlayerPower.SUPER_JUMP);
                         GameState.player.usePower(PlayerPower.NORMAL_JUMP);
                         GameState.player.disablePower(PlayerPower.WEAK_JUMP);
                         break;
                     case PlayerPower.WEAK_JUMP:
-                        activePowers += (hackString + "\n");
+                        prevLogEntries += (hackString + "\n");
                         GameState.player.JUMP = -0.6f;
                         GameState.player.disablePower(PlayerPower.SUPER_JUMP);
                         GameState.player.disablePower(PlayerPower.NORMAL_JUMP);
@@ -289,7 +280,7 @@ namespace RGJgame
                         break;
 
                     case PlayerPower.OVERCLOCK4:
-                        activePowers += (hackString + "\n");
+                        prevLogEntries += (hackString + "\n");
                         Game1.CLOCKSPEED = 4;
                         GameState.player.usePower(PlayerPower.OVERCLOCK4);
                         GameState.player.disablePower(PlayerPower.OVERCLOCK2);
@@ -298,7 +289,7 @@ namespace RGJgame
                         GameState.player.disablePower(PlayerPower.UNDERCLOCK4);
                         break;
                     case PlayerPower.OVERCLOCK2:
-                        activePowers += (hackString + "\n");
+                        prevLogEntries += (hackString + "\n");
                         Game1.CLOCKSPEED = 2;
                         GameState.player.disablePower(PlayerPower.OVERCLOCK4);
                         GameState.player.usePower(PlayerPower.OVERCLOCK2);
@@ -307,7 +298,7 @@ namespace RGJgame
                         GameState.player.disablePower(PlayerPower.UNDERCLOCK4);
                         break;
                     case PlayerPower.CLOCK1:
-                        activePowers += (hackString + "\n");
+                        prevLogEntries += (hackString + "\n");
                         Game1.CLOCKSPEED = 1.0f;
                         GameState.player.disablePower(PlayerPower.OVERCLOCK4);
                         GameState.player.disablePower(PlayerPower.OVERCLOCK2);
@@ -316,7 +307,7 @@ namespace RGJgame
                         GameState.player.disablePower(PlayerPower.UNDERCLOCK4);
                         break;
                     case PlayerPower.UNDERCLOCK4:
-                        activePowers += (hackString + "\n");
+                        prevLogEntries += (hackString + "\n");
                         GameState.player.disablePower(PlayerPower.OVERCLOCK4);
                         GameState.player.disablePower(PlayerPower.OVERCLOCK2);
                         GameState.player.disablePower(PlayerPower.CLOCK1);
@@ -325,7 +316,7 @@ namespace RGJgame
                         Game1.CLOCKSPEED = 0.25f;
                         break;
                     case PlayerPower.UNDERCLOCK2:
-                        activePowers += (hackString + "\n");
+                        prevLogEntries += (hackString + "\n");
                         Game1.CLOCKSPEED = 0.5f;
                         GameState.player.disablePower(PlayerPower.OVERCLOCK4);
                         GameState.player.disablePower(PlayerPower.OVERCLOCK2);
@@ -335,21 +326,21 @@ namespace RGJgame
                         break;
 
                     case PlayerPower.MOVEMENT_FAST:
-                        activePowers += (hackString + "\n");
+                        prevLogEntries += (hackString + "\n");
                         GameState.player.MOVEMENTSPEED = 0.56f;
                         GameState.player.disablePower(PlayerPower.MOVEMENT_SLOW);
                         GameState.player.disablePower(PlayerPower.MOVEMENT_NORMAL);
                         GameState.player.usePower(PlayerPower.MOVEMENT_FAST);
                         break;
                     case PlayerPower.MOVEMENT_NORMAL:
-                        activePowers += (hackString + "\n");
+                        prevLogEntries += (hackString + "\n");
                         GameState.player.MOVEMENTSPEED = 0.28f;
                         GameState.player.disablePower(PlayerPower.MOVEMENT_SLOW);
                         GameState.player.usePower(PlayerPower.MOVEMENT_NORMAL);
                         GameState.player.disablePower(PlayerPower.MOVEMENT_FAST);
                         break;
                     case PlayerPower.MOVEMENT_SLOW:
-                        activePowers += (hackString + "\n");
+                        prevLogEntries += (hackString + "\n");
                         GameState.player.MOVEMENTSPEED = 0.14f;
                         GameState.player.usePower(PlayerPower.MOVEMENT_SLOW);
                         GameState.player.disablePower(PlayerPower.MOVEMENT_NORMAL);
@@ -358,20 +349,20 @@ namespace RGJgame
 
 
                     case PlayerPower.BULLET1:
-                        activePowers += (hackString + "\n");
+                        prevLogEntries += (hackString + "\n");
                         Bullets.instance.addNewBullet(GameState.player.position,
                             GameState.player.facingLeft ? new Vector2(-2f, 0f) : new Vector2(2f, 0f), Bullets.P_SMALL, GameState.player);
                         GameState.player.detection -= 0.1f;
                         break;
 
                     case PlayerPower.BULLET2:
-                        activePowers += (hackString + "\n");
+                        prevLogEntries += (hackString + "\n");
                         Bullets.instance.addNewBullet(GameState.player.position,
                             GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
                         GameState.player.detection -= 0.1f;
                         break;
                     case PlayerPower.BULLET_SPREAD:
-                        activePowers += (hackString + "\n");
+                        prevLogEntries += (hackString + "\n");
                         Bullets.instance.addNewBullet(GameState.player.position,
                             GameState.player.facingLeft ? new Vector2(-0.8f, 0.4f) : new Vector2(0.8f, 0.4f), Bullets.P_SMALL, GameState.player);
                         Bullets.instance.addNewBullet(GameState.player.position,
@@ -385,7 +376,7 @@ namespace RGJgame
                         GameState.player.detection -= 0.4f;
                         break;
                     case PlayerPower.BULLET_DIAGONAL:
-                        activePowers += (hackString + "\n");
+                        prevLogEntries += (hackString + "\n");
                         Bullets.instance.addNewBullet(GameState.player.position,
                             GameState.player.facingLeft ? new Vector2(-0.8f, 0.5f) : new Vector2(0.8f, 0.5f), Bullets.P_SMALL, GameState.player);
                         Bullets.instance.addNewBullet(GameState.player.position,
@@ -393,7 +384,7 @@ namespace RGJgame
                         GameState.player.detection -= 0.2f;
                         break;
                     case PlayerPower.BULLET_TRIPLE:
-                        activePowers += (hackString + "\n");
+                        prevLogEntries += (hackString + "\n");
                         Bullets.instance.addNewBullet(GameState.player.position + new Vector2(0, -20),
                             GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
                         Bullets.instance.addNewBullet(GameState.player.position,
@@ -444,7 +435,7 @@ namespace RGJgame
                         break;
 
                     case PlayerPower.RESET:
-                        activePowers += (hackString + "\n");
+                        prevLogEntries += (hackString + "\n");
                         GameState.player.hardReset();
                         break;
 
@@ -453,23 +444,28 @@ namespace RGJgame
                             hackString = new String(("System Runtime Exception: \n   Unknown Command: " + hackString + "\n").ToCharArray());
                         else
                             hackString = new String(("System Runtime Exception: \n   Unknown Command: " + hackString.Substring(0, 10) + "...\n").ToCharArray());
-                        activePowers += hackString;
+                        prevLogEntries += (hackString + "\n");
                         break;
                 }
             }
             else
             {
-                activePowers += (hackString + " not available yet\n");
+                prevLogEntries += (hackString + " not available yet\n");
             }
         }
 
         public void clearInput()
         {
             promptString = new String(
-                 (promptDefault + activePowers + "Enter Power:\n").ToCharArray());
+                 (promptDefault + "Previous Log Entries:\n" + prevLogEntries + "Enter Power:\n").ToCharArray());
 
             if (hackString.Length > 0)
                 hackString = hackString.Remove(0);
+        }
+
+        internal void catIntoAvailable(string newPower)
+        {
+            promptDefault += newPower + "\n";
         }
     }
 }

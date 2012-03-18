@@ -298,6 +298,8 @@ namespace RGJgame
                 {
                     powers.makeAvailable(newPower);
                     LogState.instance.catIntoLog("Discovered: " + newPower + "\n");
+                    LogState.instance.catIntoAvailable(newPower);
+                    LogState.instance.clearInput();
                 }
             }
         }
