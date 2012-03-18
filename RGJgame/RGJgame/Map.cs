@@ -118,10 +118,10 @@ namespace RGJgame
             }
 
             int y = (int)(ent.position.Y) / tileWidth;
-
+            
             if (m_tiles[xmin, y] != null)
             {
-                ent.position.X = (xmax) * tileWidth + ent.texture.Width / 2;
+                ent.position.X = (xmin + 1) * tileWidth + ent.texture.Width / 2;
             }
             if (m_tiles[xmax, y] != null)
             {
