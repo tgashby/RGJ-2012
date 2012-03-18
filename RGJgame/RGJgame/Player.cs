@@ -385,6 +385,7 @@ namespace RGJgame
             available.Add(KILL_ID, false);
             available.Add(ROOT_PRIV, false);
             available.Add(RESET, true);
+            available.Add("", false);
         }
 
         public bool check(String power)
