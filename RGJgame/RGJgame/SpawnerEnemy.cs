@@ -18,7 +18,7 @@ namespace RGJgame
     {
         public float MOVEMENTSPEED = 0.28f, GRAVITY = 0.08f;
         public static Vector2 SPAWNERDRAWPOS = new Vector2(300, 300);
-        public const int RUNCYCLE = 20;
+        public const int RUNCYCLE = 30;
 
         public float health;
         private Texture2D spawner1, spawner2, spawner3;

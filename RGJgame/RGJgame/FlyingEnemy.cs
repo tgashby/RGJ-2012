@@ -18,7 +18,7 @@ namespace RGJgame
     {
         public float MOVEMENTSPEED = 0.28f, GRAVITY = 0.08f;
         public static Vector2 FLYERDRAWPOS = new Vector2(300, 300);
-        public const int RUNCYCLE = 20;
+        public const int RUNCYCLE = 40;
 
         public float health;
         private Texture2D flyer1, flyer2, flyer3, flyer4;
@@ -60,6 +60,8 @@ namespace RGJgame
         {
             Texture2D toDraw;
             if (velocity.X == 0)
+                toDraw = flyer1;
+            else if (runtimer % RUNCYCLE < RUNCYCLE / 4)
                 toDraw = flyer1;
             else if (runtimer % RUNCYCLE < RUNCYCLE / 3)
                 toDraw = flyer2;
