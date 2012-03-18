@@ -98,6 +98,14 @@ namespace RGJgame
 
         public bool checkBulletCollision(Vector2 pos)
         {
+            if ((int)pos.X / tileWidth >= m_tiles.GetLength(1) ||
+                (int)pos.X / tileWidth < 0 ||
+                (int)pos.Y / tileWidth >= m_tiles.GetLength(0) ||
+                (int)pos.Y / tileWidth < 0)
+            {
+                return true;
+            }
+
             return m_tiles[(int)pos.X / tileWidth, (int)pos.Y / tileWidth] != null;
         }
 

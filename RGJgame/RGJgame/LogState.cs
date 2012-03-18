@@ -251,8 +251,8 @@ namespace RGJgame
                         GameState.player.usePower(PlayerPower.MASSIVE_GRAV);
                         break;
                     case PlayerPower.REV_GRAVITY:
-                        /*GameState.player.GRAVITY = -0.08f;
-                        GameState.player.JUMP = 3.0f;*/
+                        GameState.player.GRAVITY = -0.08f;
+                        GameState.player.JUMP = 3.0f;
                         prevLogEntries += (hackString + "\n");
                         GameState.player.usePower(PlayerPower.REV_GRAVITY);
                         break;
@@ -410,7 +410,7 @@ namespace RGJgame
 
                         break;
 
-                    case PlayerPower.NUKE:
+                    case PlayerPower.SUPERLAZER:
 
                         break;
 

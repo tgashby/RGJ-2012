@@ -17,7 +17,7 @@ namespace RGJgame
     public class Bullets
     {
         public static Bullets instance;
-        public static Texture2D P_SMALL;
+        public static Texture2D P_SMALL, PURPLE, RED, YELLOW;
         private List<Bullet> bullets;
 
 
@@ -30,6 +30,9 @@ namespace RGJgame
         public void LoadContent(Game game)
         {
             P_SMALL = game.Content.Load<Texture2D>(@"images/playersmallbullet");
+            PURPLE = game.Content.Load<Texture2D>(@"images/enemypurplebullet");
+            RED = game.Content.Load<Texture2D>(@"images/enemyredbullet");
+            YELLOW = game.Content.Load<Texture2D>(@"images/enemyyellowbullet");
         }
 
         public void addNewBullet(Vector2 position, Vector2 velocity, Texture2D image, Object shotBy, bool passthrough)
