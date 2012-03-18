@@ -49,7 +49,8 @@ namespace RGJgame
             if (runtimer > 500.0f)
                 runtimer = 0;
 
-            Vector2 dirToPlayer = position - GameState.player.position;
+            Vector2 dirToPlayer = GameState.player.position - position + Player.PLAYERDRAWPOS;
+            dirToPlayer.Normalize();
 
             position += dirToPlayer * velocity * elapsedTime;
             runtimer++;
