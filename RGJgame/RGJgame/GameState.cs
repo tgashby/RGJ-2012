@@ -151,7 +151,7 @@ namespace RGJgame
                 }
             }
 
-            bullets.cullDeadBullets();
+            bullets.cullDeadBullets(gameMap);
         }
     }
 }
