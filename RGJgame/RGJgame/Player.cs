@@ -29,7 +29,7 @@ namespace RGJgame
         public bool hack = false, jump = false;
         private bool shielding = false;
         private bool justHit = false;
-        private Texture2D standing, running1, running2, jumping, hacking, jumphacking, shield;
+        private Texture2D standing, running1, running2, jumping, hacking, jumphacking, shield, shield1, shield2, shield3;
         private int runtimer, detectiontimer = DETECTIONCYCLE;
 
         PlayerPower powers;
@@ -54,6 +54,9 @@ namespace RGJgame
             hacking = game.Content.Load<Texture2D>(@"images/guy_hacking_standing");
             jumphacking = game.Content.Load<Texture2D>(@"images/guy_hacking_jumping");
             shield = game.Content.Load<Texture2D>(@"images/guy_shield");
+            shield1 = game.Content.Load<Texture2D>(@"images/playershield1");
+            shield2 = game.Content.Load<Texture2D>(@"images/playershield2");
+            shield3 = game.Content.Load<Texture2D>(@"images/playershield3");
 
             powers = new PlayerPower();
             powers.initiate();
@@ -196,6 +199,7 @@ namespace RGJgame
             powers = new PlayerPower();
             powers.initiate();
             LogState.instance.catIntoLog("Resetting...\n");
+            Bullets.instance.removeAll(this);
         }
 
         public Vector2 imageDimension()
@@ -237,6 +241,19 @@ namespace RGJgame
                 playerDir = SpriteEffects.FlipHorizontally;
                 
             spriteBatch.Draw(toDraw, PLAYERDRAWPOS, null, Color.White, 0f, new Vector2(toDraw.Width/2, toDraw.Height/2), 1f, playerDir, 0.9f);
+
+            if (shielding)
+            {
+                Random r = new Random();
+                Texture2D shieldIM = null;
+                switch (r.Next(3))
+                {
+                    case 0: shieldIM = shield1; break;
+                    case 1: shieldIM = shield2; break;
+                    case 2: shieldIM = shield3; break;
+                }
+                spriteBatch.Draw(shieldIM, PLAYERDRAWPOS, null, Color.White, 0f, new Vector2(shieldIM.Width / 2, shieldIM.Height / 2), 1f, playerDir, 0.95f);
+            }
         }
 
         public void doCollision(Entity ent)
@@ -329,8 +346,9 @@ namespace RGJgame
         public const string UNDERCLOCK4 = "OVERCLOCK 0.25";
         public const string BULLET1 = "SHOOT BULLET";
         public const string BULLET2 = "SHOOT";
-        public const string BULLET_SPREAD = "FIRE SPREAD";
-        public const string AUTO_FIRE = "AUTO FIRE";
+        public const string BULLET_SPREAD = "SHOOT SPREAD";
+        public const string BULLET_DIAGONAL = "SHOOT DIAGONAL";
+        public const string BULLET_TRIPLE = "SHOOT TRIPLE";
         public const string STRONG_BULLETS = "STRONG BULLETS";
         public const string FREEZE_ENEMIES = "FREEZE";
         public const string BURN_ENEMIES = "FLAMES";

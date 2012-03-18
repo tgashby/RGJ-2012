@@ -32,9 +32,28 @@ namespace RGJgame
             P_SMALL = game.Content.Load<Texture2D>(@"images/playersmallbullet");
         }
 
-        public void addNewBullet(Vector2 position, Vector2 velocity, Texture2D image)
+        public void addNewBullet(Vector2 position, Vector2 velocity, Texture2D image, Object shotBy)
         {
-            bullets.Add(new Bullet(position, velocity, image));
+            bullets.Add(new Bullet(position, velocity, image, shotBy));
+        }
+
+        public void removeAll(Object objWhoShotThem)
+        {
+            if (objWhoShotThem == null)
+            {
+                bullets = new List<Bullet>();
+            }
+            else
+            {
+                for (int i = 0; i < bullets.Count; i++)
+                {
+                    if (bullets[i].shotBy == objWhoShotThem)
+                    {
+                        bullets.RemoveAt(i);
+                        i--;
+                    }
+                }
+            }
         }
 
         public void update(float gameTime)
@@ -58,7 +77,7 @@ namespace RGJgame
                     rot = (float)Math.Atan((b.position.X - pos.X) / (b.position.Y - pos.Y - 0.0001)) + (float)MathHelper.Pi;
 
                 spriteBatch.Draw(b.image, b.position - pos + Player.PLAYERDRAWPOS, null, Color.White, rot, 
-                    new Vector2(b.image.Width / 2, b.image.Height / 2), 1f, SpriteEffects.None, 1f);
+                    new Vector2(b.image.Width / 2, b.image.Height / 2), 1f, SpriteEffects.None, 0.85f);
             }
         }
 
@@ -66,12 +85,14 @@ namespace RGJgame
         {
             public Vector2 position, velocity;
             public Texture2D image;
+            public Object shotBy;
 
-            public Bullet(Vector2 position, Vector2 velocity, Texture2D image)
+            public Bullet(Vector2 position, Vector2 velocity, Texture2D image, Object shotBy)
             {
                 this.position = position;
                 this.velocity = velocity;
                 this.image = image;
+                this.shotBy = shotBy;
             }
         }
     }
