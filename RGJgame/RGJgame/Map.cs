@@ -106,15 +106,16 @@ namespace RGJgame
 
             int x = (int)(ent.position.X) / tileWidth;
 
-            if (m_tiles[x, ymin] != null)
+            if (m_tiles[x, ymin] != null || m_tiles[xmin, ymin] != null || m_tiles[xmax, ymin] != null)
             {
                 ent.position.Y = ymax * tileWidth + ent.texture.Height / 2;
                 ent.velocity.Y = 0;
             }
 
-            if (m_tiles[x, ymax] != null)
+            if (m_tiles[x, ymax] != null || m_tiles[xmin, ymax] != null || m_tiles[xmax, ymax] != null)
             {
                 ent.position.Y = ymax * tileWidth - ent.texture.Height / 2;
+                ent.velocity.Y = GameState.player.GRAVITY;
             }
 
             int y = (int)(ent.position.Y) / tileWidth;
@@ -240,6 +241,7 @@ namespace RGJgame
 
         public List<Entity> makeTileMap()
         {
+            Random rand = new Random();
             Bus bus = new Bus();
             Color curColor;
             for (int y = 0; y < m_tileMap.Height; y++)
@@ -259,7 +261,7 @@ namespace RGJgame
                     else if (curColor.Equals(Color.Red))
                     {
                         m_tiles[x, y] = new Tile(new Vector2(x * tileWidth, y * tileWidth),
-                            m_textures[curColor]);
+                            m_textures[curColor], rand);
                         m_tiles[x, y].setType(1);
                     }
                     else if (m_entities.ContainsKey(curColor))
@@ -271,7 +273,7 @@ namespace RGJgame
                     else if (m_textures.ContainsKey(curColor))
                     {
                         m_tiles[x, y] = new Tile(new Vector2(x * tileWidth, y * tileWidth),
-                            m_textures[curColor]);
+                            m_textures[curColor], rand);
                     }
                     else
                     {

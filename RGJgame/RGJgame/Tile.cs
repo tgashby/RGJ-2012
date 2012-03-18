@@ -22,13 +22,15 @@ namespace RGJgame
         private Texture2D m_currentTexture;
         private int m_type;
         private float m_textureTimer;
+        Random rand;
 
-        public Tile(Vector2 position, Texture2D[] texture)
+        public Tile(Vector2 position, Texture2D[] texture, Random rand)
         {
             m_position = position;
             m_texture = texture;
             m_currentTexture = m_texture[0];
             m_type = 0;
+            this.rand = rand;
         }
 
         public Vector2 getPosition()
@@ -53,7 +55,6 @@ namespace RGJgame
 
         public void Update(float gameTime)
         {
-            Random rand = new Random();
             int index = rand.Next(m_texture.Length);
             m_textureTimer += gameTime;
             if (m_textureTimer > 0.35) {
