@@ -26,7 +26,7 @@ namespace RGJgame
         public float health;
         public float detection;
         private float hitTimer;
-        public bool hack = false, jump = false;
+        public bool hack = false, jump = false, facingLeft = false;
         private bool shielding = false;
         private bool justHit = false;
         private Texture2D standing, running1, running2, jumping, hacking, jumphacking, shield, shield1, shield2, shield3;
@@ -102,6 +102,11 @@ namespace RGJgame
                     if (velocity.X < -MOVEMENTSPEED)
                         velocity.X = -MOVEMENTSPEED;
                     runtimer++;
+
+                    if (velocity.X <= 0)
+                    {
+                        facingLeft = true;
+                    }
                 }
                 if (KeyHandler.keyDown(Keys.D))
                 {
@@ -109,6 +114,11 @@ namespace RGJgame
                     if (velocity.X > MOVEMENTSPEED)
                         velocity.X = MOVEMENTSPEED;
                     runtimer++;
+
+                    if (velocity.X >= 0)
+                    {
+                        facingLeft = false;
+                    }
                 }
 
                 if (!KeyHandler.keyDown(Keys.D) && !KeyHandler.keyDown(Keys.A))
@@ -238,8 +248,15 @@ namespace RGJgame
             SpriteEffects playerDir = new SpriteEffects();
 
             if (velocity.X < 0)
+                facingLeft = true;
+            if (velocity.X > 0)
+                facingLeft = false;
+
+            if (facingLeft)
+            {
                 playerDir = SpriteEffects.FlipHorizontally;
-                
+            }
+    
             spriteBatch.Draw(toDraw, PLAYERDRAWPOS, null, Color.White, 0f, new Vector2(toDraw.Width/2, toDraw.Height/2), 1f, playerDir, 0.9f);
 
             if (shielding)
@@ -328,22 +345,17 @@ namespace RGJgame
         }
 
         // Add powers and their string values down here, then go to LogState and add them in parseInput
-        public const string GRAVITY_OFF = "GRAVITY OFF";
-        public const string GRAVITY_NORMAL = "GRAVITY NORMAL";
-        public const string MASSIVE_GRAV = "GRAVITY STRONG";
-        public const string REV_GRAVITY = "GRAVITY FLIP";
         public const string LOW_GRAV = "GRAVITY WEAK";
+        public const string MASSIVE_GRAV = "GRAVITY STRONG";
+        public const string GRAVITY_NORMAL = "GRAVITY NORMAL";
+        public const string GRAVITY_OFF = "GRAVITY OFF";
+        public const string REV_GRAVITY = "GRAVITY FLIP";
+        public const string WEAK_JUMP = "JUMP WEAK";
         public const string SUPER_JUMP = "JUMP STRONG";
         public const string NORMAL_JUMP = "JUMP NORMAL";
-        public const string WEAK_JUMP = "JUMP WEAK";
         public const string MOVEMENT_FAST = "MOVEMENT FAST";
-        public const string MOVEMENT_NORMAL = "MOVEMENT NORMAL";
         public const string MOVEMENT_SLOW = "MOVEMENT SLOW";
-        public const string OVERCLOCK4 = "OVERCLOCK 4.0";
-        public const string OVERCLOCK2 = "OVERCLOCK 2.0";
-        public const string CLOCK1 = "OVERCLOCK 1.0";
-        public const string UNDERCLOCK2 = "OVERCLOCK 0.5";
-        public const string UNDERCLOCK4 = "OVERCLOCK 0.25";
+        public const string MOVEMENT_NORMAL = "MOVEMENT NORMAL";
         public const string BULLET1 = "SHOOT BULLET";
         public const string BULLET2 = "SHOOT";
         public const string BULLET_SPREAD = "SHOOT SPREAD";
@@ -360,6 +372,11 @@ namespace RGJgame
         public const string GET_ENEMY_ID = "PID NEAREST";
         public const string KILL_ID = "KILL"; // Special Case
         public const string ROOT_PRIV = "LOLZROOT";
+        public const string OVERCLOCK4 = "OVERCLOCK 4.0";
+        public const string OVERCLOCK2 = "OVERCLOCK 2.0";
+        public const string CLOCK1 = "OVERCLOCK 1.0";
+        public const string UNDERCLOCK2 = "OVERCLOCK 0.5";
+        public const string UNDERCLOCK4 = "OVERCLOCK 0.25";
         public const string RESET = "RESET";
     }
 }

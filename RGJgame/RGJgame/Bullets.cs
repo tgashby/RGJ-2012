@@ -56,6 +56,42 @@ namespace RGJgame
             }
         }
 
+        public void checkEnemyCollisions(List<Entity> enemies)
+        {
+            foreach (Entity e in enemies)
+            {
+                foreach (Bullet b in bullets)
+                {
+                    if (!(b.shotBy is Entity))
+                    {
+                        if (b.position.X > e.position.X - e.texture.Width / 2 &&
+                            b.position.X < e.position.X + e.texture.Width / 2 &&
+                            b.position.Y > e.position.Y - e.texture.Height / 2 &&
+                            b.position.Y < e.position.Y + e.texture.Height / 2)
+                        {
+                            if (b.image == Bullets.P_SMALL)
+                            {
+                                e.health -= 1;
+                                b.alive = false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        public void cullDeadBullets()
+        {
+            for (int i = 0; i < bullets.Count; i++)
+            {
+                if (!bullets[i].alive)
+                {
+                    bullets.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+
         public void update(float gameTime)
         {
             foreach (Bullet b in bullets)
@@ -86,6 +122,7 @@ namespace RGJgame
             public Vector2 position, velocity;
             public Texture2D image;
             public Object shotBy;
+            public bool alive = true;
 
             public Bullet(Vector2 position, Vector2 velocity, Texture2D image, Object shotBy)
             {

@@ -18,7 +18,7 @@ namespace RGJgame
     {
         private SpriteFont logFont;
         private Texture2D background;
-        private String hackString, promptString, activePowers;
+        private String hackString, promptString, activePowers, promptDefault;
 
         public static LogState instance;
 
@@ -38,19 +38,21 @@ namespace RGJgame
             hackString = new String("".ToCharArray());
             activePowers = new String("".ToCharArray());
 
-            promptString = new String(
-                 ("List of Available Commands:\n" +
+            promptDefault = new String(
+                ("List of Available Commands:\n" +
                  "GRAVITY [WEAK, STRONG, NORMAL]\n" +
-                 "GRAVITY [OFF, REV]\n" +
+                 "GRAVITY [OFF, FLIP]\n" +
                 // Add power names and a comma, or a \n at the end of powers list
                  "JUMP [WEAK, STRONG, NORMAL]\n" +
                  "MOVEMENT [FAST, SLOW, NORMAL]\n" +
-                 "SHOOT [ , BULLET, TRIPLE]\n"+
-                 "SHOOT [DIAGONAL, TRIPLE]\n"+
+                 "SHOOT [SPREAD, BULLET, TRIPLE]\n" +
+                 "SHOOT [DIAGONAL, TRIPLE]\n" +
                  "OVERCLOCK [4.0, 2.0, 1.0, 0.5, 0.25]\n" +
                  "RESET\n" +
-                 "Currently Active Powers:\n" +
-                 activePowers + "Enter Power:\n").ToCharArray());
+                 "Currently Active Powers:\n").ToCharArray());
+
+            promptString = new String(
+                 (promptDefault + activePowers + "Enter Power:\n").ToCharArray());
 
             keystates = new Dictionary<Keys, bool>();
 
@@ -179,6 +181,7 @@ namespace RGJgame
                         {
                             GameState.player.health = 0;
                         }
+                        activePowers += (hackString + "\n");
                     }
                     catch (Exception e)
                     { }
@@ -337,46 +340,46 @@ namespace RGJgame
                 case PlayerPower.BULLET1:
                     activePowers += (hackString + "\n");
                     Bullets.instance.addNewBullet(GameState.player.position,
-                        GameState.player.velocity.X < 0 ? new Vector2(-2f, 0f) : new Vector2(2f, 0f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.facingLeft ? new Vector2(-2f, 0f) : new Vector2(2f, 0f), Bullets.P_SMALL, GameState.player);
                     GameState.player.detection -= 0.1f;
                     break;
 
                 case PlayerPower.BULLET2:
                     activePowers += (hackString + "\n");
                     Bullets.instance.addNewBullet(GameState.player.position,
-                        GameState.player.velocity.X < 0 ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
                     GameState.player.detection -= 0.1f;
                     break;
                 case PlayerPower.BULLET_SPREAD:
                     activePowers += (hackString + "\n");
                     Bullets.instance.addNewBullet(GameState.player.position,
-                        GameState.player.velocity.X < 0 ? new Vector2(-0.8f, 0.4f) : new Vector2(0.8f, 0.4f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.facingLeft ? new Vector2(-0.8f, 0.4f) : new Vector2(0.8f, 0.4f), Bullets.P_SMALL, GameState.player);
                     Bullets.instance.addNewBullet(GameState.player.position,
-                        GameState.player.velocity.X < 0 ? new Vector2(-0.9f, 0.2f) : new Vector2(0.9f, 0.2f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.facingLeft ? new Vector2(-0.9f, 0.2f) : new Vector2(0.9f, 0.2f), Bullets.P_SMALL, GameState.player);
                     Bullets.instance.addNewBullet(GameState.player.position,
-                        GameState.player.velocity.X < 0 ? new Vector2(-1.0f, 0f) : new Vector2(1.0f, 0f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.facingLeft ? new Vector2(-1.0f, 0f) : new Vector2(1.0f, 0f), Bullets.P_SMALL, GameState.player);
                     Bullets.instance.addNewBullet(GameState.player.position,
-                        GameState.player.velocity.X < 0 ? new Vector2(-0.9f, -0.2f) : new Vector2(0.9f, -0.2f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.facingLeft ? new Vector2(-0.9f, -0.2f) : new Vector2(0.9f, -0.2f), Bullets.P_SMALL, GameState.player);
                     Bullets.instance.addNewBullet(GameState.player.position,
-                        GameState.player.velocity.X < 0 ? new Vector2(-0.8f, -0.4f) : new Vector2(0.8f, -0.4f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.facingLeft ? new Vector2(-0.8f, -0.4f) : new Vector2(0.8f, -0.4f), Bullets.P_SMALL, GameState.player);
                     GameState.player.detection -= 0.4f;
                     break;
                 case PlayerPower.BULLET_DIAGONAL:
                     activePowers += (hackString + "\n");
                     Bullets.instance.addNewBullet(GameState.player.position,
-                        GameState.player.velocity.X < 0 ? new Vector2(-0.8f, 0.5f) : new Vector2(0.8f, 0.5f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.facingLeft ? new Vector2(-0.8f, 0.5f) : new Vector2(0.8f, 0.5f), Bullets.P_SMALL, GameState.player);
                     Bullets.instance.addNewBullet(GameState.player.position,
-                        GameState.player.velocity.X < 0 ? new Vector2(-0.8f, -0.5f) : new Vector2(0.8f, -0.5f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.facingLeft ? new Vector2(-0.8f, -0.5f) : new Vector2(0.8f, -0.5f), Bullets.P_SMALL, GameState.player);
                     GameState.player.detection -= 0.2f;
                     break;
                 case PlayerPower.BULLET_TRIPLE:
                     activePowers += (hackString + "\n");
                     Bullets.instance.addNewBullet(GameState.player.position + new Vector2(0, -20),
-                        GameState.player.velocity.X < 0 ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
                     Bullets.instance.addNewBullet(GameState.player.position,
-                        GameState.player.velocity.X < 0 ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
                     Bullets.instance.addNewBullet(GameState.player.position + new Vector2(0, 20),
-                        GameState.player.velocity.X < 0 ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
+                        GameState.player.facingLeft ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
                     GameState.player.detection -= 0.25f;
                     break;
 
@@ -430,7 +433,6 @@ namespace RGJgame
                         hackString = new String(("System Runtime Exception: \n   Unknown Command: " + hackString + "\n").ToCharArray());
                     else
                         hackString = new String(("System Runtime Exception: \n   Unknown Command: " + hackString.Substring(0, 10) + "...\n").ToCharArray());
-                    activePowers += hackString;
                     break;
             }
         }
@@ -438,16 +440,7 @@ namespace RGJgame
         public void clearInput()
         {
             promptString = new String(
-                 ("List of Available Commands:\n" +
-                 "GRAVITY [WEAK, STRONG, NORMAL]\n" +
-                 "GRAVITY [OFF, REV]\n" +
-                // Add power names and a comma, or a \n at the end of powers list
-                 "JUMP [WEAK, STRONG, NORMAL]\n" +
-                 "MOVEMENT [FAST, SLOW, NORMAL]\n" +
-                 "OVERCLOCK [4.0, 2.0, 1.0, 0.5, 0.25]\n" +
-                 "RESET\n" +
-                 "Currently Active Powers:\n" +
-                 activePowers + "Enter Power:\n").ToCharArray());
+                 (promptDefault + activePowers + "Enter Power:\n").ToCharArray());
 
             if (hackString.Length > 0)
                 hackString = hackString.Remove(0);
