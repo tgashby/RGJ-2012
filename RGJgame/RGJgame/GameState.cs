@@ -54,9 +54,41 @@ namespace RGJgame
             });
 
             entities = new Dictionary<Color, Entity>();
-            entities.Add(new Color(100, 100, 100), new InfoPad(Vector2.One, PlayerPower.GRAVITY_OFF));
-            entities.Add(new Color(110, 100, 100), new InfoPad(Vector2.One, PlayerPower.BULLET1));
+            entities.Add(new Color(0, 100, 100), new InfoPad(Vector2.One, PlayerPower.LOW_GRAV));
+            entities.Add(new Color(5, 100, 100), new InfoPad(Vector2.One, PlayerPower.MASSIVE_GRAV));
+            entities.Add(new Color(10, 100, 100), new InfoPad(Vector2.One, PlayerPower.GRAVITY_NORMAL));
+            entities.Add(new Color(15, 100, 100), new InfoPad(Vector2.One, PlayerPower.GRAVITY_OFF));
+            entities.Add(new Color(20, 100, 100), new InfoPad(Vector2.One, PlayerPower.REV_GRAVITY));
+            entities.Add(new Color(25, 100, 100), new InfoPad(Vector2.One, PlayerPower.WEAK_JUMP));
+            entities.Add(new Color(30, 100, 100), new InfoPad(Vector2.One, PlayerPower.SUPER_JUMP));
+            entities.Add(new Color(35, 100, 100), new InfoPad(Vector2.One, PlayerPower.NORMAL_JUMP));
+            entities.Add(new Color(40, 100, 100), new InfoPad(Vector2.One, PlayerPower.MOVEMENT_FAST));
+            entities.Add(new Color(45, 100, 100), new InfoPad(Vector2.One, PlayerPower.MOVEMENT_SLOW));
+            entities.Add(new Color(50, 100, 100), new InfoPad(Vector2.One, PlayerPower.MOVEMENT_NORMAL));
+            entities.Add(new Color(55, 100, 100), new InfoPad(Vector2.One, PlayerPower.BULLET1));
+            entities.Add(new Color(60, 100, 100), new InfoPad(Vector2.One, PlayerPower.BULLET2));
+            entities.Add(new Color(65, 100, 100), new InfoPad(Vector2.One, PlayerPower.BULLET_SPREAD));
+            entities.Add(new Color(70, 100, 100), new InfoPad(Vector2.One, PlayerPower.BULLET_DIAGONAL));
+            entities.Add(new Color(75, 100, 100), new InfoPad(Vector2.One, PlayerPower.BULLET_TRIPLE));
+            entities.Add(new Color(80, 100, 100), new InfoPad(Vector2.One, PlayerPower.STRONG_BULLETS));
+            entities.Add(new Color(85, 100, 100), new InfoPad(Vector2.One, PlayerPower.FREEZE_ENEMIES));
+            entities.Add(new Color(90, 100, 100), new InfoPad(Vector2.One, PlayerPower.BURN_ENEMIES));
+            entities.Add(new Color(95, 100, 100), new InfoPad(Vector2.One, PlayerPower.THROW_ENEMY));
+            entities.Add(new Color(100, 100, 100), new InfoPad(Vector2.One, PlayerPower.NUKE));
+            entities.Add(new Color(105, 100, 100), new InfoPad(Vector2.One, PlayerPower.TELEPORT));
+            entities.Add(new Color(110, 100, 100), new InfoPad(Vector2.One, PlayerPower.LAZER));
+            entities.Add(new Color(115, 100, 100), new InfoPad(Vector2.One, PlayerPower.DECREASE_ENEMY_SPEED));
+            entities.Add(new Color(120, 100, 100), new InfoPad(Vector2.One, PlayerPower.GET_ENEMY_ID));
+            entities.Add(new Color(125, 100, 100), new InfoPad(Vector2.One, PlayerPower.KILL_ID));
+            entities.Add(new Color(130, 100, 100), new InfoPad(Vector2.One, PlayerPower.ROOT_PRIV));
+            entities.Add(new Color(135, 100, 100), new InfoPad(Vector2.One, PlayerPower.OVERCLOCK4));
+            entities.Add(new Color(140, 100, 100), new InfoPad(Vector2.One, PlayerPower.OVERCLOCK2));
+            entities.Add(new Color(145, 100, 100), new InfoPad(Vector2.One, PlayerPower.CLOCK1));
+            entities.Add(new Color(150, 100, 100), new InfoPad(Vector2.One, PlayerPower.UNDERCLOCK2));
+            entities.Add(new Color(155, 100, 100), new InfoPad(Vector2.One, PlayerPower.UNDERCLOCK4));
+            entities.Add(new Color(160, 100, 100), new InfoPad(Vector2.One, PlayerPower.RESET));
             
+           
             entities.Add(new Color(50, 255, 255), new GuardEnemy(Vector2.One));
             entities.Add(new Color(60, 255, 255), new SpawnerEnemy(Vector2.One));
             entities.Add(new Color(70, 255, 255), new FlyingEnemy(Vector2.One));
