@@ -54,8 +54,8 @@ namespace RGJgame
             });
 
             entities = new Dictionary<Color, Entity>();
-            entities.Add(new Color(255, 0, 255), new InfoPad(Vector2.One, PlayerPower.GRAVITY_OFF));
-            entities.Add(new Color(255, 5, 255), new InfoPad(Vector2.One, PlayerPower.BULLET1));
+            entities.Add(new Color(100, 100, 100), new InfoPad(Vector2.One, PlayerPower.GRAVITY_OFF));
+            entities.Add(new Color(110, 100, 100), new InfoPad(Vector2.One, PlayerPower.BULLET1));
             
             entities.Add(new Color(50, 255, 255), new GuardEnemy(Vector2.One));
             entities.Add(new Color(60, 255, 255), new SpawnerEnemy(Vector2.One));
