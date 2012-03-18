@@ -45,6 +45,8 @@ namespace RGJgame
                 // Add power names and a comma, or a \n at the end of powers list
                  "JUMP [WEAK, STRONG, NORMAL]\n" +
                  "MOVEMENT [FAST, SLOW, NORMAL]\n" +
+                 "SHOOT [ , BULLET, TRIPLE]\n"+
+                 "SHOOT [DIAGONAL, TRIPLE]\n"+
                  "OVERCLOCK [4.0, 2.0, 1.0, 0.5, 0.25]\n" +
                  "RESET\n" +
                  "Currently Active Powers:\n" +
@@ -234,7 +236,7 @@ namespace RGJgame
 
                 case PlayerPower.SUPER_JUMP:
                     activePowers += (hackString + "\n");
-                    GameState.player.JUMP = -2.2f;
+                    GameState.player.JUMP = -1.8f;
                     GameState.player.usePower(PlayerPower.SUPER_JUMP);
                     GameState.player.disablePower(PlayerPower.NORMAL_JUMP);
                     GameState.player.disablePower(PlayerPower.WEAK_JUMP);
@@ -326,23 +328,47 @@ namespace RGJgame
                 case PlayerPower.BULLET1:
                     activePowers += (hackString + "\n");
                     Bullets.instance.addNewBullet(GameState.player.position,
-                        GameState.player.velocity.X < 0 ? new Vector2(-3f, 0f) : new Vector2(3f, 0f), Bullets.P_SMALL);
+                        GameState.player.velocity.X < 0 ? new Vector2(-2f, 0f) : new Vector2(2f, 0f), Bullets.P_SMALL, GameState.player);
                     GameState.player.detection -= 0.1f;
                     break;
 
                 case PlayerPower.BULLET2:
                     activePowers += (hackString + "\n");
                     Bullets.instance.addNewBullet(GameState.player.position,
-                        GameState.player.velocity.X < 0 ? new Vector2(-2f, 0f) : new Vector2(2f, 0f), Bullets.P_SMALL);
+                        GameState.player.velocity.X < 0 ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
                     GameState.player.detection -= 0.1f;
                     break;
-
                 case PlayerPower.BULLET_SPREAD:
-
+                    activePowers += (hackString + "\n");
+                    Bullets.instance.addNewBullet(GameState.player.position,
+                        GameState.player.velocity.X < 0 ? new Vector2(-0.8f, 0.4f) : new Vector2(0.8f, 0.4f), Bullets.P_SMALL, GameState.player);
+                    Bullets.instance.addNewBullet(GameState.player.position,
+                        GameState.player.velocity.X < 0 ? new Vector2(-0.9f, 0.2f) : new Vector2(0.9f, 0.2f), Bullets.P_SMALL, GameState.player);
+                    Bullets.instance.addNewBullet(GameState.player.position,
+                        GameState.player.velocity.X < 0 ? new Vector2(-1.0f, 0f) : new Vector2(1.0f, 0f), Bullets.P_SMALL, GameState.player);
+                    Bullets.instance.addNewBullet(GameState.player.position,
+                        GameState.player.velocity.X < 0 ? new Vector2(-0.9f, -0.2f) : new Vector2(0.9f, -0.2f), Bullets.P_SMALL, GameState.player);
+                    Bullets.instance.addNewBullet(GameState.player.position,
+                        GameState.player.velocity.X < 0 ? new Vector2(-0.8f, -0.4f) : new Vector2(0.8f, -0.4f), Bullets.P_SMALL, GameState.player);
+                    GameState.player.detection -= 0.4f;
                     break;
-
-                case PlayerPower.AUTO_FIRE:
-
+                case PlayerPower.BULLET_DIAGONAL:
+                    activePowers += (hackString + "\n");
+                    Bullets.instance.addNewBullet(GameState.player.position,
+                        GameState.player.velocity.X < 0 ? new Vector2(-0.8f, 0.5f) : new Vector2(0.8f, 0.5f), Bullets.P_SMALL, GameState.player);
+                    Bullets.instance.addNewBullet(GameState.player.position,
+                        GameState.player.velocity.X < 0 ? new Vector2(-0.8f, -0.5f) : new Vector2(0.8f, -0.5f), Bullets.P_SMALL, GameState.player);
+                    GameState.player.detection -= 0.2f;
+                    break;
+                case PlayerPower.BULLET_TRIPLE:
+                    activePowers += (hackString + "\n");
+                    Bullets.instance.addNewBullet(GameState.player.position + new Vector2(0, -20),
+                        GameState.player.velocity.X < 0 ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
+                    Bullets.instance.addNewBullet(GameState.player.position,
+                        GameState.player.velocity.X < 0 ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
+                    Bullets.instance.addNewBullet(GameState.player.position + new Vector2(0, 20),
+                        GameState.player.velocity.X < 0 ? new Vector2(-1.2f, 0f) : new Vector2(1.2f, 0f), Bullets.P_SMALL, GameState.player);
+                    GameState.player.detection -= 0.25f;
                     break;
 
                 case PlayerPower.STRONG_BULLETS:
