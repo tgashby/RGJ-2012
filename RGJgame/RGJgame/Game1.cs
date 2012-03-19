@@ -29,6 +29,7 @@ namespace RGJgame
         Map gameMap;
         Dictionary<Color, Texture2D[]> textureDictionary;
         Bus bus;
+        Song music;
 
         Texture2D bg;
         Texture2D[] levels = new Texture2D[10];
@@ -76,6 +77,7 @@ namespace RGJgame
 
             font = Content.Load<SpriteFont>(@"logtext");
             bg = Content.Load<Texture2D>(@"backgrounds/bg");
+            music = Content.Load<Song>(@"sound/Para_Marina");
 
             // TODO: use this.Content to load your game content here
         }
@@ -189,7 +191,11 @@ namespace RGJgame
 
             currentState = gameState;
 
+            MediaPlayer.Play(music);
+            MediaPlayer.Volume = 0.5f;
+
             KeyHandler.Update();
+            ;
         }
 
 
