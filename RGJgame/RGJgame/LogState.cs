@@ -95,6 +95,7 @@ namespace RGJgame
         public void catIntoLog(String str)
         {
             prevLogEntries += str;
+            clearInput();
         }
 
         public override void Update(GameTime gameTime)
