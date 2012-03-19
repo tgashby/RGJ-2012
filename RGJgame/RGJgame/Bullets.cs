@@ -17,7 +17,7 @@ namespace RGJgame
     public class Bullets
     {
         public static Bullets instance;
-        public static Texture2D P_SMALL, PURPLE, RED, YELLOW;
+        public static Texture2D P_SMALL, PURPLE, RED, YELLOW, LASER;
         private List<Bullet> bullets;
         private Random rand;
 
@@ -35,6 +35,7 @@ namespace RGJgame
             PURPLE = game.Content.Load<Texture2D>(@"images/enemypurplebullet");
             RED = game.Content.Load<Texture2D>(@"images/enemyredbullet");
             YELLOW = game.Content.Load<Texture2D>(@"images/enemyyellowbullet");
+            LASER = game.Content.Load<Texture2D>(@"images/playerlaser");
         }
 
         public void addNewBullet(Vector2 position, Vector2 velocity, Texture2D image, Object shotBy, bool passthrough)
@@ -77,6 +78,11 @@ namespace RGJgame
                             if (b.image == Bullets.P_SMALL)
                             {
                                 e.health -= 1;
+                                b.alive = false;
+                            }
+                            if (b.image == Bullets.LASER)
+                            {
+                                e.health -= 3;
                                 b.alive = false;
                             }
                         }

@@ -410,11 +410,23 @@ namespace RGJgame
                         break;
 
                     case PlayerPower.SUPERLAZER:
-
+                        prevLogEntries += (hackString + "\n");
+                        foreach (Vector2 v in GameState.instance.findNearbyEntities(GameState.player.position, 500))
+                        {
+                            Vector2 dir = -GameState.player.position + v;
+                            dir.Normalize();
+                            Bullets.instance.addNewBullet(GameState.player.position, dir * 2.5f, Bullets.LASER, GameState.player, true);
+                            GameState.player.detection -= 0.3f;
+                        }
                         break;
 
                     case PlayerPower.LAZER:
-
+                        prevLogEntries += (hackString + "\n");
+                        Vector2 direc = GameState.instance.findNearestEntity(GameState.player.position);
+                        direc = -GameState.player.position + direc;
+                        direc.Normalize();
+                        Bullets.instance.addNewBullet(GameState.player.position, direc * 2.5f, Bullets.LASER, GameState.player, true);
+                        GameState.player.detection -= 0.3f;
                         break;
 
                     case PlayerPower.DECREASE_ENEMY_SPEED:

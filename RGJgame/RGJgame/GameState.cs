@@ -28,10 +28,12 @@ namespace RGJgame
         public Texture2D texture_infoPad;
         List<Entity> enemies;
         public Bullets bullets;
+        public static GameState instance;
 
         public GameState(Game game)
             : base(game)
         {
+            instance = this;
         }
 
         protected override void LoadContent()
@@ -74,7 +76,7 @@ namespace RGJgame
             entities.Add(new Color(85, 100, 100), new InfoPad(Vector2.One, PlayerPower.FREEZE_ENEMIES));            // 85
             entities.Add(new Color(90, 100, 100), new InfoPad(Vector2.One, PlayerPower.BURN_ENEMIES));              // 90
             entities.Add(new Color(95, 100, 100), new InfoPad(Vector2.One, PlayerPower.THROW_ENEMY));               // 95
-            entities.Add(new Color(100, 100, 100), new InfoPad(Vector2.One, PlayerPower.SUPERLAZER));                     // 100
+            entities.Add(new Color(100, 100, 100), new InfoPad(Vector2.One, PlayerPower.SUPERLAZER));               // 100
             entities.Add(new Color(105, 100, 100), new InfoPad(Vector2.One, PlayerPower.TELEPORT));                 // 105
             entities.Add(new Color(110, 100, 100), new InfoPad(Vector2.One, PlayerPower.LAZER));                    // 110
             entities.Add(new Color(115, 100, 100), new InfoPad(Vector2.One, PlayerPower.DECREASE_ENEMY_SPEED));     // 115
@@ -152,6 +154,40 @@ namespace RGJgame
             }
 
             bullets.cullDeadBullets(gameMap);
+        }
+
+        public Vector2 findNearestEntity(Vector2 position)
+        {
+            Vector2 loc = new Vector2(1000000, 1000000);
+            float distance = Vector2.Distance(position, loc);
+
+            foreach (Entity e in enemies)
+            {
+                float d = Vector2.Distance(position, e.position);
+                if (d < distance)
+                {
+                    loc = e.position;
+                    distance = d;
+                }
+            }
+
+            return loc;
+        }
+
+        public Vector2[] findNearbyEntities(Vector2 position, int distance)
+        {
+            List<Vector2> locs = new List<Vector2>();
+
+            foreach (Entity e in enemies)
+            {
+                float d = Vector2.Distance(position, e.position);
+                if (d < distance)
+                {
+                    locs.Add(e.position);
+                }
+            }
+
+            return locs.ToArray();
         }
     }
 }
