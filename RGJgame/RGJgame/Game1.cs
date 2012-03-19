@@ -76,7 +76,7 @@ namespace RGJgame
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             font = Content.Load<SpriteFont>(@"logtext");
-            bg = Content.Load<Texture2D>(@"backgrounds/bg");
+            bg = Content.Load<Texture2D>(@"backgrounds/chipbg");
             music = Content.Load<Song>(@"sound/Para_Marina");
 
             // TODO: use this.Content to load your game content here

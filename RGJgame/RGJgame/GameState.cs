@@ -37,7 +37,7 @@ namespace RGJgame
         protected override void LoadContent()
         {
             gameFont = Game.Content.Load<SpriteFont>(@"logtext");
-            background = Game.Content.Load<Texture2D>(@"backgrounds/bg");
+            background = Game.Content.Load<Texture2D>(@"backgrounds/chipbg");
 
             level = Game.Content.Load<Texture2D>(@"maps/HugeLevel");
 
