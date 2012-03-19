@@ -31,7 +31,7 @@ namespace RGJgame
         public FlyingEnemy(Vector2 pos)
             : base(pos)
         {
-            health = 6;
+            health = 2;
             runtimer = 0;
             rand = new Random();
 
