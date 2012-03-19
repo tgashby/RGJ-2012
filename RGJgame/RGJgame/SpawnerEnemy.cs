@@ -19,7 +19,7 @@ namespace RGJgame
         public float MOVEMENTSPEED = 0.28f, GRAVITY = 0.08f, BULLETSPEED = 0.8f;
         public static Vector2 SPAWNERDRAWPOS = new Vector2(300, 300);
         public const int RUNCYCLE = 30;
-        public const int SHOOTTIME = 50, MINDISTANCE = 400, MAXDISTANCE = 900, NUMSHOTS = 20;
+        public const int SHOOTTIME = 50, MINDISTANCE = 400, MAXDISTANCE = 900, NUMSHOTS = 10;
 
         private Texture2D[] spawner;
         private int runtimer;
@@ -30,7 +30,7 @@ namespace RGJgame
         public SpawnerEnemy(Vector2 pos)
             : base(pos)
         {
-            health = 20;
+            health = 10;
             rand = new Random();
         }
 
@@ -71,7 +71,7 @@ namespace RGJgame
                 if (numshots == 0)
                 {
                     numshots = NUMSHOTS;
-                    shotTimer = SHOOTTIME * 120;
+                    shotTimer = SHOOTTIME * 50;
                 }
             }
             
