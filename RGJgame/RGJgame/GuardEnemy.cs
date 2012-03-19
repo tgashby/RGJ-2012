@@ -17,7 +17,7 @@ namespace RGJgame
     class GuardEnemy : Entity
     {
         public const float MOVEMENTSPEED = 0.28f, BULLETSPEED = 2f;
-        public const int SHOOTTIME = 100, MINDISTANCE = 400, MAXDISTANCE = 900, NUMSHOTS = 12;
+        public const int SHOOTTIME = 100, MINDISTANCE = 250, MAXDISTANCE = 700, NUMSHOTS = 12;
 
 
         private Texture2D guardbase, guardgun;
