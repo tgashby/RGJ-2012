@@ -371,7 +371,7 @@ namespace RGJgame
             available.Add(GRAVITY_OFF, false);
             available.Add(GRAVITY_NORMAL, true);
             available.Add(MASSIVE_GRAV, false);
-            available.Add(REV_GRAVITY, false);
+            available.Add(REV_GRAVITY, true);
             available.Add(LOW_GRAV, false);
             available.Add(SUPER_JUMP, false);
             available.Add(NORMAL_JUMP, true);

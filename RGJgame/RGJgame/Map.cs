@@ -96,6 +96,61 @@ namespace RGJgame
             }
         }
 
+        public void checkPlayerCollisionRev(Player p)
+        {
+            int xmin = (int)(p.position.X - p.imageDimension().X / 2) / tileWidth;
+            int xmax = (int)(p.position.X + p.imageDimension().X / 2) / tileWidth;
+            int ymin = (int)(p.position.Y - p.imageDimension().Y / 2) / tileWidth;
+            int ymax = (int)(p.position.Y + p.imageDimension().Y / 2) / tileWidth;
+
+            int x = (int)(p.position.X) / tileWidth;
+
+            if (m_tiles[x, ymin] != null)
+            {
+                p.position.Y = ymax * tileWidth + p.imageDimension().Y / 2;
+                p.jump = false;
+                p.velocity.Y = 0;
+                if (m_tiles[x, ymin].getType() == 1)
+                {
+                    p.health = 0;
+                }
+            }
+
+            if (m_tiles[x, ymax] != null)
+            {
+                p.position.Y = ymax * tileWidth - p.imageDimension().Y / 2;
+                p.velocity.Y = 0;
+                if (m_tiles[x, ymax].getType() == 1)
+                {
+                    p.health = 0;
+                }
+            }
+            else
+            {
+                p.jump = true;
+            }
+
+            int y = (int)(p.position.Y) / tileWidth;
+
+            if (m_tiles[xmin, y] != null)
+            {
+                p.position.X = (xmax) * tileWidth + p.imageDimension().X / 2;
+                if (m_tiles[xmin, y].getType() == 1)
+                {
+                    p.health = 0;
+                }
+            }
+            if (m_tiles[xmax, y] != null)
+            {
+                p.position.X = xmax * tileWidth - p.imageDimension().X / 2;
+                if (m_tiles[xmax, y].getType() == 1)
+                {
+                    p.health = 0;
+                }
+            }
+        }
+
+
         public bool checkBulletCollision(Vector2 pos)
         {
             if ((int)pos.X / tileWidth >= m_tiles.GetLength(0) ||

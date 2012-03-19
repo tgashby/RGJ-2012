@@ -134,7 +134,14 @@ namespace RGJgame
             gameMap.Update(gametime);
             bullets.update(gametime);
 
-            gameMap.checkPlayerCollision(player);
+            if (player.GRAVITY < 0)
+            {
+                gameMap.checkPlayerCollisionRev(player);
+            }
+            else
+            {
+                gameMap.checkPlayerCollision(player);
+            }
 
             foreach (Entity ent in enemies)
             {
