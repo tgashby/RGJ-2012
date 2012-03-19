@@ -28,7 +28,7 @@ namespace RGJgame
         private int numshots = NUMSHOTS;
 
         public SpawnerEnemy(Vector2 pos)
-            : base(pos)
+            : base(pos - new Vector2(30, 30))
         {
             health = 20;
             rand = new Random();
