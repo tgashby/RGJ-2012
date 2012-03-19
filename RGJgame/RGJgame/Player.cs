@@ -283,11 +283,8 @@ namespace RGJgame
                 ent.GetType() == typeof(SpawnerEnemy) || 
                 ent.GetType() == typeof(GuardEnemy))
             {
-                if (!justHit)
-                {
+                
                     health -= 1.0f;
-                    justHit = true;
-                }
             }
 
             if (ent.GetType() == typeof(InfoPad))
@@ -300,6 +297,16 @@ namespace RGJgame
                     LogState.instance.catIntoLog("Discovered: " + newPower + "\n");
                     LogState.instance.catIntoAvailable(newPower);
                     LogState.instance.clearInput();
+                    ent.health = 0;
+                }
+                else
+                {
+                    if (!justHit)
+                    {
+                        LogState.instance.catIntoLog("Already know " + newPower + "\n");
+                        justHit = true;
+                        ent.health = 0;
+                    }
                 }
             }
         }
