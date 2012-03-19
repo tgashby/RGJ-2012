@@ -120,7 +120,7 @@ namespace RGJgame
 
             if (m_tiles[x, ymin] != null || m_tiles[xmin, ymin] != null || m_tiles[xmax, ymin] != null)
             {
-                ent.position.Y = ymax * tileWidth + ent.texture.Height / 2;
+                ent.position.Y = (ymin + 1) * tileWidth + ent.texture.Height / 2;
                 ent.velocity.Y = 0;
             }
 
