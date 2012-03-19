@@ -455,9 +455,9 @@ namespace RGJgame
         public const string FREEZE_ENEMIES = "FREEZE";
         public const string BURN_ENEMIES = "FLAMES";
         public const string THROW_ENEMY = "THROW NEAREST";
-        public const string SUPERLAZER = "WE ARE DOOMED";
+        public const string SUPERLAZER = "LASER ALL";
         public const string TELEPORT = "TELEPORT"; // Special Case
-        public const string LAZER = "LAZAR";
+        public const string LAZER = "LASER";
         public const string DECREASE_ENEMY_SPEED = "SLOW EM DOWN";
         public const string GET_ENEMY_ID = "PID NEAREST";
         public const string KILL_ID = "KILL"; // Special Case

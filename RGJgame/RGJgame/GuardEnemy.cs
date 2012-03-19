@@ -17,11 +17,11 @@ namespace RGJgame
     class GuardEnemy : Entity
     {
         public const float MOVEMENTSPEED = 0.28f, BULLETSPEED = 2f;
-        public const int SHOOTTIME = 100, MINDISTANCE = 250, MAXDISTANCE = 700, NUMSHOTS = 12;
+        public const int SHOOTTIME = 100, MINDISTANCE = 250, MAXDISTANCE = 1200, NUMSHOTS = 12, WAIT = 1000;
 
 
         private Texture2D guardbase, guardgun;
-        private float shotTimer;
+        private float shotTimer, wait;
         private int numshots;
 
         public GuardEnemy(Vector2 pos)
@@ -29,6 +29,7 @@ namespace RGJgame
         {
             health = 3;
             numshots = NUMSHOTS;
+            wait = WAIT;
             shotTimer = 0;
         }
 
@@ -62,11 +63,13 @@ namespace RGJgame
             else
             {
                 velocity.X = 0;
+                if (toPlayer.Length() > MAXDISTANCE)
+                    wait = WAIT;
             }
 
             position += velocity * elapsedTime;
-            
-            if (toPlayer.Length() < MINDISTANCE)
+
+            if (toPlayer.Length() < MINDISTANCE && wait <= 0)
             {
                 shotTimer -= elapsedTime;
                 if (shotTimer <= 0)
@@ -82,6 +85,10 @@ namespace RGJgame
                     numshots = NUMSHOTS;
                     shotTimer = SHOOTTIME * 20;
                 }
+            }
+            else if (toPlayer.Length() < MINDISTANCE && wait > 0)
+            {
+                wait -= elapsedTime;
             }
 
             // Collision checking
