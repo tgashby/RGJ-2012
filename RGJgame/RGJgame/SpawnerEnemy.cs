@@ -63,7 +63,7 @@ namespace RGJgame
                     toPlayer.Normalize();
                     Vector2 r = new Vector2((float)rand.NextDouble() - 0.5f, (float)rand.NextDouble() - 0.5f);
                     r /= 2;
-                    Bullets.instance.addNewBullet((position + new Vector2(0, 60)), toPlayer * BULLETSPEED + r, Bullets.PURPLE, this, true);
+                    Bullets.instance.addNewBullet((position + new Vector2(0, 40)), toPlayer * BULLETSPEED + r, Bullets.PURPLE, this, true);
 
                     shotTimer = SHOOTTIME;
                     numshots--;

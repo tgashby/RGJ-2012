@@ -19,12 +19,14 @@ namespace RGJgame
         public static Bullets instance;
         public static Texture2D P_SMALL, PURPLE, RED, YELLOW;
         private List<Bullet> bullets;
+        private Random rand;
 
 
         public Bullets()
         {
             Bullets.instance = this;
             bullets = new List<Bullet>();
+            rand = new Random();
         }
 
         public void LoadContent(Game game)
@@ -106,8 +108,20 @@ namespace RGJgame
         {
             foreach (Bullet b in bullets)
             {
-                if (m.checkBulletCollision(b.position) && !b.pass)
+                if (m.checkBulletCollision(b.position) && !b.pass && b.image != Bullets.RED)
                     b.alive = false;
+                else if (m.checkBulletCollision(b.position) && !b.pass)
+                {
+                    if (rand.Next(2) == 0)
+                    {
+                        b.alive = false;
+                    }
+                    else
+                    {
+                        b.velocity.X = -b.velocity.X;
+                        b.velocity.Y = -b.velocity.Y;
+                    }
+                }
             }
 
             for (int i = 0; i < bullets.Count; i++)
