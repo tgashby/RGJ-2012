@@ -301,6 +301,10 @@ namespace RGJgame
                     LogState.instance.catIntoAvailable(newPower);
                     LogState.instance.clearInput();
                 }
+                else
+                {
+                    LogState.instance.catIntoLog("Already know " + newPower + "\n");
+                }
             }
         }
 
