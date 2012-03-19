@@ -27,7 +27,7 @@ namespace RGJgame
         public GuardEnemy(Vector2 pos)
             : base(pos)
         {
-            health = 9;
+            health = 3;
             numshots = NUMSHOTS;
             shotTimer = 0;
         }
@@ -72,7 +72,7 @@ namespace RGJgame
                 if (shotTimer <= 0)
                 {
                     toPlayer.Normalize();
-                    Bullets.instance.addNewBullet((position - new Vector2(0, 20)), toPlayer * BULLETSPEED, Bullets.P_SMALL, this, false);
+                    Bullets.instance.addNewBullet((position - new Vector2(0, 20)), toPlayer * BULLETSPEED, Bullets.YELLOW, this, false);
 
                     shotTimer = SHOOTTIME;
                     numshots--;

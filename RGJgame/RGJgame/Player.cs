@@ -349,7 +349,7 @@ namespace RGJgame
             active.Add(FREEZE_ENEMIES, false);
             active.Add(BURN_ENEMIES, false);
             active.Add(THROW_ENEMY, false);
-            active.Add(NUKE, false);
+            active.Add(SUPERLAZER, false);
             active.Add(TELEPORT, false);
             active.Add(LAZER, false);
             active.Add(DECREASE_ENEMY_SPEED, false);
@@ -386,7 +386,7 @@ namespace RGJgame
             available.Add(FREEZE_ENEMIES, false);
             available.Add(BURN_ENEMIES, false);
             available.Add(THROW_ENEMY, false);
-            available.Add(NUKE, false);
+            available.Add(SUPERLAZER, false);
             available.Add(TELEPORT, false);
             available.Add(LAZER, false);
             available.Add(DECREASE_ENEMY_SPEED, false);
@@ -448,7 +448,7 @@ namespace RGJgame
         public const string FREEZE_ENEMIES = "FREEZE";
         public const string BURN_ENEMIES = "FLAMES";
         public const string THROW_ENEMY = "THROW NEAREST";
-        public const string NUKE = "WE ARE DOOMED";
+        public const string SUPERLAZER = "WE ARE DOOMED";
         public const string TELEPORT = "TELEPORT"; // Special Case
         public const string LAZER = "LAZAR";
         public const string DECREASE_ENEMY_SPEED = "SLOW EM DOWN";

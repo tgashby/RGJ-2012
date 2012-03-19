@@ -153,6 +153,14 @@ namespace RGJgame
 
         public bool checkBulletCollision(Vector2 pos)
         {
+            if ((int)pos.X / tileWidth >= m_tiles.GetLength(0) ||
+                (int)pos.X / tileWidth < 0 ||
+                (int)pos.Y / tileWidth >= m_tiles.GetLength(1) ||
+                (int)pos.Y / tileWidth < 0)
+            {
+                return true;
+            }
+
             return m_tiles[(int)pos.X / tileWidth, (int)pos.Y / tileWidth] != null;
         }
 
@@ -167,7 +175,7 @@ namespace RGJgame
 
             if (m_tiles[x, ymin] != null || m_tiles[xmin, ymin] != null || m_tiles[xmax, ymin] != null)
             {
-                ent.position.Y = ymax * tileWidth + ent.texture.Height / 2;
+                ent.position.Y = (ymin + 1) * tileWidth + ent.texture.Height / 2;
                 ent.velocity.Y = 0;
             }
 
@@ -183,12 +191,14 @@ namespace RGJgame
             }
 
             int y = (int)(ent.position.Y) / tileWidth;
-            
-            if (m_tiles[xmin, y] != null)
+            ymin = (int)(ent.position.Y - ent.texture.Height / 2) / tileWidth;
+            ymax = (int)(ent.position.Y + ent.texture.Height / 2) / tileWidth;
+
+            if (m_tiles[xmin, y] != null || m_tiles[xmin, ymax] != null || m_tiles[xmin, ymin] != null)
             {
                 ent.position.X = (xmin + 1) * tileWidth + ent.texture.Width / 2;
             }
-            if (m_tiles[xmax, y] != null)
+            if (m_tiles[xmax, y] != null || m_tiles[xmax, ymax] != null || m_tiles[xmax, ymin] != null)
             {
                 ent.position.X = xmax * tileWidth - ent.texture.Width / 2;
             }
@@ -332,7 +342,7 @@ namespace RGJgame
                     {
                         m_tiles[x, y] = null;
                         Entity temp = m_entities[curColor];
-                        Entities.instance().addEntity(temp, new Vector2(x * tileWidth, y * tileWidth), m_game);
+                        Entities.instance().addEntity(temp, new Vector2(x * tileWidth + 30, y * tileWidth + 30), m_game);
                     }
                     else if (m_textures.ContainsKey(curColor))
                     {
