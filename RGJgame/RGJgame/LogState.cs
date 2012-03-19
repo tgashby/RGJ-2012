@@ -94,8 +94,8 @@ namespace RGJgame
 
         public void catIntoLog(String str)
         {
-            promptString += str;
             prevLogEntries += str;
+            clearInput();
         }
 
         public override void Update(GameTime gameTime)
@@ -456,7 +456,7 @@ namespace RGJgame
 
         public void clearInput()
         {
-            if (prevLogEntries.Length > 60)
+            if (prevLogEntries.Length > 300)
                 prevLogEntries = new String("".ToCharArray());
 
             promptString = new String(
